@@ -1,0 +1,106 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+datasource db {
+  provider = "sqlite"
+  url      = "file:./dev.db"
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Article {
+  id              Int       @id @default(autoincrement())
+  label           String
+  createdAt       DateTime  @default(now())
+  updatedAt       DateTime
+  content         String
+  isPublished     Boolean
+
+  publishedBy     Writer  @relation(fields: [writerId], references: [id])
+  writerId        Int
+  
+  comments        ArticleComment[]
+  
+  tags            Tag[]
+}
+
+model ArticleComment {
+  id              Int       @id @default(autoincrement())
+  createdAt       DateTime  @default(now())
+  isValidated     Boolean
+  content         String
+  note            Int
+
+  publishedBy     Writer  @relation(fields: [writerId], references: [id])
+  writerId        Int
+  publishedOn     Article @relation(fields: [articleId], references: [id])
+  articleId       Int
+}
+
+model Category {
+  id              Int       @id @default(autoincrement())
+  label           String
+
+  writers         Writer[]
+}
+
+model Image {
+  id              Int       @id @default(autoincrement())
+  createdAt       DateTime  @default(now())
+  url             String
+
+  ownedBy         Writer    @relation(fields: [ownerId], references: [id])
+  ownerId         Int
+}
+
+model Tag {
+  id              Int       @id @default(autoincrement())
+  label           String
+
+  articles        Article[]
+}
+
+model Writer {
+  id                  Int       @id @default(autoincrement())
+  role                String
+  pseudo              String
+  email               String    @unique
+  password            String
+  description         String
+  avatar              String
+  createdAt           DateTime  @default(now())
+  blogLabel           String
+
+  category            Category  @relation(fields: [categoryId], references: [id])
+  categoryId          Int
+
+  articles            Article[]
+  images              Image[]
+  commentsOnArticles  ArticleComment[]
+  commentsOnWriters   WriterComment[] @relation(name: "writtenBy")
+  commentFromWriters  WriterComment[] @relation(name: "writtenOn")
+  following           Follow[]        @relation(name: "following")
+  followers           Follow[]        @relation(name: "followed")
+}
+
+model WriterComment {
+  id              Int       @id @default(autoincrement())
+  createdAt       DateTime  @default(now())
+  isValidated     Boolean
+  content         String
+  note            Int
+  writtenBy       Writer    @relation(name: "writtenBy", fields: [writtenById], references: [id])
+  writtenById     Int
+  writtenOn       Writer    @relation(name: "writtenOn", fields: [writtenOnId], references: [id])
+  writtenOnId     Int
+}
+
+model Follow {
+  id              Int       @id @default(autoincrement())
+  following       Writer    @relation(name: "following", fields: [followingId], references: [id])
+  followingId     Int
+  followed        Writer    @relation(name: "followed", fields: [followedId], references: [id])
+  followedId      Int
+}

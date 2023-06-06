@@ -1,0 +1,11 @@
+type Image: changer le createdAt de string à date
+type redacteur: changer le avatar en Image
+Régler le probleme de DateTime
+
+
+Parler de:
+    Apollo Server (index.ts)
+    schema.ts
+    prisma (folder)
+    context.ts ()
+    
