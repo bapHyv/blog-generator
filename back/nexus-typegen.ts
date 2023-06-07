@@ -5,8 +5,23 @@
 
 
 import type { Context } from "./src/context"
-
-
+import type { core } from "nexus"
+declare global {
+  interface NexusGenCustomInputMethods<TypeName extends string> {
+    /**
+     * A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+     */
+    dateTime<FieldName extends string>(fieldName: FieldName, opts?: core.CommonInputFieldConfig<TypeName, FieldName>): void // "DateTime";
+  }
+}
+declare global {
+  interface NexusGenCustomOutputMethods<TypeName extends string> {
+    /**
+     * A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+     */
+    dateTime<FieldName extends string>(fieldName: FieldName, ...opts: core.ScalarOutSpread<TypeName, FieldName>): void // "DateTime";
+  }
+}
 
 
 declare global {
@@ -25,21 +40,21 @@ export interface NexusGenScalars {
   Float: number
   Boolean: boolean
   ID: string
+  DateTime: any
 }
 
 export interface NexusGenObjects {
   Article: { // root type
     content: string; // String!
-    createdAt: string; // String!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: number; // Int!
     isPublished: boolean; // Boolean!
     label: string; // String!
-    publishedAt: string; // String!
-    updatedAt: string; // String!
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   ArticleComment: { // root type
     content: string; // String!
-    createdAt: string; // String!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: number; // Int!
     isValidated: boolean; // Boolean!
     note?: number | null; // Int
@@ -48,16 +63,23 @@ export interface NexusGenObjects {
     id: number; // Int!
     label: string; // String!
   }
+  Follow: { // root type
+    id: number; // Int!
+  }
   Image: { // root type
-    createdAt: string; // String!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: number; // Int!
     url: string; // String!
   }
   Query: {};
-  Redacteur: { // root type
-    BlogLabel: string; // String!
+  Tag: { // root type
+    id: number; // Int!
+    label: string; // String!
+  }
+  Writer: { // root type
     avatar: string; // String!
-    createdAt: string; // String!
+    blogLabel: string; // String!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
     description: string; // String!
     email: string; // String!
     id: number; // Int!
@@ -65,13 +87,9 @@ export interface NexusGenObjects {
     pseudo: string; // String!
     role: string; // String!
   }
-  Tag: { // root type
-    id: number; // Int!
-    label: string; // String!
-  }
   WriterComment: { // root type
     content: string; // String!
-    createdAt: string; // String!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: number; // Int!
     isValidated: boolean; // Boolean!
     note?: number | null; // Int
@@ -90,107 +108,151 @@ export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
   Article: { // field return type
+    comments: NexusGenRootTypes['ArticleComment'][] | null; // [ArticleComment!]
     content: string; // String!
-    createdAt: string; // String!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: number; // Int!
     isPublished: boolean; // Boolean!
     label: string; // String!
-    publishedAt: string; // String!
-    updatedAt: string; // String!
+    publishedBy: NexusGenRootTypes['Writer'] | null; // Writer
+    tags: NexusGenRootTypes['Tag'][] | null; // [Tag!]
+    updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   ArticleComment: { // field return type
     content: string; // String!
-    createdAt: string; // String!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: number; // Int!
     isValidated: boolean; // Boolean!
     note: number | null; // Int
+    publishedBy: NexusGenRootTypes['Writer'] | null; // Writer
+    publishedOn: NexusGenRootTypes['Article'] | null; // Article
   }
   Category: { // field return type
     id: number; // Int!
     label: string; // String!
+    writers: NexusGenRootTypes['Writer'][] | null; // [Writer!]
+  }
+  Follow: { // field return type
+    followed: NexusGenRootTypes['Writer'] | null; // Writer
+    following: NexusGenRootTypes['Writer'] | null; // Writer
+    id: number; // Int!
   }
   Image: { // field return type
-    createdAt: string; // String!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: number; // Int!
+    ownedBy: NexusGenRootTypes['Writer'] | null; // Writer
     url: string; // String!
   }
   Query: { // field return type
-    ok: boolean; // Boolean!
+    getAllArticles: NexusGenRootTypes['Article'][]; // [Article!]!
   }
-  Redacteur: { // field return type
-    BlogLabel: string; // String!
+  Tag: { // field return type
+    articles: NexusGenRootTypes['Article'][] | null; // [Article!]
+    id: number; // Int!
+    label: string; // String!
+  }
+  Writer: { // field return type
+    articles: NexusGenRootTypes['Article'][] | null; // [Article!]
     avatar: string; // String!
-    createdAt: string; // String!
+    blogLabel: string; // String!
+    category: NexusGenRootTypes['Category'] | null; // Category
+    commentsFromWriters: NexusGenRootTypes['ArticleComment'][] | null; // [ArticleComment!]
+    commentsOnArticles: NexusGenRootTypes['ArticleComment'][] | null; // [ArticleComment!]
+    commentsOnWriters: NexusGenRootTypes['ArticleComment'][] | null; // [ArticleComment!]
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
     description: string; // String!
     email: string; // String!
+    followers: NexusGenRootTypes['Follow'][] | null; // [Follow!]
+    following: NexusGenRootTypes['Follow'][] | null; // [Follow!]
     id: number; // Int!
+    images: NexusGenRootTypes['Image'][] | null; // [Image!]
     password: string; // String!
     pseudo: string; // String!
     role: string; // String!
   }
-  Tag: { // field return type
-    id: number; // Int!
-    label: string; // String!
-  }
   WriterComment: { // field return type
     content: string; // String!
-    createdAt: string; // String!
+    createdAt: NexusGenScalars['DateTime']; // DateTime!
     id: number; // Int!
     isValidated: boolean; // Boolean!
     note: number | null; // Int
+    writtenBy: NexusGenRootTypes['Writer'] | null; // Writer
+    writtenOn: NexusGenRootTypes['Writer'] | null; // Writer
   }
 }
 
 export interface NexusGenFieldTypeNames {
   Article: { // field return type name
+    comments: 'ArticleComment'
     content: 'String'
-    createdAt: 'String'
+    createdAt: 'DateTime'
     id: 'Int'
     isPublished: 'Boolean'
     label: 'String'
-    publishedAt: 'String'
-    updatedAt: 'String'
+    publishedBy: 'Writer'
+    tags: 'Tag'
+    updatedAt: 'DateTime'
   }
   ArticleComment: { // field return type name
     content: 'String'
-    createdAt: 'String'
+    createdAt: 'DateTime'
     id: 'Int'
     isValidated: 'Boolean'
     note: 'Int'
+    publishedBy: 'Writer'
+    publishedOn: 'Article'
   }
   Category: { // field return type name
     id: 'Int'
     label: 'String'
+    writers: 'Writer'
+  }
+  Follow: { // field return type name
+    followed: 'Writer'
+    following: 'Writer'
+    id: 'Int'
   }
   Image: { // field return type name
-    createdAt: 'String'
+    createdAt: 'DateTime'
     id: 'Int'
+    ownedBy: 'Writer'
     url: 'String'
   }
   Query: { // field return type name
-    ok: 'Boolean'
+    getAllArticles: 'Article'
   }
-  Redacteur: { // field return type name
-    BlogLabel: 'String'
+  Tag: { // field return type name
+    articles: 'Article'
+    id: 'Int'
+    label: 'String'
+  }
+  Writer: { // field return type name
+    articles: 'Article'
     avatar: 'String'
-    createdAt: 'String'
+    blogLabel: 'String'
+    category: 'Category'
+    commentsFromWriters: 'ArticleComment'
+    commentsOnArticles: 'ArticleComment'
+    commentsOnWriters: 'ArticleComment'
+    createdAt: 'DateTime'
     description: 'String'
     email: 'String'
+    followers: 'Follow'
+    following: 'Follow'
     id: 'Int'
+    images: 'Image'
     password: 'String'
     pseudo: 'String'
     role: 'String'
   }
-  Tag: { // field return type name
-    id: 'Int'
-    label: 'String'
-  }
   WriterComment: { // field return type name
     content: 'String'
-    createdAt: 'String'
+    createdAt: 'DateTime'
     id: 'Int'
     isValidated: 'Boolean'
     note: 'Int'
+    writtenBy: 'Writer'
+    writtenOn: 'Writer'
   }
 }
 

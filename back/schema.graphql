@@ -3,59 +3,87 @@
 
 
 type Article {
+  comments: [ArticleComment!]
   content: String!
-  createdAt: String!
+  createdAt: DateTime!
   id: Int!
   isPublished: Boolean!
   label: String!
-  publishedAt: String!
-  updatedAt: String!
+  publishedBy: Writer
+  tags: [Tag!]
+  updatedAt: DateTime!
 }
 
 type ArticleComment {
   content: String!
-  createdAt: String!
+  createdAt: DateTime!
   id: Int!
   isValidated: Boolean!
   note: Int
+  publishedBy: Writer
+  publishedOn: Article
 }
 
 type Category {
   id: Int!
   label: String!
+  writers: [Writer!]
+}
+
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar DateTime
+
+type Follow {
+  followed: Writer
+  following: Writer
+  id: Int!
 }
 
 type Image {
-  createdAt: String!
+  createdAt: DateTime!
   id: Int!
+  ownedBy: Writer
   url: String!
 }
 
 type Query {
-  ok: Boolean!
+  getAllArticles: [Article!]!
 }
 
-type Redacteur {
-  BlogLabel: String!
+type Tag {
+  articles: [Article!]
+  id: Int!
+  label: String!
+}
+
+type Writer {
+  articles: [Article!]
   avatar: String!
-  createdAt: String!
+  blogLabel: String!
+  category: Category
+  commentsFromWriters: [ArticleComment!]
+  commentsOnArticles: [ArticleComment!]
+  commentsOnWriters: [ArticleComment!]
+  createdAt: DateTime!
   description: String!
   email: String!
+  followers: [Follow!]
+  following: [Follow!]
   id: Int!
+  images: [Image!]
   password: String!
   pseudo: String!
   role: String!
 }
 
-type Tag {
-  id: Int!
-  label: String!
-}
-
 type WriterComment {
   content: String!
-  createdAt: String!
+  createdAt: DateTime!
   id: Int!
   isValidated: Boolean!
   note: Int
+  writtenBy: Writer
+  writtenOn: Writer
 }

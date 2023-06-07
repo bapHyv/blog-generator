@@ -1,6 +1,77 @@
-type Image: changer le createdAt de string à date
 type redacteur: changer le avatar en Image
-Régler le probleme de DateTime
+
+Article:
+    Query:
+        -getOneArticle
+        -getAllArticles
+
+    Mutation:
+        -createOneArticle
+        -updateOneArticle
+        -deleteOneArticle
+
+ArticleComment:
+    Query:
+        -getOneComment
+        -getAllComments
+
+    Mutation:
+        -updateOneComment
+        -deleteOneComment
+
+Category:
+    Query:
+        -getCategory
+        -getCategories
+    
+    Mutation:
+        -updateOneCategory
+        -deleteOneCategory
+
+Follow:
+    Query:
+        -getAllFollowing
+        -getAllFollowed
+
+    Mutation:
+        -deleteOneFollowing
+        -deleteOneFollowed
+
+Image:
+    Query:
+        -getOneImage
+        -getAllImages
+
+    Mutation:
+        -addOneImage
+        -deleteOneImage
+
+Tag:
+    Query:
+        -getOneTag
+        -getAllTag
+
+    Mutation:
+        -createOneTag
+        -deleteOneTag
+
+Writer:
+    Query:
+        -getWriterData
+
+    Mutation:
+        -updateWriterData
+
+WriterComment:
+    Query:
+        -getOneComment
+        -getAllComments
+
+    Mutation:
+        -updateOneComment
+        -deleteOneComment
+
+Tag:
 
 
 Parler de:
