@@ -29,7 +29,7 @@ model ArticleComment {
   createdAt           DateTime          @default(now())
   isValidated         Boolean
   content             String
-  note                Int
+  note                Int?
 
   publishedBy         Writer            @relation(fields: [writerId], references: [id])
   writerId            Int

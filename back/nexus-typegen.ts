@@ -142,15 +142,20 @@ export interface NexusGenFieldTypes {
   Mutation: { // field return type
     changeArticleVisibility: NexusGenRootTypes['Article']; // Article!
     createOneArticle: NexusGenRootTypes['Article']; // Article!
+    createOneArticleComment: NexusGenRootTypes['ArticleComment']; // ArticleComment!
     createOneCategory: NexusGenRootTypes['Category']; // Category!
     deleteOneArticle: NexusGenRootTypes['Article']; // Article!
+    deleteOneArticleComment: NexusGenRootTypes['ArticleComment']; // ArticleComment!
     register: NexusGenRootTypes['Writer']; // Writer!
     updateOneArticle: NexusGenRootTypes['Article']; // Article!
+    updateOneArticleComment: NexusGenRootTypes['ArticleComment']; // ArticleComment!
+    validateOneComment: NexusGenRootTypes['ArticleComment']; // ArticleComment!
   }
   Query: { // field return type
     getAllArticles: NexusGenRootTypes['Article'][]; // [Article!]!
     getOneArticle: NexusGenRootTypes['Article'] | null; // Article
     getOneCategory: NexusGenRootTypes['Category']; // Category!
+    getOneComment: NexusGenRootTypes['ArticleComment'] | null; // ArticleComment
   }
   Writer: { // field return type
     articles: Array<NexusGenRootTypes['Article'] | null> | null; // [Article]
@@ -221,15 +226,20 @@ export interface NexusGenFieldTypeNames {
   Mutation: { // field return type name
     changeArticleVisibility: 'Article'
     createOneArticle: 'Article'
+    createOneArticleComment: 'ArticleComment'
     createOneCategory: 'Category'
     deleteOneArticle: 'Article'
+    deleteOneArticleComment: 'ArticleComment'
     register: 'Writer'
     updateOneArticle: 'Article'
+    updateOneArticleComment: 'ArticleComment'
+    validateOneComment: 'ArticleComment'
   }
   Query: { // field return type name
     getAllArticles: 'Article'
     getOneArticle: 'Article'
     getOneCategory: 'Category'
+    getOneComment: 'ArticleComment'
   }
   Writer: { // field return type name
     articles: 'Article'
@@ -273,11 +283,20 @@ export interface NexusGenArgTypes {
       label: string; // String!
       writerId: number; // Int!
     }
+    createOneArticleComment: { // args
+      articleId: number; // Int!
+      content: string; // String!
+      note?: number | null; // Int
+      writerId: number; // Int!
+    }
     createOneCategory: { // args
       label: string; // String!
     }
     deleteOneArticle: { // args
       id: number; // Int!
+    }
+    deleteOneArticleComment: { // args
+      commentId: number; // Int!
     }
     register: { // args
       avatar: string; // String!
@@ -295,6 +314,16 @@ export interface NexusGenArgTypes {
       isPublished: boolean; // Boolean!
       label: string; // String!
     }
+    updateOneArticleComment: { // args
+      articleId: number; // Int!
+      commentId: number; // Int!
+      content: string; // String!
+      note?: number | null; // Int
+      writerId: number; // Int!
+    }
+    validateOneComment: { // args
+      commentId: number; // Int!
+    }
   }
   Query: {
     getOneArticle: { // args
@@ -302,6 +331,9 @@ export interface NexusGenArgTypes {
     }
     getOneCategory: { // args
       id: number; // Int!
+    }
+    getOneComment: { // args
+      commentId: number; // Int!
     }
   }
 }
