@@ -54,16 +54,19 @@ type Mutation {
   createOneCategory(label: String!): Category!
   deleteOneArticle(id: Int!): Article!
   deleteOneArticleComment(commentId: Int!): ArticleComment!
+  deleteOneCategory(label: String!): Category!
   register(avatar: String!, blogLabel: String!, categoryId: Int!, description: String!, email: String!, password: String!, pseudo: String!, role: String!): Writer!
   updateOneArticle(content: String!, id: Int!, isPublished: Boolean!, label: String!): Article!
   updateOneArticleComment(articleId: Int!, commentId: Int!, content: String!, note: Int, writerId: Int!): ArticleComment!
+  updateOneCategory(label: String!): Category!
   validateOneComment(commentId: Int!): ArticleComment!
 }
 
 type Query {
   getAllArticles: [Article!]!
+  getAllCategories: [Category!]!
   getOneArticle(id: Int!): Article
-  getOneCategory(id: Int!): Category!
+  getOneCategory(id: Int!): Category
   getOneComment(commentId: Int!): ArticleComment
 }
 

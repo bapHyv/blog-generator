@@ -29,6 +29,7 @@ Category:
         -getCategories
     
     Mutation:
+        -createOneCategory
         -updateOneCategory
         -deleteOneCategory
 

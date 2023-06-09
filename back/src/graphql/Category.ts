@@ -16,7 +16,7 @@ export const Category = objectType({
 export const CategoryQueries = extendType({
   type: "Query",
   definition(t) {
-    t.nonNull.field("getOneCategory", {
+    t.field("getOneCategory", {
       type: "Category",
       args: {
         id: nonNull(intArg()),
@@ -28,7 +28,16 @@ export const CategoryQueries = extendType({
           where: { id },
         });
 
-        return category as any;
+        return category;
+      },
+    });
+
+    t.nonNull.list.nonNull.field("getAllCategories", {
+      type: "Category",
+      resolve: async (r, a, c, i) => {
+        const category = await c.prisma.category.findMany();
+
+        return category;
       },
     });
   },
@@ -49,6 +58,41 @@ export const CategoryMutations = extendType({
           data: {
             label,
           },
+        });
+
+        return category;
+      },
+    });
+
+    t.nonNull.field("updateOneCategory", {
+      type: "Category",
+      args: {
+        label: nonNull(stringArg()),
+      },
+      resolve: async (r, a, c, i) => {
+        const { label } = a;
+
+        const category = await c.prisma.category.update({
+          data: {
+            label,
+          },
+          where: { label },
+        });
+
+        return category;
+      },
+    });
+
+    t.nonNull.field("deleteOneCategory", {
+      type: "Category",
+      args: {
+        label: nonNull(stringArg()),
+      },
+      resolve: async (r, a, c, i) => {
+        const { label } = a;
+
+        const category = await c.prisma.category.delete({
+          where: { label },
         });
 
         return category;

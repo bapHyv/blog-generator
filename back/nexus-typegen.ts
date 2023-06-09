@@ -146,15 +146,18 @@ export interface NexusGenFieldTypes {
     createOneCategory: NexusGenRootTypes['Category']; // Category!
     deleteOneArticle: NexusGenRootTypes['Article']; // Article!
     deleteOneArticleComment: NexusGenRootTypes['ArticleComment']; // ArticleComment!
+    deleteOneCategory: NexusGenRootTypes['Category']; // Category!
     register: NexusGenRootTypes['Writer']; // Writer!
     updateOneArticle: NexusGenRootTypes['Article']; // Article!
     updateOneArticleComment: NexusGenRootTypes['ArticleComment']; // ArticleComment!
+    updateOneCategory: NexusGenRootTypes['Category']; // Category!
     validateOneComment: NexusGenRootTypes['ArticleComment']; // ArticleComment!
   }
   Query: { // field return type
     getAllArticles: NexusGenRootTypes['Article'][]; // [Article!]!
+    getAllCategories: NexusGenRootTypes['Category'][]; // [Category!]!
     getOneArticle: NexusGenRootTypes['Article'] | null; // Article
-    getOneCategory: NexusGenRootTypes['Category']; // Category!
+    getOneCategory: NexusGenRootTypes['Category'] | null; // Category
     getOneComment: NexusGenRootTypes['ArticleComment'] | null; // ArticleComment
   }
   Writer: { // field return type
@@ -230,13 +233,16 @@ export interface NexusGenFieldTypeNames {
     createOneCategory: 'Category'
     deleteOneArticle: 'Article'
     deleteOneArticleComment: 'ArticleComment'
+    deleteOneCategory: 'Category'
     register: 'Writer'
     updateOneArticle: 'Article'
     updateOneArticleComment: 'ArticleComment'
+    updateOneCategory: 'Category'
     validateOneComment: 'ArticleComment'
   }
   Query: { // field return type name
     getAllArticles: 'Article'
+    getAllCategories: 'Category'
     getOneArticle: 'Article'
     getOneCategory: 'Category'
     getOneComment: 'ArticleComment'
@@ -298,6 +304,9 @@ export interface NexusGenArgTypes {
     deleteOneArticleComment: { // args
       commentId: number; // Int!
     }
+    deleteOneCategory: { // args
+      label: string; // String!
+    }
     register: { // args
       avatar: string; // String!
       blogLabel: string; // String!
@@ -320,6 +329,9 @@ export interface NexusGenArgTypes {
       content: string; // String!
       note?: number | null; // Int
       writerId: number; // Int!
+    }
+    updateOneCategory: { // args
+      label: string; // String!
     }
     validateOneComment: { // args
       commentId: number; // Int!
