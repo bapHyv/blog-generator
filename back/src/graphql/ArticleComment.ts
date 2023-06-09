@@ -45,6 +45,15 @@ export const ArticleCommentQueries = extendType({
         return comment;
       },
     });
+
+    t.nonNull.list.nonNull.field("getAllComments", {
+      type: "ArticleComment",
+      resolve: async (r, a, c, i) => {
+        const comments = await c.prisma.articleComment.findMany();
+
+        return comments;
+      },
+    });
   },
 });
 
@@ -81,19 +90,15 @@ export const ArticleCommentMutations = extendType({
       args: {
         commentId: nonNull(intArg()),
         content: nonNull(stringArg()),
-        writerId: nonNull(intArg()),
-        articleId: nonNull(intArg()),
         note: intArg(),
       },
       resolve: async (r, a, c, i) => {
-        const { commentId, content, note, articleId, writerId } = a;
+        const { commentId, content, note } = a;
 
         const comment = await c.prisma.articleComment.update({
           data: {
             content,
             note,
-            publishedBy: { connect: { id: writerId } },
-            publishedOn: { connect: { id: articleId } },
           },
           where: {
             id: commentId,

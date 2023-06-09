@@ -58,14 +58,16 @@ Writer:
     Mutation:
         -updateWriterData
 
-WriterComment:
+#WriterComment:
     Query:
-        -getOneComment
-        -getAllComments
+        -#getOneComment
+        -#getAllComments
 
     Mutation:
-        -updateOneComment
-        -deleteOneComment
+        -#createOneComment
+        -#updateOneComment
+        -#deleteOneComment
+        -#validateOneComment
 
 Tag:
 

@@ -158,6 +158,7 @@ export interface NexusGenFieldTypes {
   Query: { // field return type
     getAllArticles: NexusGenRootTypes['Article'][]; // [Article!]!
     getAllCategories: NexusGenRootTypes['Category'][]; // [Category!]!
+    getAllComments: NexusGenRootTypes['ArticleComment'][]; // [ArticleComment!]!
     getAllImages: Array<NexusGenRootTypes['Image'] | null> | null; // [Image]
     getOneArticle: NexusGenRootTypes['Article'] | null; // Article
     getOneCategory: NexusGenRootTypes['Category'] | null; // Category
@@ -249,6 +250,7 @@ export interface NexusGenFieldTypeNames {
   Query: { // field return type name
     getAllArticles: 'Article'
     getAllCategories: 'Category'
+    getAllComments: 'ArticleComment'
     getAllImages: 'Image'
     getOneArticle: 'Article'
     getOneCategory: 'Category'
@@ -339,11 +341,9 @@ export interface NexusGenArgTypes {
       label: string; // String!
     }
     updateOneArticleComment: { // args
-      articleId: number; // Int!
       commentId: number; // Int!
       content: string; // String!
       note?: number | null; // Int
-      writerId: number; // Int!
     }
     updateOneCategory: { // args
       label: string; // String!

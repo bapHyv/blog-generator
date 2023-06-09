@@ -59,7 +59,7 @@ type Mutation {
   deleteOneImage(id: Int!): Image!
   register(avatar: String!, blogLabel: String!, categoryId: Int!, description: String!, email: String!, password: String!, pseudo: String!, role: String!): Writer!
   updateOneArticle(content: String!, id: Int!, isPublished: Boolean!, label: String!): Article!
-  updateOneArticleComment(articleId: Int!, commentId: Int!, content: String!, note: Int, writerId: Int!): ArticleComment!
+  updateOneArticleComment(commentId: Int!, content: String!, note: Int): ArticleComment!
   updateOneCategory(label: String!): Category!
   validateOneComment(commentId: Int!): ArticleComment!
 }
@@ -67,6 +67,7 @@ type Mutation {
 type Query {
   getAllArticles: [Article!]!
   getAllCategories: [Category!]!
+  getAllComments: [ArticleComment!]!
   getAllImages: [Image]
   getOneArticle(id: Int!): Article
   getOneCategory(id: Int!): Category

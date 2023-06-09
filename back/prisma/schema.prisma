@@ -92,7 +92,7 @@ model WriterComment {
   createdAt           DateTime          @default(now())
   isValidated         Boolean
   content             String
-  note                Int
+  note                Int?
   
   writtenBy           Writer            @relation(name: "writtenBy", fields: [writtenById], references: [id])
   writtenById         Int
