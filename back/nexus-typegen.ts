@@ -71,11 +71,8 @@ export interface NexusGenObjects {
     id: number; // Int!
     url: string; // String!
   }
+  Mutation: {};
   Query: {};
-  Tag: { // root type
-    id: number; // Int!
-    label: string; // String!
-  }
   Writer: { // root type
     avatar: string; // String!
     blogLabel: string; // String!
@@ -115,7 +112,6 @@ export interface NexusGenFieldTypes {
     isPublished: boolean; // Boolean!
     label: string; // String!
     publishedBy: NexusGenRootTypes['Writer'] | null; // Writer
-    tags: NexusGenRootTypes['Tag'][] | null; // [Tag!]
     updatedAt: NexusGenScalars['DateTime']; // DateTime!
   }
   ArticleComment: { // field return type
@@ -130,7 +126,7 @@ export interface NexusGenFieldTypes {
   Category: { // field return type
     id: number; // Int!
     label: string; // String!
-    writers: NexusGenRootTypes['Writer'][] | null; // [Writer!]
+    writers: Array<NexusGenRootTypes['Writer'] | null> | null; // [Writer]
   }
   Follow: { // field return type
     followed: NexusGenRootTypes['Writer'] | null; // Writer
@@ -143,29 +139,34 @@ export interface NexusGenFieldTypes {
     ownedBy: NexusGenRootTypes['Writer'] | null; // Writer
     url: string; // String!
   }
+  Mutation: { // field return type
+    changeArticleVisibility: NexusGenRootTypes['Article']; // Article!
+    createOneArticle: NexusGenRootTypes['Article']; // Article!
+    createOneCategory: NexusGenRootTypes['Category']; // Category!
+    deleteOneArticle: NexusGenRootTypes['Article']; // Article!
+    register: NexusGenRootTypes['Writer']; // Writer!
+    updateOneArticle: NexusGenRootTypes['Article']; // Article!
+  }
   Query: { // field return type
     getAllArticles: NexusGenRootTypes['Article'][]; // [Article!]!
-  }
-  Tag: { // field return type
-    articles: NexusGenRootTypes['Article'][] | null; // [Article!]
-    id: number; // Int!
-    label: string; // String!
+    getOneArticle: NexusGenRootTypes['Article'] | null; // Article
+    getOneCategory: NexusGenRootTypes['Category']; // Category!
   }
   Writer: { // field return type
-    articles: NexusGenRootTypes['Article'][] | null; // [Article!]
+    articles: Array<NexusGenRootTypes['Article'] | null> | null; // [Article]
     avatar: string; // String!
     blogLabel: string; // String!
     category: NexusGenRootTypes['Category'] | null; // Category
-    commentsFromWriters: NexusGenRootTypes['ArticleComment'][] | null; // [ArticleComment!]
-    commentsOnArticles: NexusGenRootTypes['ArticleComment'][] | null; // [ArticleComment!]
-    commentsOnWriters: NexusGenRootTypes['ArticleComment'][] | null; // [ArticleComment!]
+    commentsFromWriters: Array<NexusGenRootTypes['ArticleComment'] | null> | null; // [ArticleComment]
+    commentsOnArticles: Array<NexusGenRootTypes['ArticleComment'] | null> | null; // [ArticleComment]
+    commentsOnWriters: Array<NexusGenRootTypes['ArticleComment'] | null> | null; // [ArticleComment]
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     description: string; // String!
     email: string; // String!
-    followers: NexusGenRootTypes['Follow'][] | null; // [Follow!]
-    following: NexusGenRootTypes['Follow'][] | null; // [Follow!]
+    followers: Array<NexusGenRootTypes['Follow'] | null> | null; // [Follow]
+    following: Array<NexusGenRootTypes['Follow'] | null> | null; // [Follow]
     id: number; // Int!
-    images: NexusGenRootTypes['Image'][] | null; // [Image!]
+    images: Array<NexusGenRootTypes['Image'] | null> | null; // [Image]
     password: string; // String!
     pseudo: string; // String!
     role: string; // String!
@@ -190,7 +191,6 @@ export interface NexusGenFieldTypeNames {
     isPublished: 'Boolean'
     label: 'String'
     publishedBy: 'Writer'
-    tags: 'Tag'
     updatedAt: 'DateTime'
   }
   ArticleComment: { // field return type name
@@ -218,13 +218,18 @@ export interface NexusGenFieldTypeNames {
     ownedBy: 'Writer'
     url: 'String'
   }
+  Mutation: { // field return type name
+    changeArticleVisibility: 'Article'
+    createOneArticle: 'Article'
+    createOneCategory: 'Category'
+    deleteOneArticle: 'Article'
+    register: 'Writer'
+    updateOneArticle: 'Article'
+  }
   Query: { // field return type name
     getAllArticles: 'Article'
-  }
-  Tag: { // field return type name
-    articles: 'Article'
-    id: 'Int'
-    label: 'String'
+    getOneArticle: 'Article'
+    getOneCategory: 'Category'
   }
   Writer: { // field return type name
     articles: 'Article'
@@ -257,6 +262,48 @@ export interface NexusGenFieldTypeNames {
 }
 
 export interface NexusGenArgTypes {
+  Mutation: {
+    changeArticleVisibility: { // args
+      id: number; // Int!
+      isPublished: boolean; // Boolean!
+    }
+    createOneArticle: { // args
+      content: string; // String!
+      isPublished: boolean; // Boolean!
+      label: string; // String!
+      writerId: number; // Int!
+    }
+    createOneCategory: { // args
+      label: string; // String!
+    }
+    deleteOneArticle: { // args
+      id: number; // Int!
+    }
+    register: { // args
+      avatar: string; // String!
+      blogLabel: string; // String!
+      categoryId: number; // Int!
+      description: string; // String!
+      email: string; // String!
+      password: string; // String!
+      pseudo: string; // String!
+      role: string; // String!
+    }
+    updateOneArticle: { // args
+      content: string; // String!
+      id: number; // Int!
+      isPublished: boolean; // Boolean!
+      label: string; // String!
+    }
+  }
+  Query: {
+    getOneArticle: { // args
+      id: number; // Int!
+    }
+    getOneCategory: { // args
+      id: number; // Int!
+    }
+  }
 }
 
 export interface NexusGenAbstractTypeMembers {

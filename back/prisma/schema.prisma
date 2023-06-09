@@ -22,8 +22,6 @@ model Article {
   writerId            Int
   
   comments            ArticleComment[]
-  
-  tags                Tag[]
 }
 
 model ArticleComment {
@@ -42,7 +40,7 @@ model ArticleComment {
 
 model Category {
   id                  Int               @id @default(autoincrement())
-  label               String
+  label               String            @unique
 
   writers             Writer[]
 }
@@ -62,13 +60,6 @@ model Image {
 
   ownedBy             Writer            @relation(fields: [ownerId], references: [id])
   ownerId             Int
-}
-
-model Tag {
-  id                  Int               @id @default(autoincrement())
-  label               String
-
-  articles            Article[]
 }
 
 model Writer {

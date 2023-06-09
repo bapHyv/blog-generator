@@ -1,4 +1,11 @@
-import { objectType, extendType } from "nexus";
+import {
+  objectType,
+  extendType,
+  nonNull,
+  stringArg,
+  booleanArg,
+  intArg,
+} from "nexus";
 
 export const Article = objectType({
   name: "Article",
@@ -21,12 +28,6 @@ export const Article = objectType({
       resolve: (r, a, c) =>
         c.prisma.article.findUnique({ where: { id: r.id } }).comments(),
     });
-
-    t.list.nonNull.field("tags", {
-      type: "Tag",
-      resolve: (r, a, c) =>
-        c.prisma.article.findUnique({ where: { id: r.id } }).tags(),
-    });
   },
 });
 
@@ -39,37 +40,104 @@ export const ArticleQueries = extendType({
         return c.prisma.article.findMany();
       },
     });
+    t.field("getOneArticle", {
+      type: "Article",
+      args: {
+        id: nonNull(intArg()),
+      },
+      resolve: async (r, a, c, i) => {
+        const { id } = a;
+
+        const article = await c.prisma.article.findUnique({ where: { id } });
+
+        return article;
+      },
+    });
   },
 });
 
-// export const ArticleMutations = extendType({
-//   type: "Mutation",
-//   definition(t) {
-//     t.nonNull.field("createOneArticle", {
-//       type: "Article",
-//       args: {
-//         label: nonNull(stringArg()),
-//         content: nonNull(stringArg()),
-//         isPublished: nonNull(booleanArg()),
-//       },
-//       resolve: (r, a, c, i) => {
-//         const { label, content, isPublished } = a;
+export const ArticleMutations = extendType({
+  type: "Mutation",
+  definition(t) {
+    t.nonNull.field("createOneArticle", {
+      type: "Article",
+      args: {
+        label: nonNull(stringArg()),
+        content: nonNull(stringArg()),
+        isPublished: nonNull(booleanArg()),
+        writerId: nonNull(intArg()),
+      },
+      resolve: async (r, a, c, i) => {
+        const { label, content, isPublished, writerId } = a;
 
-//         const now = new Date();
+        const now = new Date();
 
-//         const newArticle = c.prisma.article.create({
-//           data: {
-//             label,
-//             createdAt: now,
-//             updatedAt: now,
-//             publishedAt: isPublished ? now : "",
-//             content,
-//             isPublished,
-//           },
-//         });
+        const newArticle = c.prisma.article.create({
+          data: {
+            label,
+            createdAt: now,
+            updatedAt: now,
+            content,
+            isPublished,
+            publishedBy: { connect: { id: writerId } },
+          },
+        });
 
-//         return newArticle;
-//       },
-//     });
-//   },
-// });
+        return newArticle;
+      },
+    });
+
+    t.nonNull.field("deleteOneArticle", {
+      type: "Article",
+      args: {
+        id: nonNull(intArg()),
+      },
+      resolve: async (r, a, c, i) => {
+        const { id } = a;
+
+        const article = c.prisma.article.delete({ where: { id } });
+
+        return article;
+      },
+    });
+
+    t.nonNull.field("updateOneArticle", {
+      type: "Article",
+      args: {
+        id: nonNull(intArg()),
+        label: nonNull(stringArg()),
+        content: nonNull(stringArg()),
+        isPublished: nonNull(booleanArg()),
+        // tag: nonNull(stringArg()),
+      },
+      resolve: (r, a, c, i) => {
+        const { content, id, isPublished, label } = a;
+
+        const article = c.prisma.article.update({
+          data: { content, id, isPublished, label },
+          where: { id },
+        });
+
+        return article;
+      },
+    });
+
+    t.nonNull.field("changeArticleVisibility", {
+      type: "Article",
+      args: {
+        id: nonNull(intArg()),
+        isPublished: nonNull(booleanArg()),
+      },
+      resolve: (r, a, c, i) => {
+        const { id, isPublished } = a;
+
+        const article = c.prisma.article.update({
+          data: { id, isPublished },
+          where: { id },
+        });
+
+        return article;
+      },
+    });
+  },
+});

@@ -1,14 +1,16 @@
 type redacteur: changer le avatar en Image
+npx prisma migrate dev
 
 Article:
     Query:
-        -getOneArticle
-        -getAllArticles
+        -#getOneArticle
+        -#getAllArticles
 
     Mutation:
-        -createOneArticle
-        -updateOneArticle
-        -deleteOneArticle
+        -#createOneArticle
+        -#updateOneArticle
+        -#deleteOneArticle
+        -#changeArticleVisibility
 
 ArticleComment:
     Query:
@@ -80,3 +82,6 @@ Parler de:
     prisma (folder)
     context.ts ()
     
+
+
+Enlever les tags du MCD, MLD, MPD et diagramme UML

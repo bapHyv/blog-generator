@@ -10,7 +10,6 @@ type Article {
   isPublished: Boolean!
   label: String!
   publishedBy: Writer
-  tags: [Tag!]
   updatedAt: DateTime!
 }
 
@@ -27,7 +26,7 @@ type ArticleComment {
 type Category {
   id: Int!
   label: String!
-  writers: [Writer!]
+  writers: [Writer]
 }
 
 """
@@ -48,31 +47,36 @@ type Image {
   url: String!
 }
 
-type Query {
-  getAllArticles: [Article!]!
+type Mutation {
+  changeArticleVisibility(id: Int!, isPublished: Boolean!): Article!
+  createOneArticle(content: String!, isPublished: Boolean!, label: String!, writerId: Int!): Article!
+  createOneCategory(label: String!): Category!
+  deleteOneArticle(id: Int!): Article!
+  register(avatar: String!, blogLabel: String!, categoryId: Int!, description: String!, email: String!, password: String!, pseudo: String!, role: String!): Writer!
+  updateOneArticle(content: String!, id: Int!, isPublished: Boolean!, label: String!): Article!
 }
 
-type Tag {
-  articles: [Article!]
-  id: Int!
-  label: String!
+type Query {
+  getAllArticles: [Article!]!
+  getOneArticle(id: Int!): Article
+  getOneCategory(id: Int!): Category!
 }
 
 type Writer {
-  articles: [Article!]
+  articles: [Article]
   avatar: String!
   blogLabel: String!
   category: Category
-  commentsFromWriters: [ArticleComment!]
-  commentsOnArticles: [ArticleComment!]
-  commentsOnWriters: [ArticleComment!]
+  commentsFromWriters: [ArticleComment]
+  commentsOnArticles: [ArticleComment]
+  commentsOnWriters: [ArticleComment]
   createdAt: DateTime!
   description: String!
   email: String!
-  followers: [Follow!]
-  following: [Follow!]
+  followers: [Follow]
+  following: [Follow]
   id: Int!
-  images: [Image!]
+  images: [Image]
   password: String!
   pseudo: String!
   role: String!
