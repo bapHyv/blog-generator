@@ -48,6 +48,7 @@ type Image {
 }
 
 type Mutation {
+  addOneImage(url: String!, writerId: Int!): Image!
   changeArticleVisibility(id: Int!, isPublished: Boolean!): Article!
   createOneArticle(content: String!, isPublished: Boolean!, label: String!, writerId: Int!): Article!
   createOneArticleComment(articleId: Int!, content: String!, note: Int, writerId: Int!): ArticleComment!
@@ -55,6 +56,7 @@ type Mutation {
   deleteOneArticle(id: Int!): Article!
   deleteOneArticleComment(commentId: Int!): ArticleComment!
   deleteOneCategory(label: String!): Category!
+  deleteOneImage(id: Int!): Image!
   register(avatar: String!, blogLabel: String!, categoryId: Int!, description: String!, email: String!, password: String!, pseudo: String!, role: String!): Writer!
   updateOneArticle(content: String!, id: Int!, isPublished: Boolean!, label: String!): Article!
   updateOneArticleComment(articleId: Int!, commentId: Int!, content: String!, note: Int, writerId: Int!): ArticleComment!
@@ -65,9 +67,11 @@ type Mutation {
 type Query {
   getAllArticles: [Article!]!
   getAllCategories: [Category!]!
+  getAllImages: [Image]
   getOneArticle(id: Int!): Article
   getOneCategory(id: Int!): Category
   getOneComment(commentId: Int!): ArticleComment
+  getOneImage(id: Int!): Image
 }
 
 type Writer {

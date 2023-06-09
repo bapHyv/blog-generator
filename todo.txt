@@ -23,15 +23,15 @@ npx prisma migrate dev
         -#deleteOneComment
         -#validateOneComment
 
-Category:
+#Category:
     Query:
-        -getCategory
-        -getCategories
+        -#getCategory
+        -#getCategories
     
     Mutation:
-        -createOneCategory
-        -updateOneCategory
-        -deleteOneCategory
+        -#createOneCategory
+        -#updateOneCategory
+        -#deleteOneCategory
 
 Follow:
     Query:
@@ -42,23 +42,14 @@ Follow:
         -deleteOneFollowing
         -deleteOneFollowed
 
-Image:
+#Image:
     Query:
-        -getOneImage
-        -getAllImages
+        -#getOneImage
+        -#getAllImages
 
     Mutation:
-        -addOneImage
-        -deleteOneImage
-
-Tag:
-    Query:
-        -getOneTag
-        -getAllTag
-
-    Mutation:
-        -createOneTag
-        -deleteOneTag
+        -#addOneImage
+        -#deleteOneImage
 
 Writer:
     Query:

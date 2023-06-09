@@ -140,6 +140,7 @@ export interface NexusGenFieldTypes {
     url: string; // String!
   }
   Mutation: { // field return type
+    addOneImage: NexusGenRootTypes['Image']; // Image!
     changeArticleVisibility: NexusGenRootTypes['Article']; // Article!
     createOneArticle: NexusGenRootTypes['Article']; // Article!
     createOneArticleComment: NexusGenRootTypes['ArticleComment']; // ArticleComment!
@@ -147,6 +148,7 @@ export interface NexusGenFieldTypes {
     deleteOneArticle: NexusGenRootTypes['Article']; // Article!
     deleteOneArticleComment: NexusGenRootTypes['ArticleComment']; // ArticleComment!
     deleteOneCategory: NexusGenRootTypes['Category']; // Category!
+    deleteOneImage: NexusGenRootTypes['Image']; // Image!
     register: NexusGenRootTypes['Writer']; // Writer!
     updateOneArticle: NexusGenRootTypes['Article']; // Article!
     updateOneArticleComment: NexusGenRootTypes['ArticleComment']; // ArticleComment!
@@ -156,9 +158,11 @@ export interface NexusGenFieldTypes {
   Query: { // field return type
     getAllArticles: NexusGenRootTypes['Article'][]; // [Article!]!
     getAllCategories: NexusGenRootTypes['Category'][]; // [Category!]!
+    getAllImages: Array<NexusGenRootTypes['Image'] | null> | null; // [Image]
     getOneArticle: NexusGenRootTypes['Article'] | null; // Article
     getOneCategory: NexusGenRootTypes['Category'] | null; // Category
     getOneComment: NexusGenRootTypes['ArticleComment'] | null; // ArticleComment
+    getOneImage: NexusGenRootTypes['Image'] | null; // Image
   }
   Writer: { // field return type
     articles: Array<NexusGenRootTypes['Article'] | null> | null; // [Article]
@@ -227,6 +231,7 @@ export interface NexusGenFieldTypeNames {
     url: 'String'
   }
   Mutation: { // field return type name
+    addOneImage: 'Image'
     changeArticleVisibility: 'Article'
     createOneArticle: 'Article'
     createOneArticleComment: 'ArticleComment'
@@ -234,6 +239,7 @@ export interface NexusGenFieldTypeNames {
     deleteOneArticle: 'Article'
     deleteOneArticleComment: 'ArticleComment'
     deleteOneCategory: 'Category'
+    deleteOneImage: 'Image'
     register: 'Writer'
     updateOneArticle: 'Article'
     updateOneArticleComment: 'ArticleComment'
@@ -243,9 +249,11 @@ export interface NexusGenFieldTypeNames {
   Query: { // field return type name
     getAllArticles: 'Article'
     getAllCategories: 'Category'
+    getAllImages: 'Image'
     getOneArticle: 'Article'
     getOneCategory: 'Category'
     getOneComment: 'ArticleComment'
+    getOneImage: 'Image'
   }
   Writer: { // field return type name
     articles: 'Article'
@@ -279,6 +287,10 @@ export interface NexusGenFieldTypeNames {
 
 export interface NexusGenArgTypes {
   Mutation: {
+    addOneImage: { // args
+      url: string; // String!
+      writerId: number; // Int!
+    }
     changeArticleVisibility: { // args
       id: number; // Int!
       isPublished: boolean; // Boolean!
@@ -306,6 +318,9 @@ export interface NexusGenArgTypes {
     }
     deleteOneCategory: { // args
       label: string; // String!
+    }
+    deleteOneImage: { // args
+      id: number; // Int!
     }
     register: { // args
       avatar: string; // String!
@@ -346,6 +361,9 @@ export interface NexusGenArgTypes {
     }
     getOneComment: { // args
       commentId: number; // Int!
+    }
+    getOneImage: { // args
+      id: number; // Int!
     }
   }
 }
