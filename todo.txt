@@ -1,7 +1,7 @@
 type redacteur: changer le avatar en Image
 npx prisma migrate dev
 
-Article:
+#Article:
     Query:
         -#getOneArticle
         -#getAllArticles
@@ -12,14 +12,16 @@ Article:
         -#deleteOneArticle
         -#changeArticleVisibility
 
-ArticleComment:
+#ArticleComment:
     Query:
-        -getOneComment
-        -getAllComments
+        -#getOneComment
+        -(getAllComments)
 
     Mutation:
-        -updateOneComment
-        -deleteOneComment
+        -#createOneComment
+        -#updateOneComment
+        -#deleteOneComment
+        -#validateOneComment
 
 Category:
     Query:
