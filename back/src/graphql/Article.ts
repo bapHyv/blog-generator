@@ -71,7 +71,7 @@ export const ArticleMutations = extendType({
         const { writerId } = c;
 
         if (!writerId) {
-          throw new Error("Cannot post without logging in");
+          throw new Error("Cannot add one article without logging in");
         }
 
         const now = new Date();
@@ -101,7 +101,7 @@ export const ArticleMutations = extendType({
         const { writerId } = c;
 
         if (!writerId) {
-          throw new Error("Cannot post without logging in");
+          throw new Error("Cannot delete one Article without logging in");
         }
 
         const article = c.prisma.article.delete({ where: { id } });
@@ -124,7 +124,7 @@ export const ArticleMutations = extendType({
         const { writerId } = c;
 
         if (!writerId) {
-          throw new Error("Cannot post without logging in");
+          throw new Error("Cannot update one article without logging in");
         }
 
         const article = c.prisma.article.update({

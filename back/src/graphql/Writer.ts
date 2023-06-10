@@ -57,13 +57,13 @@ export const Writer = objectType({
     t.list.field("following", {
       type: "Follow",
       resolve: (r, a, c) =>
-        c.prisma.writer.findUnique({ where: { id: r.id } }).following(),
+        c.prisma.writer.findUnique({ where: { id: r.id } }).followers(),
     });
 
     t.list.field("followers", {
       type: "Follow",
       resolve: (r, a, c) =>
-        c.prisma.writer.findUnique({ where: { id: r.id } }).followers(),
+        c.prisma.writer.findUnique({ where: { id: r.id } }).following(),
     });
   },
 });
@@ -114,7 +114,7 @@ export const WriterMutations = extendType({
         const { writerId } = c;
 
         if (!writerId) {
-          throw new Error("Cannot post without logging in");
+          throw new Error("Cannot update data without logging in");
         }
 
         const now = new Date();

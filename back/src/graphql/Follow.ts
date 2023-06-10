@@ -32,7 +32,7 @@ export const FollowMutations = extendType({
         const { writerId } = c;
 
         if (!writerId) {
-          throw new Error("Cannot post without logging in");
+          throw new Error("Cannot follow without logging in");
         }
 
         const follow = await c.prisma.follow.create({

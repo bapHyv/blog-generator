@@ -69,7 +69,7 @@ export const WriterCommentMutations = extendType({
         const { writerId } = c;
 
         if (!writerId) {
-          throw new Error("Cannot post without logging in");
+          throw new Error("Cannot post one comment without logging in");
         }
 
         const comment = await c.prisma.writerComment.create({
@@ -98,7 +98,7 @@ export const WriterCommentMutations = extendType({
         const { writerId } = c;
 
         if (!writerId) {
-          throw new Error("Cannot post without logging in");
+          throw new Error("Cannot update comment without logging in");
         }
 
         const comment = await c.prisma.writerComment.update({
@@ -125,7 +125,7 @@ export const WriterCommentMutations = extendType({
         const { writerId } = c;
 
         if (!writerId) {
-          throw new Error("Cannot post without logging in");
+          throw new Error("Cannot delete comment without logging in");
         }
 
         const comment = await c.prisma.writerComment.delete({
@@ -146,7 +146,7 @@ export const WriterCommentMutations = extendType({
         const { writerId } = c;
 
         if (!writerId) {
-          throw new Error("Cannot post without logging in");
+          throw new Error("Cannot validate comment without logging in");
         }
 
         const comment = await c.prisma.writerComment.update({

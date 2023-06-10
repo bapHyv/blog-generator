@@ -52,7 +52,12 @@ export const ImageMutations = extendType({
         writerId: nonNull(intArg()),
       },
       resolve: (r, a, c, i) => {
-        const { url, writerId } = a;
+        const { url } = a;
+        const { writerId } = c;
+
+        if (!writerId) {
+          throw new Error("Cannot add image without logging in");
+        }
 
         const image = c.prisma.image.create({
           data: { url, ownedBy: { connect: { id: writerId } } },
@@ -69,6 +74,11 @@ export const ImageMutations = extendType({
       },
       resolve: (r, a, c, i) => {
         const { id } = a;
+        const { writerId } = c;
+
+        if (!writerId) {
+          throw new Error("Cannot delete image without logging in");
+        }
 
         const image = c.prisma.image.delete({
           where: { id },
