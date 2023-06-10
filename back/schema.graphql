@@ -55,22 +55,23 @@ type Image {
 type Mutation {
   addOneImage(url: String!, writerId: Int!): Image!
   changeArticleVisibility(id: Int!, isPublished: Boolean!): Article!
-  createOneArticle(content: String!, isPublished: Boolean!, label: String!, writerId: Int!): Article!
-  createOneArticleComment(articleId: Int!, content: String!, note: Int, writerId: Int!): ArticleComment!
+  createOneArticle(content: String!, isPublished: Boolean!, label: String!): Article!
+  createOneArticleComment(articleId: Int!, content: String!, note: Int): ArticleComment!
   createOneCategory(label: String!): Category!
-  createOneWriterComment(content: String!, note: Int, writerIdBeingCommented: Int!, writerIdHasCommented: Int!): WriterComment!
+  createOneWriterComment(content: String!, note: Int, writerIdBeingCommented: Int!): WriterComment!
   deleteOneArticle(id: Int!): Article!
   deleteOneArticleComment(commentId: Int!): WriterComment!
   deleteOneCategory(label: String!): Category!
   deleteOneImage(id: Int!): Image!
+  followWriter(writerIdToFollow: Int!): Follow!
   login(email: String!, password: String!): AuthPayload!
-  register(avatar: String!, blogLabel: String!, categoryId: Int!, description: String!, email: String!, password: String!, pseudo: String!, role: String!): Writer!
+  passwordLost(email: String!, password: String!): AuthPayload!
   signup(avatar: String!, blogLabel: String!, categoryId: Int!, description: String!, email: String!, password: String!, pseudo: String!): AuthPayload!
   updateOneArticle(content: String!, id: Int!, isPublished: Boolean!, label: String!): Article!
   updateOneArticleComment(commentId: Int!, content: String!, note: Int): ArticleComment!
   updateOneCategory(label: String!): Category!
-  updateOneWriterComment(commentId: Int!, content: String!, note: Int, writerIdBeingCommented: Int!, writerIdHasCommented: Int!): WriterComment!
-  updateWriter(avatar: String!, blogLabel: String!, categoryId: Int!, description: String!, pseudo: String!, writerId: Int!): Writer!
+  updateOneWriterComment(commentId: Int!, content: String!, note: Int): WriterComment!
+  updateWriter(avatar: String!, blogLabel: String!, categoryId: Int!, description: String!, pseudo: String!): Writer!
   validateOneComment(commentId: Int!): WriterComment!
 }
 

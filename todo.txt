@@ -20,17 +20,6 @@ Follow:
         -deleteOneFollowing
         -deleteOneFollowed
 
-#Writer:
-    Query:
-        -#getOneWriter
-        -#getAllWriters
-
-    Mutation:
-        -#register
-        -#updateWriterData
-
-
-
 
 ----- RAPPORT -----
 Enlever les tags du MCD, MLD, MPD et diagramme UML

@@ -136,3 +136,7 @@ export const WriterMutations = extendType({
     });
   },
 });
+
+// export const WriterSubscriptions = extendType({
+//   type: "Subscription"
+// })

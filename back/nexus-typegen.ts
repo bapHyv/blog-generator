@@ -158,8 +158,9 @@ export interface NexusGenFieldTypes {
     deleteOneArticleComment: NexusGenRootTypes['WriterComment']; // WriterComment!
     deleteOneCategory: NexusGenRootTypes['Category']; // Category!
     deleteOneImage: NexusGenRootTypes['Image']; // Image!
+    followWriter: NexusGenRootTypes['Follow']; // Follow!
     login: NexusGenRootTypes['AuthPayload']; // AuthPayload!
-    register: NexusGenRootTypes['Writer']; // Writer!
+    passwordLost: NexusGenRootTypes['AuthPayload']; // AuthPayload!
     signup: NexusGenRootTypes['AuthPayload']; // AuthPayload!
     updateOneArticle: NexusGenRootTypes['Article']; // Article!
     updateOneArticleComment: NexusGenRootTypes['ArticleComment']; // ArticleComment!
@@ -263,8 +264,9 @@ export interface NexusGenFieldTypeNames {
     deleteOneArticleComment: 'WriterComment'
     deleteOneCategory: 'Category'
     deleteOneImage: 'Image'
+    followWriter: 'Follow'
     login: 'AuthPayload'
-    register: 'Writer'
+    passwordLost: 'AuthPayload'
     signup: 'AuthPayload'
     updateOneArticle: 'Article'
     updateOneArticleComment: 'ArticleComment'
@@ -331,13 +333,11 @@ export interface NexusGenArgTypes {
       content: string; // String!
       isPublished: boolean; // Boolean!
       label: string; // String!
-      writerId: number; // Int!
     }
     createOneArticleComment: { // args
       articleId: number; // Int!
       content: string; // String!
       note?: number | null; // Int
-      writerId: number; // Int!
     }
     createOneCategory: { // args
       label: string; // String!
@@ -346,7 +346,6 @@ export interface NexusGenArgTypes {
       content: string; // String!
       note?: number | null; // Int
       writerIdBeingCommented: number; // Int!
-      writerIdHasCommented: number; // Int!
     }
     deleteOneArticle: { // args
       id: number; // Int!
@@ -360,19 +359,16 @@ export interface NexusGenArgTypes {
     deleteOneImage: { // args
       id: number; // Int!
     }
+    followWriter: { // args
+      writerIdToFollow: number; // Int!
+    }
     login: { // args
       email: string; // String!
       password: string; // String!
     }
-    register: { // args
-      avatar: string; // String!
-      blogLabel: string; // String!
-      categoryId: number; // Int!
-      description: string; // String!
+    passwordLost: { // args
       email: string; // String!
       password: string; // String!
-      pseudo: string; // String!
-      role: string; // String!
     }
     signup: { // args
       avatar: string; // String!
@@ -401,8 +397,6 @@ export interface NexusGenArgTypes {
       commentId: number; // Int!
       content: string; // String!
       note?: number | null; // Int
-      writerIdBeingCommented: number; // Int!
-      writerIdHasCommented: number; // Int!
     }
     updateWriter: { // args
       avatar: string; // String!
@@ -410,7 +404,6 @@ export interface NexusGenArgTypes {
       categoryId: number; // Int!
       description: string; // String!
       pseudo: string; // String!
-      writerId: number; // Int!
     }
     validateOneComment: { // args
       commentId: number; // Int!
