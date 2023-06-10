@@ -59,6 +59,10 @@ export interface NexusGenObjects {
     isValidated: boolean; // Boolean!
     note?: number | null; // Int
   }
+  AuthPayload: { // root type
+    token: string; // String!
+    writer: NexusGenRootTypes['Writer']; // Writer!
+  }
   Category: { // root type
     id: number; // Int!
     label: string; // String!
@@ -123,6 +127,10 @@ export interface NexusGenFieldTypes {
     publishedBy: NexusGenRootTypes['Writer'] | null; // Writer
     publishedOn: NexusGenRootTypes['Article'] | null; // Article
   }
+  AuthPayload: { // field return type
+    token: string; // String!
+    writer: NexusGenRootTypes['Writer']; // Writer!
+  }
   Category: { // field return type
     id: number; // Int!
     label: string; // String!
@@ -145,25 +153,34 @@ export interface NexusGenFieldTypes {
     createOneArticle: NexusGenRootTypes['Article']; // Article!
     createOneArticleComment: NexusGenRootTypes['ArticleComment']; // ArticleComment!
     createOneCategory: NexusGenRootTypes['Category']; // Category!
+    createOneWriterComment: NexusGenRootTypes['WriterComment']; // WriterComment!
     deleteOneArticle: NexusGenRootTypes['Article']; // Article!
-    deleteOneArticleComment: NexusGenRootTypes['ArticleComment']; // ArticleComment!
+    deleteOneArticleComment: NexusGenRootTypes['WriterComment']; // WriterComment!
     deleteOneCategory: NexusGenRootTypes['Category']; // Category!
     deleteOneImage: NexusGenRootTypes['Image']; // Image!
+    login: NexusGenRootTypes['AuthPayload']; // AuthPayload!
     register: NexusGenRootTypes['Writer']; // Writer!
+    signup: NexusGenRootTypes['AuthPayload']; // AuthPayload!
     updateOneArticle: NexusGenRootTypes['Article']; // Article!
     updateOneArticleComment: NexusGenRootTypes['ArticleComment']; // ArticleComment!
     updateOneCategory: NexusGenRootTypes['Category']; // Category!
-    validateOneComment: NexusGenRootTypes['ArticleComment']; // ArticleComment!
+    updateOneWriterComment: NexusGenRootTypes['WriterComment']; // WriterComment!
+    updateWriter: NexusGenRootTypes['Writer']; // Writer!
+    validateOneComment: NexusGenRootTypes['WriterComment']; // WriterComment!
   }
   Query: { // field return type
     getAllArticles: NexusGenRootTypes['Article'][]; // [Article!]!
     getAllCategories: NexusGenRootTypes['Category'][]; // [Category!]!
     getAllComments: NexusGenRootTypes['ArticleComment'][]; // [ArticleComment!]!
     getAllImages: Array<NexusGenRootTypes['Image'] | null> | null; // [Image]
+    getAllWriterComments: NexusGenRootTypes['WriterComment'][]; // [WriterComment!]!
+    getAllWriters: NexusGenRootTypes['Writer'][]; // [Writer!]!
     getOneArticle: NexusGenRootTypes['Article'] | null; // Article
     getOneCategory: NexusGenRootTypes['Category'] | null; // Category
     getOneComment: NexusGenRootTypes['ArticleComment'] | null; // ArticleComment
     getOneImage: NexusGenRootTypes['Image'] | null; // Image
+    getOneWriter: NexusGenRootTypes['Writer'] | null; // Writer
+    getOneWritterComment: NexusGenRootTypes['WriterComment'] | null; // WriterComment
   }
   Writer: { // field return type
     articles: Array<NexusGenRootTypes['Article'] | null> | null; // [Article]
@@ -215,6 +232,10 @@ export interface NexusGenFieldTypeNames {
     publishedBy: 'Writer'
     publishedOn: 'Article'
   }
+  AuthPayload: { // field return type name
+    token: 'String'
+    writer: 'Writer'
+  }
   Category: { // field return type name
     id: 'Int'
     label: 'String'
@@ -237,25 +258,34 @@ export interface NexusGenFieldTypeNames {
     createOneArticle: 'Article'
     createOneArticleComment: 'ArticleComment'
     createOneCategory: 'Category'
+    createOneWriterComment: 'WriterComment'
     deleteOneArticle: 'Article'
-    deleteOneArticleComment: 'ArticleComment'
+    deleteOneArticleComment: 'WriterComment'
     deleteOneCategory: 'Category'
     deleteOneImage: 'Image'
+    login: 'AuthPayload'
     register: 'Writer'
+    signup: 'AuthPayload'
     updateOneArticle: 'Article'
     updateOneArticleComment: 'ArticleComment'
     updateOneCategory: 'Category'
-    validateOneComment: 'ArticleComment'
+    updateOneWriterComment: 'WriterComment'
+    updateWriter: 'Writer'
+    validateOneComment: 'WriterComment'
   }
   Query: { // field return type name
     getAllArticles: 'Article'
     getAllCategories: 'Category'
     getAllComments: 'ArticleComment'
     getAllImages: 'Image'
+    getAllWriterComments: 'WriterComment'
+    getAllWriters: 'Writer'
     getOneArticle: 'Article'
     getOneCategory: 'Category'
     getOneComment: 'ArticleComment'
     getOneImage: 'Image'
+    getOneWriter: 'Writer'
+    getOneWritterComment: 'WriterComment'
   }
   Writer: { // field return type name
     articles: 'Article'
@@ -312,6 +342,12 @@ export interface NexusGenArgTypes {
     createOneCategory: { // args
       label: string; // String!
     }
+    createOneWriterComment: { // args
+      content: string; // String!
+      note?: number | null; // Int
+      writerIdBeingCommented: number; // Int!
+      writerIdHasCommented: number; // Int!
+    }
     deleteOneArticle: { // args
       id: number; // Int!
     }
@@ -324,6 +360,10 @@ export interface NexusGenArgTypes {
     deleteOneImage: { // args
       id: number; // Int!
     }
+    login: { // args
+      email: string; // String!
+      password: string; // String!
+    }
     register: { // args
       avatar: string; // String!
       blogLabel: string; // String!
@@ -333,6 +373,15 @@ export interface NexusGenArgTypes {
       password: string; // String!
       pseudo: string; // String!
       role: string; // String!
+    }
+    signup: { // args
+      avatar: string; // String!
+      blogLabel: string; // String!
+      categoryId: number; // Int!
+      description: string; // String!
+      email: string; // String!
+      password: string; // String!
+      pseudo: string; // String!
     }
     updateOneArticle: { // args
       content: string; // String!
@@ -347,6 +396,21 @@ export interface NexusGenArgTypes {
     }
     updateOneCategory: { // args
       label: string; // String!
+    }
+    updateOneWriterComment: { // args
+      commentId: number; // Int!
+      content: string; // String!
+      note?: number | null; // Int
+      writerIdBeingCommented: number; // Int!
+      writerIdHasCommented: number; // Int!
+    }
+    updateWriter: { // args
+      avatar: string; // String!
+      blogLabel: string; // String!
+      categoryId: number; // Int!
+      description: string; // String!
+      pseudo: string; // String!
+      writerId: number; // Int!
     }
     validateOneComment: { // args
       commentId: number; // Int!
@@ -364,6 +428,12 @@ export interface NexusGenArgTypes {
     }
     getOneImage: { // args
       id: number; // Int!
+    }
+    getOneWriter: { // args
+      writerId: number; // Int!
+    }
+    getOneWritterComment: { // args
+      commentId: number; // Int!
     }
   }
 }

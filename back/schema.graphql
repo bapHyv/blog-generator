@@ -23,6 +23,11 @@ type ArticleComment {
   publishedOn: Article
 }
 
+type AuthPayload {
+  token: String!
+  writer: Writer!
+}
+
 type Category {
   id: Int!
   label: String!
@@ -53,15 +58,20 @@ type Mutation {
   createOneArticle(content: String!, isPublished: Boolean!, label: String!, writerId: Int!): Article!
   createOneArticleComment(articleId: Int!, content: String!, note: Int, writerId: Int!): ArticleComment!
   createOneCategory(label: String!): Category!
+  createOneWriterComment(content: String!, note: Int, writerIdBeingCommented: Int!, writerIdHasCommented: Int!): WriterComment!
   deleteOneArticle(id: Int!): Article!
-  deleteOneArticleComment(commentId: Int!): ArticleComment!
+  deleteOneArticleComment(commentId: Int!): WriterComment!
   deleteOneCategory(label: String!): Category!
   deleteOneImage(id: Int!): Image!
+  login(email: String!, password: String!): AuthPayload!
   register(avatar: String!, blogLabel: String!, categoryId: Int!, description: String!, email: String!, password: String!, pseudo: String!, role: String!): Writer!
+  signup(avatar: String!, blogLabel: String!, categoryId: Int!, description: String!, email: String!, password: String!, pseudo: String!): AuthPayload!
   updateOneArticle(content: String!, id: Int!, isPublished: Boolean!, label: String!): Article!
   updateOneArticleComment(commentId: Int!, content: String!, note: Int): ArticleComment!
   updateOneCategory(label: String!): Category!
-  validateOneComment(commentId: Int!): ArticleComment!
+  updateOneWriterComment(commentId: Int!, content: String!, note: Int, writerIdBeingCommented: Int!, writerIdHasCommented: Int!): WriterComment!
+  updateWriter(avatar: String!, blogLabel: String!, categoryId: Int!, description: String!, pseudo: String!, writerId: Int!): Writer!
+  validateOneComment(commentId: Int!): WriterComment!
 }
 
 type Query {
@@ -69,10 +79,14 @@ type Query {
   getAllCategories: [Category!]!
   getAllComments: [ArticleComment!]!
   getAllImages: [Image]
+  getAllWriterComments: [WriterComment!]!
+  getAllWriters: [Writer!]!
   getOneArticle(id: Int!): Article
   getOneCategory(id: Int!): Category
   getOneComment(commentId: Int!): ArticleComment
   getOneImage(id: Int!): Image
+  getOneWriter(writerId: Int!): Writer
+  getOneWritterComment(commentId: Int!): WriterComment
 }
 
 type Writer {

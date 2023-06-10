@@ -64,12 +64,16 @@ export const ArticleCommentMutations = extendType({
       type: "ArticleComment",
       args: {
         content: nonNull(stringArg()),
-        writerId: nonNull(intArg()),
         articleId: nonNull(intArg()),
         note: intArg(),
       },
       resolve: async (r, a, c, i) => {
-        const { content, note, articleId, writerId } = a;
+        const { content, note, articleId } = a;
+        const { writerId } = c;
+
+        if (!writerId) {
+          throw new Error("Cannot post without logging in");
+        }
 
         const comment = await c.prisma.articleComment.create({
           data: {
@@ -94,6 +98,11 @@ export const ArticleCommentMutations = extendType({
       },
       resolve: async (r, a, c, i) => {
         const { commentId, content, note } = a;
+        const { writerId } = c;
+
+        if (!writerId) {
+          throw new Error("Cannot post without logging in");
+        }
 
         const comment = await c.prisma.articleComment.update({
           data: {
@@ -116,6 +125,11 @@ export const ArticleCommentMutations = extendType({
       },
       resolve: async (r, a, c, i) => {
         const { commentId } = a;
+        const { writerId } = c;
+
+        if (!writerId) {
+          throw new Error("Cannot post without logging in");
+        }
 
         const comment = await c.prisma.articleComment.delete({
           where: { id: commentId },
@@ -132,6 +146,11 @@ export const ArticleCommentMutations = extendType({
       },
       resolve: async (r, a, c, i) => {
         const { commentId } = a;
+        const { writerId } = c;
+
+        if (!writerId) {
+          throw new Error("Cannot post without logging in");
+        }
 
         const comment = await c.prisma.articleComment.update({
           data: { isValidated: true },

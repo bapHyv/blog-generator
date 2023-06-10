@@ -23,7 +23,7 @@ export const WriterComment = objectType({
   },
 });
 
-export const ArticleCommentQueries = extendType({
+export const WriterCommentQueries = extendType({
   type: "Query",
   definition(t) {
     t.field("getOneWritterComment", {
@@ -53,27 +53,31 @@ export const ArticleCommentQueries = extendType({
   },
 });
 
-export const ArticleCommentMutations = extendType({
+export const WriterCommentMutations = extendType({
   type: "Mutation",
   definition(t) {
     t.nonNull.field("createOneWriterComment", {
       type: "WriterComment",
       args: {
         content: nonNull(stringArg()),
-        writerIdHasCommented: nonNull(intArg()),
         writerIdBeingCommented: nonNull(intArg()),
         note: intArg(),
       },
       resolve: async (r, a, c, i) => {
-        const { content, note, writerIdHasCommented, writerIdBeingCommented } =
-          a;
+        const { content, note, writerIdBeingCommented } = a;
+
+        const { writerId } = c;
+
+        if (!writerId) {
+          throw new Error("Cannot post without logging in");
+        }
 
         const comment = await c.prisma.writerComment.create({
           data: {
             isValidated: false,
             content,
             note,
-            writtenBy: { connect: { id: writerIdHasCommented } },
+            writtenBy: { connect: { id: writerId } },
             writtenOn: { connect: { id: writerIdBeingCommented } },
           },
         });
@@ -87,12 +91,15 @@ export const ArticleCommentMutations = extendType({
       args: {
         commentId: nonNull(intArg()),
         content: nonNull(stringArg()),
-        writerIdHasCommented: nonNull(intArg()),
-        writerIdBeingCommented: nonNull(intArg()),
         note: intArg(),
       },
       resolve: async (r, a, c, i) => {
         const { content, note, commentId } = a;
+        const { writerId } = c;
+
+        if (!writerId) {
+          throw new Error("Cannot post without logging in");
+        }
 
         const comment = await c.prisma.writerComment.update({
           data: {
@@ -115,6 +122,11 @@ export const ArticleCommentMutations = extendType({
       },
       resolve: async (r, a, c, i) => {
         const { commentId } = a;
+        const { writerId } = c;
+
+        if (!writerId) {
+          throw new Error("Cannot post without logging in");
+        }
 
         const comment = await c.prisma.writerComment.delete({
           where: { id: commentId },
@@ -131,6 +143,11 @@ export const ArticleCommentMutations = extendType({
       },
       resolve: async (r, a, c, i) => {
         const { commentId } = a;
+        const { writerId } = c;
+
+        if (!writerId) {
+          throw new Error("Cannot post without logging in");
+        }
 
         const comment = await c.prisma.writerComment.update({
           data: { isValidated: true },

@@ -65,10 +65,14 @@ export const ArticleMutations = extendType({
         label: nonNull(stringArg()),
         content: nonNull(stringArg()),
         isPublished: nonNull(booleanArg()),
-        writerId: nonNull(intArg()),
       },
       resolve: async (r, a, c, i) => {
-        const { label, content, isPublished, writerId } = a;
+        const { label, content, isPublished } = a;
+        const { writerId } = c;
+
+        if (!writerId) {
+          throw new Error("Cannot post without logging in");
+        }
 
         const now = new Date();
 
@@ -94,6 +98,11 @@ export const ArticleMutations = extendType({
       },
       resolve: async (r, a, c, i) => {
         const { id } = a;
+        const { writerId } = c;
+
+        if (!writerId) {
+          throw new Error("Cannot post without logging in");
+        }
 
         const article = c.prisma.article.delete({ where: { id } });
 
@@ -112,6 +121,11 @@ export const ArticleMutations = extendType({
       },
       resolve: (r, a, c, i) => {
         const { content, id, isPublished, label } = a;
+        const { writerId } = c;
+
+        if (!writerId) {
+          throw new Error("Cannot post without logging in");
+        }
 
         const article = c.prisma.article.update({
           data: { content, id, isPublished, label },
@@ -130,6 +144,11 @@ export const ArticleMutations = extendType({
       },
       resolve: (r, a, c, i) => {
         const { id, isPublished } = a;
+        const { writerId } = c;
+
+        if (!writerId) {
+          throw new Error("Cannot post without logging in");
+        }
 
         const article = c.prisma.article.update({
           data: { id, isPublished },

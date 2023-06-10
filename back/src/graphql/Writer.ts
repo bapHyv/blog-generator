@@ -68,50 +68,70 @@ export const Writer = objectType({
   },
 });
 
+export const WriterQueries = extendType({
+  type: "Query",
+  definition(t) {
+    t.field("getOneWriter", {
+      type: "Writer",
+      args: {
+        writerId: nonNull(intArg()),
+      },
+      resolve: async (r, a, c, i) => {
+        const { writerId } = a;
+
+        const writer = await c.prisma.writer.findUnique({
+          where: { id: writerId },
+        });
+
+        return writer;
+      },
+    });
+
+    t.nonNull.list.nonNull.field("getAllWriters", {
+      type: "Writer",
+      resolve: async (r, a, c, i) => {
+        const writers = await c.prisma.writer.findMany();
+        return writers;
+      },
+    });
+  },
+});
+
 export const WriterMutations = extendType({
   type: "Mutation",
   definition(t) {
-    t.nonNull.field("register", {
+    t.nonNull.field("updateWriter", {
       type: "Writer",
       args: {
-        role: nonNull(stringArg()),
         pseudo: nonNull(stringArg()),
-        email: nonNull(stringArg()),
-        password: nonNull(stringArg()),
         description: nonNull(stringArg()),
         avatar: nonNull(stringArg()),
         blogLabel: nonNull(stringArg()),
         categoryId: nonNull(intArg()),
       },
       resolve: async (r, a, c, i) => {
-        const {
-          avatar,
-          blogLabel,
-          description,
-          email,
-          password,
-          pseudo,
-          role,
-          categoryId,
-        } = a;
+        const { avatar, blogLabel, description, pseudo, categoryId } = a;
+        const { writerId } = c;
+
+        if (!writerId) {
+          throw new Error("Cannot post without logging in");
+        }
 
         const now = new Date();
 
-        const newWriter = await c.prisma.writer.create({
+        const writer = await c.prisma.writer.update({
           data: {
             avatar,
             blogLabel,
             description,
-            email,
-            password,
             pseudo,
-            role,
             createdAt: now,
             category: { connect: { id: categoryId } },
           },
+          where: { id: writerId },
         });
 
-        return newWriter;
+        return writer;
       },
     });
   },

@@ -1,5 +1,6 @@
 export * from "./Article";
 export * from "./ArticleComment";
+export * from "./Auth";
 export * from "./Category";
 export * from "./Follow";
 export * from "./Image";

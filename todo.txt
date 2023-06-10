@@ -1,37 +1,15 @@
+----- TODO -----
 type redacteur: changer le avatar en Image
-npx prisma migrate dev
+#Finir l'authentification:
+    -#env
+    -#signup
+    -#login
+    -enlever register de Writer
+    -#ajouter changePassword à AuthPayload
+    -#ajouter le user dans le context
+    -#modifier les queries et mutations qui nécessite d'être logger
 
-#Article:
-    Query:
-        -#getOneArticle
-        -#getAllArticles
-
-    Mutation:
-        -#createOneArticle
-        -#updateOneArticle
-        -#deleteOneArticle
-        -#changeArticleVisibility
-
-#ArticleComment:
-    Query:
-        -#getOneComment
-        -(getAllComments)
-
-    Mutation:
-        -#createOneComment
-        -#updateOneComment
-        -#deleteOneComment
-        -#validateOneComment
-
-#Category:
-    Query:
-        -#getCategory
-        -#getCategories
-    
-    Mutation:
-        -#createOneCategory
-        -#updateOneCategory
-        -#deleteOneCategory
+Pagination
 
 Follow:
     Query:
@@ -42,42 +20,28 @@ Follow:
         -deleteOneFollowing
         -deleteOneFollowed
 
-#Image:
+#Writer:
     Query:
-        -#getOneImage
-        -#getAllImages
+        -#getOneWriter
+        -#getAllWriters
 
     Mutation:
-        -#addOneImage
-        -#deleteOneImage
+        -#register
+        -#updateWriterData
 
-Writer:
-    Query:
-        -getWriterData
 
-    Mutation:
-        -updateWriterData
 
-#WriterComment:
-    Query:
-        -#getOneComment
-        -#getAllComments
 
-    Mutation:
-        -#createOneComment
-        -#updateOneComment
-        -#deleteOneComment
-        -#validateOneComment
-
-Tag:
-
+----- RAPPORT -----
+Enlever les tags du MCD, MLD, MPD et diagramme UML
 
 Parler de:
     Apollo Server (index.ts)
     schema.ts
     prisma (folder)
     context.ts ()
-    
+    auth.ts (utils folder)
 
 
-Enlever les tags du MCD, MLD, MPD et diagramme UML
+----- COMMANDS -----
+npx prisma migrate dev
