@@ -77,6 +77,7 @@ export interface NexusGenObjects {
   }
   Mutation: {};
   Query: {};
+  Subscription: {};
   Writer: { // root type
     avatar: string; // String!
     blogLabel: string; // String!
@@ -183,6 +184,10 @@ export interface NexusGenFieldTypes {
     getOneWriter: NexusGenRootTypes['Writer'] | null; // Writer
     getOneWritterComment: NexusGenRootTypes['WriterComment'] | null; // WriterComment
   }
+  Subscription: { // field return type
+    newArticleComment: NexusGenRootTypes['ArticleComment'] | null; // ArticleComment
+    newWriterComment: NexusGenRootTypes['WriterComment'] | null; // WriterComment
+  }
   Writer: { // field return type
     articles: Array<NexusGenRootTypes['Article'] | null> | null; // [Article]
     avatar: string; // String!
@@ -288,6 +293,10 @@ export interface NexusGenFieldTypeNames {
     getOneImage: 'Image'
     getOneWriter: 'Writer'
     getOneWritterComment: 'WriterComment'
+  }
+  Subscription: { // field return type name
+    newArticleComment: 'ArticleComment'
+    newWriterComment: 'WriterComment'
   }
   Writer: { // field return type name
     articles: 'Article'

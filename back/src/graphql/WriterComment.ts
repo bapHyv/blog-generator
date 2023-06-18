@@ -1,4 +1,6 @@
 import { extendType, intArg, nonNull, objectType, stringArg } from "nexus";
+import { withFilter } from "graphql-subscriptions";
+import { PubSubChannels } from "../pubsub";
 
 export const WriterComment = objectType({
   name: "WriterComment",
@@ -82,6 +84,10 @@ export const WriterCommentMutations = extendType({
           },
         });
 
+        c.pubSub.publish("newWriterComment", {
+          createdWriterComment: comment,
+        });
+
         return comment;
       },
     });
@@ -155,6 +161,26 @@ export const WriterCommentMutations = extendType({
         });
 
         return comment;
+      },
+    });
+  },
+});
+
+export const WriterCommentSubscriptions = extendType({
+  type: "Subscription",
+  definition(t) {
+    t.field("newWriterComment", {
+      type: "WriterComment",
+      subscribe: withFilter(
+        (r, a, c, i) => {
+          return c.pubSub.asyncIterator("newWriterComment");
+        },
+        async (p, v, c, i) => {
+          return p.createdWriterComment.writtenOnId === c.writerId;
+        }
+      ),
+      resolve: (payload: PubSubChannels["newWriterComment"][0]) => {
+        return payload.createdWriterComment;
       },
     });
   },

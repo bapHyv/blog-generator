@@ -90,6 +90,11 @@ type Query {
   getOneWritterComment(commentId: Int!): WriterComment
 }
 
+type Subscription {
+  newArticleComment: ArticleComment
+  newWriterComment: WriterComment
+}
+
 type Writer {
   articles: [Article]
   avatar: String!

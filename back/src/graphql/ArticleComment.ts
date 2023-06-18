@@ -1,4 +1,6 @@
 import { extendType, intArg, nonNull, objectType, stringArg } from "nexus";
+import { PubSubChannels } from "../pubsub";
+import { withFilter } from "graphql-subscriptions";
 
 export const ArticleComment = objectType({
   name: "ArticleComment",
@@ -85,6 +87,10 @@ export const ArticleCommentMutations = extendType({
           },
         });
 
+        c.pubSub.publish("newArticleComment", {
+          createdArticleComment: comment,
+        });
+
         return comment;
       },
     });
@@ -149,7 +155,7 @@ export const ArticleCommentMutations = extendType({
         const { writerId } = c;
 
         if (!writerId) {
-          throw new Error("Cannot post without logging in");
+          throw new Error("Cannot validate without logging in");
         }
 
         const comment = await c.prisma.articleComment.update({
@@ -158,6 +164,30 @@ export const ArticleCommentMutations = extendType({
         });
 
         return comment;
+      },
+    });
+  },
+});
+
+export const ArticleCommentSubscriptions = extendType({
+  type: "Subscription",
+  definition(t) {
+    t.field("newArticleComment", {
+      type: "ArticleComment",
+      subscribe: withFilter(
+        (r, a, c, i) => {
+          return c.pubSub.asyncIterator("newArticleComment");
+        },
+        async (p, v, c, i) => {
+          const article = await c.prisma.article.findUnique({
+            where: { id: p.createdArticleComment.articleId },
+          });
+
+          return c.writerId === article.writerId;
+        }
+      ),
+      resolve: (payload: PubSubChannels["newArticleComment"][0]) => {
+        return payload.createdArticleComment;
       },
     });
   },
