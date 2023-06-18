@@ -1,13 +1,16 @@
 ----- TODO -----
+
+Changer Follow en Friends
+
+-Follow:
+    -Il faut que lorsque writer A follow writer B, writer B reçoive une notification.
+    -Puisque writer A follow writer B, Writer A doit recevoir une notification lorsque writer B post un nouvel article.
+
+Comments:
+    -Lorsque writer C commente un article de writer D, writer D doit recevoir une notification.
+    -Lorsque writer C commente le profil de writer D, writer D doit recevoir une notification.
+
 type redacteur: changer le avatar en Image
-#Finir l'authentification:
-    -#env
-    -#signup
-    -#login
-    -enlever register de Writer
-    -#ajouter changePassword à AuthPayload
-    -#ajouter le user dans le context
-    -#modifier les queries et mutations qui nécessite d'être logger
 
 Pagination
 
@@ -19,6 +22,26 @@ Follow:
     Mutation:
         -deleteOneFollowing
         -deleteOneFollowed
+
+
+
+Lors d'une requête pour subscribe, il faut passer le JWT aux paramètres de connection:
+
+{
+    "authentication": "JWT"
+}
+
+Il est à noté que le context du server WS est appelé une fois lors de la requête de subscription
+et non pas à chaque emission d'évenement.
+
+
+
+
+
+
+
+
+
 
 
 ----- RAPPORT -----
