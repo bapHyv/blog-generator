@@ -17,13 +17,21 @@ function Header() {
     navigate('/');
   };
   return (
-    <header className="header-wrapper">
-      <div>
+    <header className="flex items-center justify-between p-5 bg-neutral-300">
+      <div className="w-1/5">
         <Link to={`/`}>
-          <img src={Logo} alt="logo" className="h-14 cursor-pointer" />
+          <img src={Logo} alt="logo" className="cursor-pointer h-14" />
         </Link>
       </div>
-      <div className="header-btn-wrapper">
+      <div className="flex w-3/5 gap-x-20">
+        <Link to={'/articles'} className="text-xl">
+          Articles
+        </Link>
+        <Link to={'/writers'} className="text-xl">
+          Writers
+        </Link>
+      </div>
+      <div className="flex justify-end w-1/5">
         {user.pseudo && (
           <>
             <Link to={`/userzzz`}>

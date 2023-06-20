@@ -5,7 +5,6 @@ import { pubSub } from "./pubsub";
 
 export const prisma = new PrismaClient();
 export interface Context {
-  // 1
   prisma: PrismaClient;
   writerId?: number;
   writerEmail?: string;

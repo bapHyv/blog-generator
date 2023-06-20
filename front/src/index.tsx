@@ -8,7 +8,7 @@ import reportWebVitals from './reportWebVitals';
 import { UserProvider } from './contexts/UserContext';
 
 const httpLink = createHttpLink({
-  uri: 'http://localhost:5000/',
+  uri: 'http://localhost:5000/graphql',
 });
 const authLink = setContext((_, { headers }) => {
   // get the authentication token from local storage if it exists

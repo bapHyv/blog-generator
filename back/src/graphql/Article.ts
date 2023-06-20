@@ -43,11 +43,15 @@ export const ArticleQueries = extendType({
       resolve(r, a, c, i) {
         const { skip, take } = a;
         return c.prisma.article.findMany({
+          where: {
+            isPublished: true,
+          },
           skip: skip as number | undefined,
           take: take as number | undefined,
         });
       },
     });
+
     t.field("getOneArticle", {
       type: "Article",
       args: {

@@ -8,7 +8,7 @@ import { expressMiddleware } from "@apollo/server/express4";
 import cors from "cors";
 import bodyParser from "body-parser";
 import { schema } from "./schema";
-import { Context, context, prisma } from "./context";
+import { context, prisma } from "./context";
 import * as dotenv from "dotenv";
 import { decodeAuthHeader } from "./utils/auth";
 import { pubSub } from "./pubsub";
@@ -64,7 +64,7 @@ dotenv.config();
 
   app.use(
     "/graphql",
-    cors<cors.CorsRequest>(),
+    cors<cors.CorsRequest>({ origin: "http://localhost:3000" }),
     bodyParser.json(),
     expressMiddleware(server, { context })
   );
