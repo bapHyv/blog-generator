@@ -159,10 +159,12 @@ export interface NexusGenFieldTypes {
     deleteOneArticleComment: NexusGenRootTypes['WriterComment']; // WriterComment!
     deleteOneCategory: NexusGenRootTypes['Category']; // Category!
     deleteOneImage: NexusGenRootTypes['Image']; // Image!
+    deleteRelation: NexusGenRootTypes['Follow']; // Follow!
     followWriter: NexusGenRootTypes['Follow']; // Follow!
     login: NexusGenRootTypes['AuthPayload']; // AuthPayload!
     passwordLost: NexusGenRootTypes['AuthPayload']; // AuthPayload!
     signup: NexusGenRootTypes['AuthPayload']; // AuthPayload!
+    stopFollowingWriter: NexusGenRootTypes['Follow']; // Follow!
     updateOneArticle: NexusGenRootTypes['Article']; // Article!
     updateOneArticleComment: NexusGenRootTypes['ArticleComment']; // ArticleComment!
     updateOneCategory: NexusGenRootTypes['Category']; // Category!
@@ -174,6 +176,7 @@ export interface NexusGenFieldTypes {
     getAllArticles: NexusGenRootTypes['Article'][]; // [Article!]!
     getAllCategories: NexusGenRootTypes['Category'][]; // [Category!]!
     getAllComments: NexusGenRootTypes['ArticleComment'][]; // [ArticleComment!]!
+    getAllFollow: NexusGenRootTypes['Follow'][]; // [Follow!]!
     getAllImages: Array<NexusGenRootTypes['Image'] | null> | null; // [Image]
     getAllWriterComments: NexusGenRootTypes['WriterComment'][]; // [WriterComment!]!
     getAllWriters: NexusGenRootTypes['Writer'][]; // [Writer!]!
@@ -186,6 +189,7 @@ export interface NexusGenFieldTypes {
   }
   Subscription: { // field return type
     newArticleComment: NexusGenRootTypes['ArticleComment'] | null; // ArticleComment
+    newFollower: NexusGenRootTypes['Follow'] | null; // Follow
     newWriterComment: NexusGenRootTypes['WriterComment'] | null; // WriterComment
   }
   Writer: { // field return type
@@ -269,10 +273,12 @@ export interface NexusGenFieldTypeNames {
     deleteOneArticleComment: 'WriterComment'
     deleteOneCategory: 'Category'
     deleteOneImage: 'Image'
+    deleteRelation: 'Follow'
     followWriter: 'Follow'
     login: 'AuthPayload'
     passwordLost: 'AuthPayload'
     signup: 'AuthPayload'
+    stopFollowingWriter: 'Follow'
     updateOneArticle: 'Article'
     updateOneArticleComment: 'ArticleComment'
     updateOneCategory: 'Category'
@@ -284,6 +290,7 @@ export interface NexusGenFieldTypeNames {
     getAllArticles: 'Article'
     getAllCategories: 'Category'
     getAllComments: 'ArticleComment'
+    getAllFollow: 'Follow'
     getAllImages: 'Image'
     getAllWriterComments: 'WriterComment'
     getAllWriters: 'Writer'
@@ -296,6 +303,7 @@ export interface NexusGenFieldTypeNames {
   }
   Subscription: { // field return type name
     newArticleComment: 'ArticleComment'
+    newFollower: 'Follow'
     newWriterComment: 'WriterComment'
   }
   Writer: { // field return type name
@@ -368,6 +376,9 @@ export interface NexusGenArgTypes {
     deleteOneImage: { // args
       id: number; // Int!
     }
+    deleteRelation: { // args
+      id: number; // Int!
+    }
     followWriter: { // args
       writerIdToFollow: number; // Int!
     }
@@ -387,6 +398,9 @@ export interface NexusGenArgTypes {
       email: string; // String!
       password: string; // String!
       pseudo: string; // String!
+    }
+    stopFollowingWriter: { // args
+      writerIdToStopFollowing: number; // Int!
     }
     updateOneArticle: { // args
       content: string; // String!
