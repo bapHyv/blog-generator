@@ -16,7 +16,6 @@ const AddCommentTab = ({ articleId }: { articleId: number }) => {
 
   const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log('machin');
     addComment();
   };
 

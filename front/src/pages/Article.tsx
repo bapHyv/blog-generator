@@ -62,8 +62,6 @@ function Article() {
     },
   });
 
-  console.log(user);
-
   useEffect(() => {
     getArticle();
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -87,47 +85,45 @@ function Article() {
   }, [tab, article, user]);
 
   return (
-    <>
-      <div className="min-h-screen py-10 px-28">
-        <div className="mt-5 mb-10">
-          <Link to={'/articles'} className="p-2 text-white rounded bg-neutral-700">
-            Return to articles
-          </Link>
-        </div>
-        {article ? (
-          <div className="flex flex-col gap-y-10">
-            <div className="flex items-center justify-between">
-              <h1 className="text-3xl">{article.label}</h1>
-              {/* <p>
+    <div className="min-h-screen py-10 px-28">
+      <div className="mt-5 mb-10">
+        <Link to={'/articles'} className="p-2 text-white rounded bg-neutral-700">
+          Return to articles
+        </Link>
+      </div>
+      {article ? (
+        <div className="flex flex-col gap-y-10">
+          <div className="flex items-center justify-between">
+            <h1 className="text-3xl">{article.label}</h1>
+            {/* <p>
                 Written by: <span className="text-xl">{article.publishedBy.pseudo}</span>
               </p> */}
-            </div>
-            <p>{new Array(10).fill(0).map((e) => article.content)}</p>
-            <div className="flex gap-x-10">
-              <div
-                className={`flex items-center justify-center w-1/2 h-10 cursor-pointer rounded-t-xl hover:bg-neutral-300 ${
-                  tab === 'comments' ? 'bg-neutral-300' : 'bg-neutral-100'
-                }`}
-                onClick={() => setTab('comments')}
-              >
-                Comments
-              </div>
-              <div
-                className={`flex items-center justify-center w-1/2 h-10 cursor-pointer rounded-t-xl hover:bg-neutral-300 ${
-                  tab === 'addComment' ? 'bg-neutral-300' : 'bg-neutral-100'
-                }`}
-                onClick={() => setTab('addComment')}
-              >
-                Add a comment
-              </div>
-            </div>
-            {currentTab}
           </div>
-        ) : (
-          <div className="h-screen rounded-3xl bg-neutral-500 animate-pulse"></div>
-        )}
-      </div>
-    </>
+          <p>{new Array(10).fill(0).map((e) => article.content)}</p>
+          <div className="flex gap-x-10">
+            <div
+              className={`flex items-center justify-center w-1/2 h-10 cursor-pointer rounded-t-xl hover:bg-neutral-300 ${
+                tab === 'comments' ? 'bg-neutral-300' : 'bg-neutral-100'
+              }`}
+              onClick={() => setTab('comments')}
+            >
+              Comments
+            </div>
+            <div
+              className={`flex items-center justify-center w-1/2 h-10 cursor-pointer rounded-t-xl hover:bg-neutral-300 ${
+                tab === 'addComment' ? 'bg-neutral-300' : 'bg-neutral-100'
+              }`}
+              onClick={() => setTab('addComment')}
+            >
+              Add a comment
+            </div>
+          </div>
+          {currentTab}
+        </div>
+      ) : (
+        <div className="h-screen rounded-3xl bg-neutral-500 animate-pulse"></div>
+      )}
+    </div>
   );
 }
 

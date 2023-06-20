@@ -1,6 +1,6 @@
 import { gql, useLazyQuery } from '@apollo/client';
-import React, { useEffect, useMemo, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useEffect, useMemo, useState } from 'react';
+import ArticleCard from '../components/ArticleCard';
 
 export const GET_ALL_ARTICLES = gql`
   query Query {
@@ -21,7 +21,7 @@ export const GET_ALL_ARTICLES = gql`
   }
 `;
 
-interface IArticle {
+export interface IArticle {
   id: number;
   label: string;
   createdAt: string;
@@ -56,29 +56,7 @@ const Articles = () => {
   return (
     <div className="flex flex-col px-20 py-10">
       {!!articles.length
-        ? articles.map((article) => (
-            <Link
-              to={`/articles/${article.id}`}
-              className="flex flex-col p-5 mt-10 rounded-2xl bg-neutral-100 gap-y-5 hover:bg-neutral-200"
-              key={article.id + Math.random()}
-            >
-              <div className="flex justify-between">
-                <h2>{article.label}</h2>
-                <span>{article.publishedBy.pseudo}</span>
-              </div>
-              <div>
-                <span>Published: {new Date(article.createdAt).toLocaleDateString()}</span>
-              </div>
-              <div>
-                <p>{article.content}</p>
-              </div>
-              <div>
-                <span>
-                  <span>{article.comments.length} comments</span>
-                </span>
-              </div>
-            </Link>
-          ))
+        ? articles.map((article) => <ArticleCard article={article} />)
         : articleCardsPlaceholder}
     </div>
   );

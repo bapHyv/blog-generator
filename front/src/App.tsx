@@ -11,6 +11,7 @@ import ArticleBuilderScreen from './pages/ArticleBuilderScreen';
 import Articles from './pages/Articles';
 import Writers from './pages/Writers';
 import Article from './pages/Article';
+import Writer from './pages/Writer';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/articles" element={<Articles />} />
           <Route path="/articles/:articleId" element={<Article />} />
           <Route path="/writers" element={<Writers />} />
+          <Route path="/writers/:writerId" element={<Writer />} />
           <Route path="/login" element={<Login />} />
           <Route path="/registration" element={<Registration />} />
           <Route path="/userzzz" element={<UserScreen />} />
