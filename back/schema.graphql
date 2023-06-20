@@ -78,13 +78,13 @@ type Mutation {
 }
 
 type Query {
-  getAllArticles: [Article!]!
+  getAllArticles(skip: Int, take: Int): [Article!]!
   getAllCategories: [Category!]!
   getAllComments: [ArticleComment!]!
   getAllFollow: [Follow!]!
   getAllImages: [Image]
   getAllWriterComments: [WriterComment!]!
-  getAllWriters: [Writer!]!
+  getAllWriters(filter: String, skip: Int, take: Int): [Writer!]!
   getOneArticle(id: Int!): Article
   getOneCategory(id: Int!): Category
   getOneComment(commentId: Int!): ArticleComment

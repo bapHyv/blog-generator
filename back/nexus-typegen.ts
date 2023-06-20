@@ -433,6 +433,15 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    getAllArticles: { // args
+      skip?: number | null; // Int
+      take?: number | null; // Int
+    }
+    getAllWriters: { // args
+      filter?: string | null; // String
+      skip?: number | null; // Int
+      take?: number | null; // Int
+    }
     getOneArticle: { // args
       id: number; // Int!
     }

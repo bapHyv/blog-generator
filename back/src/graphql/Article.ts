@@ -36,8 +36,16 @@ export const ArticleQueries = extendType({
   definition(t) {
     t.nonNull.list.nonNull.field("getAllArticles", {
       type: "Article",
+      args: {
+        skip: intArg(),
+        take: intArg(),
+      },
       resolve(r, a, c, i) {
-        return c.prisma.article.findMany();
+        const { skip, take } = a;
+        return c.prisma.article.findMany({
+          skip: skip as number | undefined,
+          take: take as number | undefined,
+        });
       },
     });
     t.field("getOneArticle", {

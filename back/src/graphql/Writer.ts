@@ -89,8 +89,30 @@ export const WriterQueries = extendType({
 
     t.nonNull.list.nonNull.field("getAllWriters", {
       type: "Writer",
+      args: {
+        filter: stringArg(),
+        skip: intArg(),
+        take: intArg(),
+      },
       resolve: async (r, a, c, i) => {
-        const writers = await c.prisma.writer.findMany();
+        const { filter, skip, take } = a;
+
+        if (filter) {
+          const where = {
+            where: {
+              OR: [{ pseudo: { contains: filter } }],
+            },
+            skip: skip as number | undefined,
+            take: take as number | undefined,
+          };
+
+          return c.prisma.writer.findMany(where);
+        }
+
+        const writers = await c.prisma.writer.findMany({
+          skip: skip as number | undefined,
+          take: take as number | undefined,
+        });
         return writers;
       },
     });
