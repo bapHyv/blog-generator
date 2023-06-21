@@ -27,7 +27,7 @@ const ArticleCard = ({ article }: { article: IArticle }) => {
       </Link>
       <div>
         <Link to={`/writers/${article.publishedBy.id}`}>
-          <span className="p-1 rounded-lg bg-neutral-300 hover:bg-neutral-400">
+          <span className="p-1.5 rounded-lg bg-neutral-300 hover:bg-neutral-400">
             {article.publishedBy.pseudo}
           </span>
         </Link>

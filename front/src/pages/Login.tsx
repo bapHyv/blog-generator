@@ -6,28 +6,36 @@ import { AiOutlineUser } from 'react-icons/ai';
 import { AiOutlineLock } from 'react-icons/ai';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { gql, useLazyQuery } from '@apollo/client';
+import { gql, useMutation } from '@apollo/client';
 import { useUser } from '../contexts/UserContext';
 
-export const GET_TOKEN = gql`
-  query Query($password: String!, $email: String!) {
-    getToken(password: $password, email: $email)
-  }
-`;
-
-const GET_USER_DATA = gql`
-  query Query($email: String!) {
-    getOneUser(email: $email) {
-      blog {
-        id
-        articles {
+export const LOGIN = gql`
+  mutation Mutation($email: String!, $password: String!) {
+    login(email: $email, password: $password) {
+      token
+      writer {
+        avatar
+        blogLabel
+        category {
           id
           label
-          createdAt
-          updatedAt
-          publishedAt
-          content
-          isPublished
+        }
+        createdAt
+        description
+        email
+        id
+        pseudo
+        followers {
+          followed {
+            id
+            email
+          }
+        }
+        following {
+          following {
+            id
+            email
+          }
         }
       }
     }
@@ -35,40 +43,27 @@ const GET_USER_DATA = gql`
 `;
 
 function Login() {
-  const [mail, setMail] = useState('');
+  const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const navigate = useNavigate();
   const { setLocalUser } = useUser();
-  const [getUserData] = useLazyQuery(GET_USER_DATA, { variables: { email: mail } });
-  const [getToken] = useLazyQuery(GET_TOKEN, {
-    variables: {
-      email: mail,
-      password: password,
+  const [login] = useMutation(LOGIN, {
+    variables: { email, password },
+    onCompleted: async (data) => {
+      const { login } = data;
+      console.log(data);
+      localStorage.setItem('token', login.token);
+      setLocalUser(login.writer);
+      navigate(`/profile/${login.writer.pseudo}`);
     },
-    async onCompleted(data) {
-      const res = JSON.parse(data.getToken);
-      setLocalUser({ ...res.user });
-
-      const userData = await getUserData();
-
-      setLocalUser((state) => ({
-        ...state,
-        blogId: userData.data.getOneUser.blog.id,
-        articles: userData.data.getOneUser.blog.articles,
-      }));
-
-      localStorage.setItem('token', res.token);
-
-      navigate('/userzzz');
-    },
-    onError(error) {
+    onError: (error) => {
       console.log(error);
     },
   });
 
   const handleKeyPressed = (e: any) => {
     if (e.keyCode === 13) {
-      getToken();
+      login();
     }
   };
 
@@ -86,8 +81,8 @@ function Login() {
               <input
                 type="text"
                 placeholder="Type your mail"
-                value={mail}
-                onChange={(e) => setMail(e.target.value)}
+                value={email}
+                onChange={(e) => setEmail(e.target.value)}
               />
             </div>
           </label>
@@ -112,7 +107,7 @@ function Login() {
         <div className="login-forgot-password-container">
           <p className="login-forgot-password">Forgot password ?</p>
         </div>
-        <button className="login-btn" onClick={() => getToken()}>
+        <button className="login-btn" onClick={() => login()}>
           LOGIN
         </button>
         <p className="signup-social">Or Sign Up Using</p>

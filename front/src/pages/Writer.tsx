@@ -7,7 +7,7 @@ import ArticleCard from '../components/ArticleCard';
 import { IArticle } from './Articles';
 import CommentsTab from '../components/CommentsTab';
 import AddCommentTab from '../components/AddCommentTab';
-import { IComment } from './Article';
+import { IComment, typeTab } from './Article';
 
 const GET_WRITER = gql`
   query Query($writerId: Int!) {
@@ -63,16 +63,17 @@ interface IWriter {
 const Writer = () => {
   const [writer, setWriter] = useState<IWriter | null>(null);
 
-  const [tab, setTab] = useState('comments');
+  const [tab, setTab] = useState<typeTab>('comments');
   const params = useParams();
 
   const { user } = useUser();
 
-  const [getWriter] = useLazyQuery(GET_WRITER, {
+  const [getWriter, { refetch }] = useLazyQuery(GET_WRITER, {
     variables: { writerId: params.writerId ? parseInt(params.writerId) : -1 },
     onCompleted: async (data) => {
       setWriter(data.getOneWriter);
     },
+    fetchPolicy: 'network-only',
   });
 
   useEffect(() => {
@@ -88,7 +89,12 @@ const Writer = () => {
         return <CommentsTab comments={writer?.commentsFromWriters || []} />;
       case 'addComment':
         return user.id ? (
-          <AddCommentTab articleId={params.writerId ? parseInt(params.writerId) : -1} />
+          <AddCommentTab
+            id={params.writerId ? parseInt(params.writerId) : -1}
+            type="writer"
+            refetch={refetch}
+            setTab={setTab}
+          />
         ) : (
           <p>You have to loggin to comment...</p>
         );

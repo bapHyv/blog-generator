@@ -89,30 +89,8 @@ export const WriterQueries = extendType({
 
     t.nonNull.list.nonNull.field("getAllWriters", {
       type: "Writer",
-      args: {
-        filter: stringArg(),
-        skip: intArg(),
-        take: intArg(),
-      },
       resolve: async (r, a, c, i) => {
-        const { filter, skip, take } = a;
-
-        if (filter) {
-          const where = {
-            where: {
-              OR: [{ pseudo: { contains: filter } }],
-            },
-            skip: skip as number | undefined,
-            take: take as number | undefined,
-          };
-
-          return c.prisma.writer.findMany(where);
-        }
-
-        const writers = await c.prisma.writer.findMany({
-          skip: skip as number | undefined,
-          take: take as number | undefined,
-        });
+        const writers = await c.prisma.writer.findMany();
         return writers;
       },
     });
@@ -126,13 +104,14 @@ export const WriterMutations = extendType({
       type: "Writer",
       args: {
         pseudo: nonNull(stringArg()),
-        description: nonNull(stringArg()),
-        avatar: nonNull(stringArg()),
-        blogLabel: nonNull(stringArg()),
-        categoryId: nonNull(intArg()),
+        // description: nonNull(stringArg()),
+        // avatar: nonNull(stringArg()),
+        // blogLabel: nonNull(stringArg()),
+        // categoryId: nonNull(intArg()),
       },
       resolve: async (r, a, c, i) => {
-        const { avatar, blogLabel, description, pseudo, categoryId } = a;
+        // const { avatar, blogLabel, description, pseudo, categoryId } = a;
+        const { pseudo } = a;
         const { writerId } = c;
 
         if (!writerId) {
@@ -143,12 +122,12 @@ export const WriterMutations = extendType({
 
         const writer = await c.prisma.writer.update({
           data: {
-            avatar,
-            blogLabel,
-            description,
+            // avatar,
+            // blogLabel,
+            // description,
             pseudo,
             createdAt: now,
-            category: { connect: { id: categoryId } },
+            // category: { connect: { id: categoryId } },
           },
           where: { id: writerId },
         });

@@ -26,7 +26,7 @@ function App() {
           <Route path="/writers/:writerId" element={<Writer />} />
           <Route path="/login" element={<Login />} />
           <Route path="/registration" element={<Registration />} />
-          <Route path="/userzzz" element={<UserScreen />} />
+          <Route path="/profile/:writerPseudo" element={<UserScreen />} />
           <Route path="/article-builder" element={<ArticleBuilderScreen />} />
         </Routes>
         <Footer />

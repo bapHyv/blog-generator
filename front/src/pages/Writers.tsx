@@ -46,6 +46,7 @@ const Writers = () => {
     onCompleted: async (data) => {
       setWriters(data.getAllWriters);
     },
+    fetchPolicy: 'network-only',
   });
 
   useEffect(() => {
@@ -58,7 +59,11 @@ const Writers = () => {
   return (
     <div>
       <div className="flex flex-col px-20 py-10">
-        {!!writers.length ? writers.map((writer) => <WriterCard writer={writer} />) : <div></div>}
+        {!!writers.length ? (
+          writers.map((writer) => <WriterCard key={writer.id + Math.random()} writer={writer} />)
+        ) : (
+          <div></div>
+        )}
       </div>
     </div>
   );

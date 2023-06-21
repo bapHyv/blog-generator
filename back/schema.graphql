@@ -73,7 +73,7 @@ type Mutation {
   updateOneArticleComment(commentId: Int!, content: String!, note: Int): ArticleComment!
   updateOneCategory(label: String!): Category!
   updateOneWriterComment(commentId: Int!, content: String!, note: Int): WriterComment!
-  updateWriter(avatar: String!, blogLabel: String!, categoryId: Int!, description: String!, pseudo: String!): Writer!
+  updateWriter(pseudo: String!): Writer!
   validateOneComment(commentId: Int!): WriterComment!
 }
 
@@ -84,7 +84,7 @@ type Query {
   getAllFollow: [Follow!]!
   getAllImages: [Image]
   getAllWriterComments: [WriterComment!]!
-  getAllWriters(filter: String, skip: Int, take: Int): [Writer!]!
+  getAllWriters: [Writer!]!
   getOneArticle(id: Int!): Article
   getOneCategory(id: Int!): Category
   getOneComment(commentId: Int!): ArticleComment

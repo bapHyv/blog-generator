@@ -40,6 +40,7 @@ const Articles = () => {
     onCompleted: async (data) => {
       setArticles(data.getAllArticles);
     },
+    fetchPolicy: 'network-only',
   });
 
   useEffect(() => {
@@ -48,15 +49,22 @@ const Articles = () => {
   }, []);
 
   const articleCardsPlaceholder = useMemo(() => {
-    return new Array(5).fill(0).map((e) => {
-      return <div className="w-full h-40 mt-10 rounded-2xl bg-neutral-500 animate-pulse"></div>;
+    return new Array(5).fill(0).map((_, i) => {
+      return (
+        <div
+          key={i + Math.random()}
+          className="w-full h-40 mt-10 rounded-2xl bg-neutral-500 animate-pulse"
+        ></div>
+      );
     });
   }, []);
 
   return (
     <div className="flex flex-col px-20 py-10">
       {!!articles.length
-        ? articles.map((article) => <ArticleCard article={article} />)
+        ? articles.map((article) => (
+            <ArticleCard key={article.id + Math.random()} article={article} />
+          ))
         : articleCardsPlaceholder}
     </div>
   );

@@ -107,7 +107,7 @@ const writers = [
     email: "VoyagePhoto@example.com",
     id: 4,
     password: "$2a$10$i0ETuhEyyRze0OgDqEZCGeGp3npYbfaUPqIkpGllMeiUaFG0y7AsO",
-    pseudo: "VoyagePhoto",
+    pseudo: "PhotoVoyage",
     role: "writer",
   },
   {
@@ -343,7 +343,7 @@ const articles = [
 ];
 
 const token_musique =
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ3cml0ZXJJZCI6Mywid3JpdGVyRW1haWwiOiJtdXNpcXVlcGFzc2lvbkBleGFtcGxlLmNvbSIsIndyaXRlclJvbGUiOiJ3cml0ZXIiLCJpYXQiOjE2ODY0Mjg1MjZ9.0GvCHO8R8G4yiorRu71dfZXrHy-imp6cyB4Nl57Tals";
+  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ3cml0ZXJJZCI6Mywid3JpdGVyUm9sZSI6IndyaXRlciIsIndyaXRlckVtYWlsIjoibXVzaXF1ZXBhc3Npb25AZXhhbXBsZS5jb20iLCJpYXQiOjE2ODcyOTA3MDJ9.xXdZFno3shlNQdtpIWaGHAE_ZoxUnXMoMSRb6adeOsw";
 
 const token_muscu =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ3cml0ZXJJZCI6OSwid3JpdGVyRW1haWwiOiJNdXNjdU51dHJpdGlvbkBleGFtcGxlLmNvbSIsIndyaXRlclJvbGUiOiJ3cml0ZXIiLCJpYXQiOjE2ODY0MjkyOTd9.EYCVhqTXz_Su58UJUF-P9Rl9V1n9fd7ylgo638WWPHc";

@@ -422,10 +422,6 @@ export interface NexusGenArgTypes {
       note?: number | null; // Int
     }
     updateWriter: { // args
-      avatar: string; // String!
-      blogLabel: string; // String!
-      categoryId: number; // Int!
-      description: string; // String!
       pseudo: string; // String!
     }
     validateOneComment: { // args
@@ -434,11 +430,6 @@ export interface NexusGenArgTypes {
   }
   Query: {
     getAllArticles: { // args
-      skip?: number | null; // Int
-      take?: number | null; // Int
-    }
-    getAllWriters: { // args
-      filter?: string | null; // String
       skip?: number | null; // Int
       take?: number | null; // Int
     }

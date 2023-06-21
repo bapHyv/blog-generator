@@ -48,18 +48,21 @@ interface IArticle {
   };
 }
 
+export type typeTab = 'comments' | 'addComment';
+
 function Article() {
   const [article, setArticle] = useState<IArticle>({} as IArticle);
-  const [tab, setTab] = useState('comments');
+  const [tab, setTab] = useState<typeTab>('comments');
   const params = useParams();
 
   const { user } = useUser();
 
-  const [getArticle] = useLazyQuery(GET_ARTICLE, {
+  const [getArticle, { refetch }] = useLazyQuery(GET_ARTICLE, {
     variables: { getOneArticleId: params.articleId ? parseInt(params.articleId) : -1 },
     onCompleted: async (data) => {
       setArticle(data.getOneArticle);
     },
+    fetchPolicy: 'network-only',
   });
 
   useEffect(() => {
@@ -73,7 +76,12 @@ function Article() {
         return <CommentsTab comments={article.comments || []} />;
       case 'addComment':
         return user.id ? (
-          <AddCommentTab articleId={params.articleId ? parseInt(params.articleId) : -1} />
+          <AddCommentTab
+            id={params.articleId ? parseInt(params.articleId) : -1}
+            type="article"
+            refetch={refetch}
+            setTab={setTab}
+          />
         ) : (
           <p>You have to loggin to comment...</p>
         );
