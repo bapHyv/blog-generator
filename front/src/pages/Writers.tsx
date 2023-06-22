@@ -54,8 +54,6 @@ const Writers = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  console.log(writers);
-
   return (
     <div>
       <div className="flex flex-col px-20 py-10">

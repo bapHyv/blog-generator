@@ -9,6 +9,7 @@ import { UserProvider } from './contexts/UserContext';
 import { GraphQLWsLink } from '@apollo/client/link/subscriptions';
 import { createClient } from 'graphql-ws';
 import { getMainDefinition } from '@apollo/client/utilities';
+import { SubscribeProvider } from './contexts/subscribeContext';
 
 const wsLink = new GraphQLWsLink(
   createClient({
@@ -53,7 +54,9 @@ root.render(
     {/* <BrowserRouter> */}
     <ApolloProvider client={client}>
       <UserProvider>
-        <App />
+        <SubscribeProvider>
+          <App />
+        </SubscribeProvider>
       </UserProvider>
     </ApolloProvider>
     {/* </BrowserRouter> */}

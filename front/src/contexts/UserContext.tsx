@@ -7,8 +7,6 @@ interface UserContext {
   setLocalUser: React.Dispatch<React.SetStateAction<User>>;
 }
 
-const userContext = React.createContext({} as UserContext);
-
 export const GET_PHOTOS = gql`
   query Query($email: String!) {
     getOne(email: $email) {
@@ -19,6 +17,8 @@ export const GET_PHOTOS = gql`
     }
   }
 `;
+
+const userContext = React.createContext({} as UserContext);
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
   const [localUser, setLocalUser] = useState<User>({} as User);

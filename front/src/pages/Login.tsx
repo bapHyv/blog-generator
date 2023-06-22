@@ -51,9 +51,11 @@ function Login() {
     variables: { email, password },
     onCompleted: async (data) => {
       const { login } = data;
-      console.log(data);
+
       localStorage.setItem('token', login.token);
+
       setLocalUser(login.writer);
+
       navigate(`/profile/${login.writer.pseudo}`);
     },
     onError: (error) => {
