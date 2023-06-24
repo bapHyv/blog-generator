@@ -2,30 +2,31 @@ import React from 'react';
 import { BsGoogle } from 'react-icons/bs';
 import { FaFacebookF } from 'react-icons/fa';
 import { FiTwitter } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 
 function Footer() {
   return (
-    <footer className="footer-wrapper">
-      <div className="footer-logo-wrapper">
-        <div className="footer-icon-google">
+    <footer className="flex flex-col py-5 bg-gray-700 gap-y-5">
+      <div className="flex justify-center gap-x-10">
+        <Link to="/" className="text-white bg-[#df4e3d] p-3 text-xl rounded-full">
           <BsGoogle />
-        </div>
-        <div className="footer-icon-facebook">
+        </Link>
+        <Link to="/" className="text-white bg-[#3e5a97] p-3 text-xl rounded-full">
           <FaFacebookF />
-        </div>
-        <div className="footer-icon-twitter">
+        </Link>
+        <Link to="/" className="text-white bg-[#549de3] p-3 text-xl rounded-full">
           <FiTwitter />
-        </div>
+        </Link>
       </div>
-      <div className="footer-btn-wrapper">
-        <button className="footer-home">Home</button>
-        <button className="footer-services">Services</button>
-        <button className="footer-about">About</button>
-        <button className="footer-terms">Terms</button>
-        <button className="footer-privacy">Privacy Policy</button>
+      <div className="flex flex-col items-center justify-center text-white md:flex-row gap-y-5 gap-x-10">
+        <Link to="/">Home</Link>
+        <Link to="/">Services</Link>
+        <Link to="/">About</Link>
+        <Link to="/">Terms</Link>
+        <Link to="/">Privacy Policy</Link>
       </div>
-      <div className="footer-company-wrapper">
-        <p>YeahBuddy © 2022</p>
+      <div className="flex justify-center text-white">
+        <p>Blog generator © 2023</p>
       </div>
     </footer>
   );

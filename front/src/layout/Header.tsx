@@ -7,6 +7,7 @@ import { useMemo } from 'react';
 import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { HiOutlineNewspaper } from 'react-icons/hi';
 import { AiOutlineUser } from 'react-icons/ai';
 
 function classNames(...classes: any) {
@@ -23,8 +24,12 @@ function Header() {
 
   const navigation = useMemo(() => {
     return [
-      { name: 'Articles', href: '/articles' },
-      { name: 'Writers', href: '/writers' },
+      {
+        name: 'Articles',
+        href: '/articles',
+        icon: <HiOutlineNewspaper className="w-6 h-6 text-white" />,
+      },
+      { name: 'Writers', href: '/writers', icon: <AiOutlineUser className="w-6 h-6 text-white" /> },
     ];
   }, []);
 
@@ -75,11 +80,12 @@ function Header() {
                           className={classNames(
                             location.pathname === item.href
                               ? 'bg-gray-900 text-white'
-                              : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                            'rounded-md px-3 py-2 text-sm font-medium',
+                              : 'text-white hover:bg-gray-700 hover:text-white',
+                            'rounded-md px-3 py-2 text-sm font-medium flex items-center gap-x-3',
                           )}
                           aria-current={location.pathname === item.href ? 'page' : undefined}
                         >
+                          {item.icon}
                           {item.name}
                         </Link>
                       ))}
@@ -117,7 +123,7 @@ function Header() {
                       >
                         <Menu.Items className="absolute right-0 z-10 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
                           <Menu.Item>
-                            {({ active }) => (
+                            {() => (
                               <div>
                                 <p>
                                   New comment on:{' '}
@@ -240,11 +246,12 @@ function Header() {
                     className={classNames(
                       location.pathname === item.href
                         ? 'bg-gray-900 text-white'
-                        : 'text-gray-300 hover:bg-gray-700 hover:text-white',
-                      'block rounded-md px-3 py-2 text-base font-medium',
+                        : 'text-white hover:bg-gray-700 hover:text-white',
+                      'rounded-md px-3 py-2 text-sm font-medium flex items-center gap-x-3',
                     )}
                     aria-current={location.pathname === item.href ? 'page' : undefined}
                   >
+                    {item.icon}
                     {item.name}
                   </Link>
                 ))}
