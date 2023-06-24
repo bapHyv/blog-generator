@@ -4,14 +4,16 @@ Général:
     -Ajouter un system d'alerte
 
 Homepage
-Navbar
 
-Footer:
-    -Enlever les liens morts
+X Navbar:
+    -X Utiliser un composant tailwindcss
 
-Login:
-    -Enlever le faux SSO
-    -Enlever le lien de reset
+X Footer:
+    -X Enlever les liens morts
+
+X Login:
+    -X Enlever le faux SSO
+    -X Enlever le lien de reset
     -X Gérer l'erreur si no user found 
 
 Alerte:
@@ -55,3 +57,5 @@ Cards: https://tailwindui.com/components/application-ui/lists/grid-lists
 Tab (article and writer page): https://tailwindui.com/components/application-ui/navigation/tabs#component-83b472fc38b57e49a566805a5e5bb2f7
 Alerts: https://tailwindui.com/components/application-ui/feedback/alerts
 Notifications: https://tailwindui.com/components/application-ui/overlays/notifications
+
+-Navbar => mettre l'avatar du user

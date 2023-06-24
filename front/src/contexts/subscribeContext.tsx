@@ -49,6 +49,7 @@ const subscribeContext = React.createContext({} as SubscribeContext);
 
 export function SubscribeProvider({ children }: { children: React.ReactNode }) {
   const { user } = useUser();
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [comment, setComment] = useState(undefined);
   const [newNotif, setNewNotif] = useState(false);
 

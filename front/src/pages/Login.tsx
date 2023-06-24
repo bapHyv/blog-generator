@@ -1,13 +1,11 @@
 import '../App.css';
-import { BsGoogle } from 'react-icons/bs';
-import { FaFacebookF } from 'react-icons/fa';
-import { FiTwitter } from 'react-icons/fi';
 import { AiFillEye, AiFillEyeInvisible, AiOutlineMail } from 'react-icons/ai';
 import { AiOutlineLock } from 'react-icons/ai';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { gql, useMutation } from '@apollo/client';
 import { useUser } from '../contexts/UserContext';
+import Title from '../components/static/Title';
 
 export const LOGIN = gql`
   mutation Mutation($email: String!, $password: String!) {
@@ -71,13 +69,10 @@ function Login() {
     login();
   };
 
-  console.log(error?.message);
-  console.log(error?.name);
-
   return (
-    <div className="min-h-screen">
-      <h1 className="my-10 text-3xl text-center">Login</h1>
-      <div className="w-1/3 p-5 m-auto rounded shadow-lg bg-neutral-100">
+    <>
+      <Title text="Login" />
+      <div className="w-5/6 p-5 m-auto text-white bg-gray-700 rounded shadow-lg md:w-1/2">
         <form action="" className="flex flex-col gap-y-10" onSubmit={(e) => onSubmit(e)}>
           <div className="flex gap-x-5">
             <div className="flex">
@@ -91,7 +86,7 @@ function Login() {
                 type="text"
                 name="email"
                 id="email"
-                className={`w-full border rounded form-input focus:ring-yeahbuddy focus:ring-1 focus:border-yeahbuddy ${
+                className={`text-gray-700 w-full border rounded form-input focus:ring-blue-500 focus:ring-1 focus:border-blue-500 ${
                   error?.message === 'No such writer found' ? 'border-red-500' : ''
                 }`}
                 placeholder="E-mail"
@@ -119,7 +114,7 @@ function Login() {
                   type={isPassword ? 'password' : 'text'}
                   name="password"
                   id="password"
-                  className={`w-full border rounded form-input focus:ring-yeahbuddy focus:ring-1 focus:border-yeahbuddy ${
+                  className={`text-gray-700 w-full border rounded form-input focus:ring-blue-500 focus:ring-1 focus:border-bluering-blue-500 ${
                     error?.message === 'Invalid password' ? 'border-red-500' : ''
                   }`}
                   placeholder="Password"
@@ -131,13 +126,13 @@ function Login() {
                 <div className="absolute top-1 right-2">
                   {isPassword && (
                     <AiFillEye
-                      className="w-8 h-8 cursor-pointer"
+                      className="w-8 h-8 text-gray-700 cursor-pointer"
                       onClick={() => setIsPassword(false)}
                     />
                   )}
                   {!isPassword && (
                     <AiFillEyeInvisible
-                      className="w-8 h-8 cursor-pointer"
+                      className="w-8 h-8 text-gray-700 cursor-pointer"
                       onClick={() => setIsPassword(true)}
                     />
                   )}
@@ -152,40 +147,19 @@ function Login() {
           <input
             type="submit"
             value="Login"
-            className="text-white border-0 rounded form-input bg-yeahbuddy"
+            className="text-white bg-blue-500 border-0 rounded form-input"
           />
         </form>
         <div className="mt-10">
           <p>
             No account?{' '}
-            <Link to={'/registration'} className="text-blue-500 underline">
+            <Link to={'/registration'} className="text-blue-300 underline">
               Sign up here !
             </Link>
           </p>
-          <p>
-            You forgot your password?{' '}
-            <Link to={'/'} className="text-blue-500 underline">
-              You can reset it here !
-            </Link>
-          </p>
-
-          <div className="mt-10">
-            <h2 className="text-xl text-center">Sign up using</h2>
-            <div className="flex justify-center mt-5 gap-x-5">
-              <div className="text-white bg-[#df4e3d] p-3 text-xl rounded-full">
-                <BsGoogle />
-              </div>
-              <div className="text-white bg-[#3e5a97] p-3 text-xl rounded-full">
-                <FaFacebookF />
-              </div>
-              <div className="text-white bg-[#549de3] p-3 text-xl rounded-full">
-                <FiTwitter />
-              </div>
-            </div>
-          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

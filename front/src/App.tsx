@@ -18,17 +18,19 @@ function App() {
     <div className="App flex flex-col [&>*:nth-last-child(2)]:flex-1">
       <Router>
         <Header />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/articles" element={<Articles />} />
-          <Route path="/articles/:articleId" element={<Article />} />
-          <Route path="/writers" element={<Writers />} />
-          <Route path="/writers/:writerId" element={<Writer />} />
-          <Route path="/login" element={<Login />} />
-          <Route path="/registration" element={<Registration />} />
-          <Route path="/profile/:writerPseudo" element={<UserScreen />} />
-          <Route path="/article-builder" element={<ArticleBuilderScreen />} />
-        </Routes>
+        <div className="min-h-screen">
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/articles" element={<Articles />} />
+            <Route path="/articles/:articleId" element={<Article />} />
+            <Route path="/writers" element={<Writers />} />
+            <Route path="/writers/:writerId" element={<Writer />} />
+            <Route path="/login" element={<Login />} />
+            <Route path="/registration" element={<Registration />} />
+            <Route path="/profile/:writerPseudo" element={<UserScreen />} />
+            <Route path="/article-builder" element={<ArticleBuilderScreen />} />
+          </Routes>
+        </div>
         <Footer />
       </Router>
     </div>

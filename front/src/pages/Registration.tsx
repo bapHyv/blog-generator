@@ -8,6 +8,7 @@ import { gql, useMutation, useQuery } from '@apollo/client';
 import { useMemo, useState } from 'react';
 import { useUser } from '../contexts/UserContext';
 import { Link, useNavigate } from 'react-router-dom';
+import Title from '../components/static/Title';
 
 const SIGN_UP = gql`
   mutation Mutation(
@@ -195,10 +196,10 @@ function Registration() {
   };
 
   return (
-    <div className="min-h-screen">
-      <h1 className="my-10 text-3xl text-center">Sign up</h1>
+    <>
+      <Title text="Sign up" />
 
-      <div className="w-1/3 p-5 m-auto rounded shadow-lg bg-neutral-100">
+      <div className="w-5/6 p-5 m-auto text-white bg-gray-700 rounded shadow-lg md:w-1/2">
         <form action="" className="flex flex-col gap-y-5" onSubmit={(e) => onSubmit(e)}>
           {/* PSEUDO */}
           <div className="flex gap-x-5">
@@ -214,7 +215,7 @@ function Registration() {
                 type="text"
                 name="pseudo"
                 id="pseudo"
-                className={`w-full border rounded form-input focus:ring-yeahbuddy focus:ring-1 focus:border-yeahbuddy ${
+                className={`w-full border rounded form-input focus:ring-blue-500 focus:ring-1 focus:border-blue-500 text-gray-700 ${
                   pseudoError ? 'border-red-500' : ''
                 }`}
                 placeholder="Pseudo"
@@ -244,7 +245,7 @@ function Registration() {
                 type="text"
                 name="email"
                 id="email"
-                className={`w-full border rounded form-input focus:ring-yeahbuddy focus:ring-1 focus:border-yeahbuddy ${
+                className={`w-full border rounded form-input focus:ring-blue-500 focus:ring-1 focus:border-blue-500 text-gray-700 ${
                   emailError ? 'border-red-500' : ''
                 }`}
                 placeholder="E-mail"
@@ -273,7 +274,7 @@ function Registration() {
                   type={isPassword ? 'password' : 'text'}
                   name="password"
                   id="password"
-                  className={`w-full border rounded form-input focus:ring-yeahbuddy focus:ring-1 focus:border-yeahbuddy ${
+                  className={`w-full border rounded form-input focus:ring-blue-500 focus:ring-1 focus:border-blue-500 text-gray-700 ${
                     passwordError ? 'border-red-500' : ''
                   }`}
                   placeholder="Password"
@@ -286,13 +287,13 @@ function Registration() {
                 <div className="absolute top-1 right-2">
                   {isPassword && (
                     <AiFillEye
-                      className="w-8 h-8 cursor-pointer"
+                      className="w-8 h-8 text-gray-700 cursor-pointer"
                       onClick={() => setIsPassword(false)}
                     />
                   )}
                   {!isPassword && (
                     <AiFillEyeInvisible
-                      className="w-8 h-8 cursor-pointer"
+                      className="w-8 h-8 text-gray-700 cursor-pointer"
                       onClick={() => setIsPassword(true)}
                     />
                   )}
@@ -323,7 +324,7 @@ function Registration() {
                   type={isPassword ? 'password' : 'text'}
                   name="confirm-password"
                   id="confirm-password"
-                  className={`w-full border rounded form-input focus:ring-yeahbuddy focus:ring-1 focus:border-yeahbuddy ${
+                  className={`w-full border rounded form-input focus:ring-blue-500 focus:ring-1 focus:border-blue-500 text-gray-700 ${
                     confirmPasswordError ? 'border-red-500' : ''
                   }`}
                   placeholder="Confirm password"
@@ -336,13 +337,13 @@ function Registration() {
                 <div className="absolute top-1 right-2">
                   {isPassword && (
                     <AiFillEye
-                      className="w-8 h-8 cursor-pointer"
+                      className="w-8 h-8 text-gray-700 cursor-pointer"
                       onClick={() => setIsPassword(false)}
                     />
                   )}
                   {!isPassword && (
                     <AiFillEyeInvisible
-                      className="w-8 h-8 cursor-pointer"
+                      className="w-8 h-8 text-gray-700 cursor-pointer"
                       onClick={() => setIsPassword(true)}
                     />
                   )}
@@ -370,7 +371,7 @@ function Registration() {
                 type="text"
                 name="blogLabel"
                 id="blogLabel"
-                className={`w-full border rounded form-input focus:ring-yeahbuddy focus:ring-1 focus:border-yeahbuddy ${
+                className={`w-full border rounded form-input focus:ring-blue-500 focus:ring-1 focus:border-blue-500 text-gray-700 ${
                   blogLabelError ? 'border-red-500' : ''
                 }`}
                 placeholder="Blog title"
@@ -405,7 +406,7 @@ function Registration() {
                 }
                 name="description"
                 id="description"
-                className={`w-full border h-36 rounded form-input focus:ring-yeahbuddy focus:ring-1 focus:border-yeahbuddy ${
+                className={`text-gray-700 w-full border h-36 rounded form-input focus:ring-blue-500 focus:ring-1 focus:border-blue-500 ${
                   descriptionError ? 'border-red-500' : ''
                 }`}
                 placeholder="Description"
@@ -442,7 +443,7 @@ function Registration() {
                 }}
                 name="category"
                 id="category"
-                className={`w-full border rounded form-input focus:ring-yeahbuddy focus:ring-1 focus:border-yeahbuddy ${
+                className={`w-full border rounded form-input focus:ring-blue-500 focus:ring-1 focus:border-blue-500 text-gray-700 ${
                   categoryError ? 'border-red-500' : ''
                 }`}
                 onChange={(e) => {
@@ -457,7 +458,11 @@ function Registration() {
                 </option>
                 {!loading &&
                   categories?.getAllCategories.map((category) => (
-                    <option key={category.id + Math.random()} value={category.label}>
+                    <option
+                      className="text-gray-700"
+                      key={category.id + Math.random()}
+                      value={category.label}
+                    >
                       {category.label}
                     </option>
                   ))}
@@ -470,7 +475,7 @@ function Registration() {
           <input
             type="submit"
             value="Sign up"
-            className="text-white border-0 rounded cursor-pointer form-input bg-yeahbuddy disabled:bg-slate-400 disabled:cursor-not-allowed"
+            className="text-white bg-blue-500 border-0 rounded cursor-pointer form-input disabled:bg-slate-400 disabled:cursor-not-allowed"
             disabled={isError}
           />
         </form>
@@ -484,7 +489,7 @@ function Registration() {
           </p>
         </div>
       </div>
-    </div>
+    </>
   );
 }
 

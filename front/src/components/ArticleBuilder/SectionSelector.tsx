@@ -4,7 +4,7 @@ import SectionStructureSelector from './SectionStructureSelector';
 import idGenerator from '../../utils/idGenerator';
 import { gql, useLazyQuery, useMutation } from '@apollo/client';
 import { useUser } from '../../contexts/UserContext';
-import { useNavigate } from 'react-router-dom';
+// import { useNavigate } from 'react-router-dom';
 import { useNewArticleBuilder } from '../../contexts/NewArticleBuilderContext';
 
 export const CREATE_ARTICLE = gql`
@@ -59,7 +59,7 @@ const SectionSelector = () => {
   const [isAddingSection, setIsAddingSection] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [refetchArticles] = useLazyQuery(REFETCH_ARTICLES);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   const sectionStructureSelectors = useMemo(() => {
     const items = new Array(4).fill(0);
