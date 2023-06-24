@@ -14,6 +14,7 @@ export const GET_ALL_WRITERS = gql`
       id
       pseudo
       description
+      email
       category {
         id
         label
@@ -34,6 +35,7 @@ export interface IWriter {
   description: string;
   id: number;
   pseudo: string;
+  email: string;
   category: { id: number; label: string };
   followers: { id: number }[];
   articles: { id: number }[];
@@ -52,13 +54,15 @@ const Writers = () => {
     <div>
       <div className="flex flex-col px-2 py-5 md:px-20 md:py-10">
         <Title text="Writers" />
-        {!loading ? (
-          data?.getAllWriters.map((writer) => (
-            <WriterCard key={writer.id + Math.random()} writer={writer} />
-          ))
-        ) : (
-          <div></div>
-        )}
+        <div className="flex flex-wrap justify-around p-5 bg-gray-300 rounded gap-x-5 gap-y-5">
+          {!loading ? (
+            data?.getAllWriters.map((writer) => (
+              <WriterCard key={writer.id + Math.random()} writer={writer} />
+            ))
+          ) : (
+            <div></div>
+          )}
+        </div>
       </div>
     </div>
   );

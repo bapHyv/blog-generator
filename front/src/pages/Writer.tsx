@@ -13,6 +13,7 @@ const GET_WRITER = gql`
   query Query($writerId: Int!) {
     getOneWriter(writerId: $writerId) {
       pseudo
+      email
       category {
         id
         label
@@ -54,6 +55,7 @@ interface IWriter {
   description: string;
   id: number;
   pseudo: string;
+  email: string;
   category: { id: number; label: string };
   followers: { id: number }[];
   articles: IArticle[];
