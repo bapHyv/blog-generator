@@ -1,6 +1,5 @@
 import { useApolloClient } from '@apollo/client';
 import { Link, useNavigate } from 'react-router-dom';
-import Logo from '../assets/logo-removebg-preview.png';
 import { useUser } from '../contexts/UserContext';
 import { User } from '../model/models';
 import { useSubscribe } from '../contexts/subscribeContext';
@@ -37,7 +36,7 @@ function Header() {
     <header className="flex items-center justify-between p-5 bg-neutral-300">
       <div className="w-1/5">
         <Link to={`/`}>
-          <img src={Logo} alt="logo" className="cursor-pointer h-14" />
+          <img src="/logo.png" alt="logo" className="cursor-pointer h-14" />
         </Link>
       </div>
       <div className="flex w-3/5 gap-x-20">
@@ -95,7 +94,7 @@ function Header() {
         </div>
         {user.pseudo && (
           <>
-            <Link to={`/userzzz`}>
+            <Link to={`/profile/${user.pseudo}`}>
               <button className="header-how">Profile</button>
             </Link>
             <button onClick={() => logout()} className="header-signup">

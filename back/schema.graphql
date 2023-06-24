@@ -67,7 +67,7 @@ type Mutation {
   followWriter(writerIdToFollow: Int!): Follow!
   login(email: String!, password: String!): AuthPayload!
   passwordLost(email: String!, password: String!): AuthPayload!
-  signup(avatar: String!, blogLabel: String!, categoryId: Int!, description: String!, email: String!, password: String!, pseudo: String!): AuthPayload!
+  signup(blogLabel: String!, categoryId: Int!, description: String!, email: String!, password: String!, pseudo: String!): AuthPayload!
   stopFollowingWriter(writerIdToStopFollowing: Int!): Follow!
   updateOneArticle(content: String!, id: Int!, isPublished: Boolean!, label: String!): Article!
   updateOneArticleComment(commentId: Int!, content: String!, note: Int): ArticleComment!

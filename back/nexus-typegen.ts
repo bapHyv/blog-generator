@@ -391,7 +391,6 @@ export interface NexusGenArgTypes {
       password: string; // String!
     }
     signup: { // args
-      avatar: string; // String!
       blogLabel: string; // String!
       categoryId: number; // Int!
       description: string; // String!

@@ -1,0 +1,57 @@
+Général:
+    -Mettre une width max
+    -Trouver des couleurs et update le tailwindcss.config.js
+    -Ajouter un system d'alerte
+
+Homepage
+Navbar
+
+Footer:
+    -Enlever les liens morts
+
+Login:
+    -Enlever le faux SSO
+    -Enlever le lien de reset
+    -X Gérer l'erreur si no user found 
+
+Alerte:
+    -Créer une petite popup verte
+    -Créer une petite popup rouge
+
+Notifications:
+    -Trouver un jolie design
+
+Articles:
+    -Trouver des cards
+    -Gérer la pagination (Load more)
+    -Gérer les filtres
+
+Writers:
+    -Filtrer par catégorie
+    -Mettre le bouton ajouter en ami. Si pas connecter, mettre un message sur le curseur.
+
+Commentaire:
+    Faire des cards articleComment (Gérer les notes)
+    Faire des cards WriterComment (Gérer les notes)
+    Gérer les isVisible
+    Lors de l'ajout d'un commentaire, mettre une petite alerte
+
+Article:
+
+
+Profile:
+    -Mettre profile manager dans le dashboard
+    -Réparer la page Articles
+    -Faire fonctionner le page builder.
+    -Faire fonctionner l'upload de photo
+
+
+Navbar: https://tailwindui.com/components/application-ui/navigation/navbars
+buttons: https://tailwindui.com/components/application-ui/elements/buttons
+sidebar: https://tailwindui.com/components/application-ui/application-shells/sidebar
+
+Cards: https://tailwindui.com/components/application-ui/lists/grid-lists
+
+Tab (article and writer page): https://tailwindui.com/components/application-ui/navigation/tabs#component-83b472fc38b57e49a566805a5e5bb2f7
+Alerts: https://tailwindui.com/components/application-ui/feedback/alerts
+Notifications: https://tailwindui.com/components/application-ui/overlays/notifications

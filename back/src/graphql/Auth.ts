@@ -22,20 +22,12 @@ export const AuthMutations = extendType({
         email: nonNull(stringArg()),
         password: nonNull(stringArg()),
         description: nonNull(stringArg()),
-        avatar: nonNull(stringArg()),
         blogLabel: nonNull(stringArg()),
         categoryId: nonNull(intArg()),
       },
       resolve: async (r, a, c, i) => {
-        const {
-          pseudo,
-          email,
-          password,
-          description,
-          avatar,
-          blogLabel,
-          categoryId,
-        } = a;
+        const { pseudo, email, password, description, blogLabel, categoryId } =
+          a;
 
         const role = "writer";
 
@@ -43,7 +35,7 @@ export const AuthMutations = extendType({
 
         const writer = await c.prisma.writer.create({
           data: {
-            avatar,
+            avatar: "/user_icon.png",
             blogLabel,
             categoryId,
             description,
