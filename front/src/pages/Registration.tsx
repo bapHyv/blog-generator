@@ -9,6 +9,7 @@ import { useMemo, useState } from 'react';
 import { useUser } from '../contexts/UserContext';
 import { Link, useNavigate } from 'react-router-dom';
 import Title from '../components/static/Title';
+import { FaSignature } from 'react-icons/fa';
 
 const SIGN_UP = gql`
   mutation Mutation(
@@ -196,10 +197,13 @@ function Registration() {
   };
 
   return (
-    <>
+    <div className="px-20 py-10">
       <Title text="Sign up" />
 
       <div className="w-5/6 p-5 m-auto text-white bg-gray-700 rounded shadow-lg md:w-1/2">
+        <div className="flex justify-center my-5">
+          <FaSignature className="w-20 h-20 text-gray-700 bg-white border border-white rounded-full" />
+        </div>
         <form action="" className="flex flex-col gap-y-5" onSubmit={(e) => onSubmit(e)}>
           {/* PSEUDO */}
           <div className="flex gap-x-5">
@@ -489,7 +493,7 @@ function Registration() {
           </p>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

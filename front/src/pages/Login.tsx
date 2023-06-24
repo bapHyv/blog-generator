@@ -1,5 +1,5 @@
 import '../App.css';
-import { AiFillEye, AiFillEyeInvisible, AiOutlineMail } from 'react-icons/ai';
+import { AiFillEye, AiFillEyeInvisible, AiOutlineMail, AiOutlineUser } from 'react-icons/ai';
 import { AiOutlineLock } from 'react-icons/ai';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
@@ -70,9 +70,12 @@ function Login() {
   };
 
   return (
-    <>
+    <div className="px-20 py-10">
       <Title text="Login" />
       <div className="w-5/6 p-5 m-auto text-white bg-gray-700 rounded shadow-lg md:w-1/2">
+        <div className="flex justify-center my-5">
+          <AiOutlineUser className="w-20 h-20 text-gray-700 bg-white border border-white rounded-full" />
+        </div>
         <form action="" className="flex flex-col gap-y-10" onSubmit={(e) => onSubmit(e)}>
           <div className="flex gap-x-5">
             <div className="flex">
@@ -159,7 +162,7 @@ function Login() {
           </p>
         </div>
       </div>
-    </>
+    </div>
   );
 }
 

@@ -2,6 +2,7 @@ Général:
     -Mettre une width max
     -Trouver des couleurs et update le tailwindcss.config.js
     -Ajouter un system d'alerte
+    -Ajouter une description à l'article
 
 Homepage
 
@@ -30,7 +31,7 @@ Articles:
 
 Writers:
     -Filtrer par catégorie
-    -Mettre le bouton ajouter en ami. Si pas connecter, mettre un message sur le curseur.
+    -Mettre le bouton ajouter en ami. Si pas connecté, mettre un message sur le curseur.
 
 Commentaire:
     Faire des cards articleComment (Gérer les notes)
@@ -59,3 +60,4 @@ Alerts: https://tailwindui.com/components/application-ui/feedback/alerts
 Notifications: https://tailwindui.com/components/application-ui/overlays/notifications
 
 -Navbar => mettre l'avatar du user
+-ArticleCard => mettre l'avatar du user
