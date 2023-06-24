@@ -25,7 +25,7 @@ Notifications:
     -Trouver un jolie design
 
 Articles:
-    -Trouver des cards
+    -X Trouver des cards
     -Gérer la pagination (Load more)
     -Gérer les filtres
 
@@ -56,8 +56,10 @@ sidebar: https://tailwindui.com/components/application-ui/application-shells/sid
 Cards: https://tailwindui.com/components/application-ui/lists/grid-lists
 
 Tab (article and writer page): https://tailwindui.com/components/application-ui/navigation/tabs#component-83b472fc38b57e49a566805a5e5bb2f7
+Tab https://headlessui.com/react/tabs
 Alerts: https://tailwindui.com/components/application-ui/feedback/alerts
 Notifications: https://tailwindui.com/components/application-ui/overlays/notifications
 
 -Navbar => mettre l'avatar du user
 -ArticleCard => mettre l'avatar du user
+-WriterCard => Ajouter la mutation pour suivre le writer

@@ -1,6 +1,6 @@
-import { gql, useLazyQuery } from '@apollo/client';
-import { useEffect, useState } from 'react';
+import { gql, useQuery } from '@apollo/client';
 import WriterCard from '../components/WriterCard';
+import Title from '../components/static/Title';
 
 /**
  * Créer un composant ArticleCard
@@ -39,26 +39,23 @@ export interface IWriter {
   articles: { id: number }[];
 }
 
-const Writers = () => {
-  const [writers, setWriters] = useState<IWriter[]>([]);
+interface IData {
+  getAllWriters: IWriter[];
+}
 
-  const [getAllWriters] = useLazyQuery(GET_ALL_WRITERS, {
-    onCompleted: async (data) => {
-      setWriters(data.getAllWriters);
-    },
+const Writers = () => {
+  const { data, loading } = useQuery<IData>(GET_ALL_WRITERS, {
     fetchPolicy: 'network-only',
   });
 
-  useEffect(() => {
-    getAllWriters();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
   return (
     <div>
-      <div className="flex flex-col px-20 py-10">
-        {!!writers.length ? (
-          writers.map((writer) => <WriterCard key={writer.id + Math.random()} writer={writer} />)
+      <div className="flex flex-col w-full px-20 py-10">
+        <Title text="Writers" />
+        {!loading ? (
+          data?.getAllWriters.map((writer) => (
+            <WriterCard key={writer.id + Math.random()} writer={writer} />
+          ))
         ) : (
           <div></div>
         )}

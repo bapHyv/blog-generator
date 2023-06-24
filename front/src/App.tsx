@@ -18,7 +18,7 @@ function App() {
     <div className="App flex flex-col [&>*:nth-last-child(2)]:flex-1">
       <Router>
         <Header />
-        <div className="min-h-screen">
+        <div className="min-h-screen max-w-[1440px] mx-auto">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/articles" element={<Articles />} />
