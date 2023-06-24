@@ -50,7 +50,7 @@ const Writers = () => {
 
   return (
     <div>
-      <div className="flex flex-col w-full px-20 py-10">
+      <div className="flex flex-col px-2 py-5 md:px-20 md:py-10">
         <Title text="Writers" />
         {!loading ? (
           data?.getAllWriters.map((writer) => (

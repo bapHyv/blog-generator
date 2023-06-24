@@ -70,15 +70,15 @@ function Login() {
   };
 
   return (
-    <div className="px-20 py-10">
+    <div className="px-5 py-5">
       <Title text="Login" />
-      <div className="w-5/6 p-5 m-auto text-white bg-gray-700 rounded shadow-lg md:w-1/2">
+      <div className="w-full p-5 m-auto text-white bg-gray-700 rounded shadow-lg lg:w-1/2">
         <div className="flex justify-center my-5">
           <AiOutlineUser className="w-20 h-20 text-gray-700 bg-white border border-white rounded-full" />
         </div>
         <form action="" className="flex flex-col gap-y-10" onSubmit={(e) => onSubmit(e)}>
           <div className="flex gap-x-5">
-            <div className="flex">
+            <div className="hidden md:block">
               <AiOutlineMail className="w-8 h-8 mb-2" />
             </div>
             <div className="flex flex-col w-full gap-y-2">
@@ -105,7 +105,7 @@ function Login() {
           </div>
 
           <div className="flex gap-x-5">
-            <div className="flex">
+            <div className="hidden md:block">
               <AiOutlineLock className="w-8 h-8" />
             </div>
             <div className="flex flex-col w-full gap-y-2">
@@ -150,11 +150,11 @@ function Login() {
           <input
             type="submit"
             value="Login"
-            className="text-white bg-blue-500 border-0 rounded form-input"
+            className="text-white transition-all bg-blue-500 border-0 rounded hover:bg-blue-600 form-input"
           />
         </form>
         <div className="mt-10">
-          <p>
+          <p className="text-right">
             No account?{' '}
             <Link to={'/registration'} className="text-blue-300 underline">
               Sign up here !

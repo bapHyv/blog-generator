@@ -15,10 +15,10 @@ import Writer from './pages/Writer';
 
 function App() {
   return (
-    <div className="App flex flex-col [&>*:nth-last-child(2)]:flex-1">
+    <div className="App overflow-x-hidden flex flex-col [&>*:nth-last-child(2)]:flex-1">
       <Router>
         <Header />
-        <div className="min-h-screen max-w-[1440px] mx-auto">
+        <div className="min-h-screen max-w-[1440px] xl:min-w-[1439px] xl:m-auto">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/articles" element={<Articles />} />

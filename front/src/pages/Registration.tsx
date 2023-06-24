@@ -197,17 +197,17 @@ function Registration() {
   };
 
   return (
-    <div className="px-20 py-10">
+    <div className="px-5 py-5">
       <Title text="Sign up" />
 
-      <div className="w-5/6 p-5 m-auto text-white bg-gray-700 rounded shadow-lg md:w-1/2">
+      <div className="w-full p-5 m-auto text-white bg-gray-700 rounded shadow-lg lg:w-1/2">
         <div className="flex justify-center my-5">
           <FaSignature className="w-20 h-20 text-gray-700 bg-white border border-white rounded-full" />
         </div>
         <form action="" className="flex flex-col gap-y-5" onSubmit={(e) => onSubmit(e)}>
           {/* PSEUDO */}
           <div className="flex gap-x-5">
-            <div className="flex">
+            <div className="hidden md:block">
               <AiOutlineUser className="w-8 h-8 mb-2" />
             </div>
             <div className="flex flex-col w-full gap-y-2">
@@ -237,7 +237,7 @@ function Registration() {
 
           {/* E-MAIL */}
           <div className="flex gap-x-5">
-            <div className="flex">
+            <div className="hidden md:block">
               <AiOutlineMail className="w-8 h-8 mb-2" />
             </div>
             <div className="flex flex-col w-full gap-y-2">
@@ -265,7 +265,7 @@ function Registration() {
 
           {/* PASSWORD */}
           <div className="flex gap-x-5">
-            <div className="flex">
+            <div className="hidden md:block">
               <AiOutlineLock className="w-8 h-8" />
             </div>
             <div className="flex flex-col w-full gap-y-2">
@@ -313,7 +313,7 @@ function Registration() {
 
           {/* CONFIRM PASSWORD */}
           <div className="flex gap-x-5">
-            <div className="flex">
+            <div className="hidden md:block">
               <AiOutlineLock className="w-8 h-8" />
             </div>
             <div className="flex flex-col w-full gap-y-2">
@@ -361,7 +361,7 @@ function Registration() {
 
           {/* TITLE */}
           <div className="flex gap-x-5">
-            <div className="flex">
+            <div className="hidden md:block">
               <MdTitle className="w-8 h-8 mb-2" />
             </div>
             <div className="flex flex-col w-full gap-y-2">
@@ -397,7 +397,7 @@ function Registration() {
 
           {/* DESCRIPTION */}
           <div className="flex gap-x-5">
-            <div className="flex">
+            <div className="hidden md:block">
               <GiFeather className="w-8 h-8" />
             </div>
             <div className="flex flex-col w-full gap-y-2">
@@ -434,7 +434,7 @@ function Registration() {
 
           {/* CATEGORY */}
           <div className="flex gap-x-5">
-            <div className="flex">
+            <div className="hidden md:block">
               <BiCategoryAlt className="w-8 h-8" />
             </div>
             <div className="flex flex-col w-full gap-y-2">
@@ -479,7 +479,7 @@ function Registration() {
           <input
             type="submit"
             value="Sign up"
-            className="text-white bg-blue-500 border-0 rounded cursor-pointer form-input disabled:bg-slate-400 disabled:cursor-not-allowed"
+            className="text-white transition-all bg-blue-500 border-0 rounded cursor-pointer hover:bg-blue-600 form-input disabled:bg-slate-400 disabled:cursor-not-allowed"
             disabled={isError}
           />
         </form>

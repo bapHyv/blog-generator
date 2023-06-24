@@ -63,3 +63,4 @@ Notifications: https://tailwindui.com/components/application-ui/overlays/notific
 -Navbar => mettre l'avatar du user
 -ArticleCard => mettre l'avatar du user
 -WriterCard => Ajouter la mutation pour suivre le writer
+-registration => Désactiver le bouton si le form n'est pas correctement rempli

@@ -18,6 +18,7 @@ function Footer() {
           <FiTwitter />
         </Link>
       </div>
+      <div className="h-[1px] mx-5 bg-white lg:mx-64"></div>
       <div className="flex flex-col items-center justify-center text-white md:flex-row gap-y-5 gap-x-10">
         <Link to="/">Home</Link>
         <Link to="/">Services</Link>
@@ -25,6 +26,7 @@ function Footer() {
         <Link to="/">Terms</Link>
         <Link to="/">Privacy Policy</Link>
       </div>
+      <div className="h-[1px] mx-5 bg-white lg:mx-64"></div>
       <div className="flex justify-center text-white">
         <p>Blog generator © 2023</p>
       </div>

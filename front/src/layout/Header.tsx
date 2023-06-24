@@ -56,12 +56,12 @@ function Header() {
               <div className="relative flex items-center justify-between h-16">
                 <div className="absolute inset-y-0 left-0 flex items-center sm:hidden">
                   {/* Mobile menu button*/}
-                  <Disclosure.Button className="inline-flex items-center justify-center p-2 text-gray-400 rounded-md hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white">
+                  <Disclosure.Button className="inline-flex items-center justify-center p-2 text-gray-400 rounded-md hover:bg-gray-700 hover:text-white focus:outline-none focus:ring-2 focus:ring-inset focus:ring-blue-500">
                     <span className="sr-only">Open main menu</span>
                     {open ? (
-                      <XMarkIcon className="block w-6 h-6" aria-hidden="true" />
+                      <XMarkIcon className="block w-6 h-6 text-white" aria-hidden="true" />
                     ) : (
-                      <Bars3Icon className="block w-6 h-6" aria-hidden="true" />
+                      <Bars3Icon className="block w-6 h-6 text-white" aria-hidden="true" />
                     )}
                   </Disclosure.Button>
                 </div>
@@ -96,7 +96,7 @@ function Header() {
                   <Menu as="div" className="relative ml-3">
                     <div>
                       <Menu.Button
-                        className="flex p-1 text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                        className="flex p-1 text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800"
                         disabled={!acs.data}
                       >
                         <span className="sr-only">View notifications</span>
@@ -158,7 +158,7 @@ function Header() {
                   {/* Profile dropdown */}
                   <Menu as="div" className="relative ml-3">
                     <div>
-                      <Menu.Button className="flex p-1 text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800">
+                      <Menu.Button className="flex p-1 text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:ring-offset-gray-800">
                         <span className="sr-only">Open user menu</span>
                         <AiOutlineUser className="w-6 h-6 text-white" />
                       </Menu.Button>
@@ -247,7 +247,7 @@ function Header() {
                       location.pathname === item.href
                         ? 'bg-gray-900 text-white'
                         : 'text-white hover:bg-gray-700 hover:text-white',
-                      'rounded-md px-3 py-2 text-sm font-medium flex items-center gap-x-3',
+                      'rounded-md px-3 py-2 text-sm font-medium flex items-center gap-x-3 max-w-max',
                     )}
                     aria-current={location.pathname === item.href ? 'page' : undefined}
                   >
