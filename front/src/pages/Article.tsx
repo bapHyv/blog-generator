@@ -1,9 +1,10 @@
-import { gql, useLazyQuery } from '@apollo/client';
-import React, { useEffect, useMemo, useState } from 'react';
+import { gql, useQuery } from '@apollo/client';
+import { useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import CommentsTab from '../components/CommentsTab';
 import AddCommentTab from '../components/AddCommentTab';
 import { useUser } from '../contexts/UserContext';
+import Title from '../components/static/Title';
 
 const GET_ARTICLE = gql`
   query Query($getOneArticleId: Int!) {
@@ -21,6 +22,17 @@ const GET_ARTICLE = gql`
         publishedBy {
           id
           pseudo
+          category {
+            label
+          }
+          articles {
+            id
+          }
+          followers {
+            followed {
+              id
+            }
+          }
         }
         content
         createdAt
@@ -29,12 +41,20 @@ const GET_ARTICLE = gql`
   }
 `;
 
+interface IPublishedBy {
+  id: number;
+  pseudo: string;
+  category: { label: string };
+  articles: { id: number }[];
+  followers: { followed: { id: number } }[];
+}
+
 export interface IComment {
   content: string;
   createdAt: string;
   id: number;
   note: number;
-  publishedBy: { id: number; pseudo: string };
+  publishedBy: IPublishedBy;
 }
 
 interface IArticle {
@@ -48,32 +68,27 @@ interface IArticle {
   };
 }
 
+interface IData {
+  getOneArticle: IArticle;
+}
+
 export type typeTab = 'comments' | 'addComment';
 
 function Article() {
-  const [article, setArticle] = useState<IArticle>({} as IArticle);
   const [tab, setTab] = useState<typeTab>('comments');
   const params = useParams();
 
   const { user } = useUser();
 
-  const [getArticle, { refetch }] = useLazyQuery(GET_ARTICLE, {
+  const { data, loading, refetch } = useQuery<IData>(GET_ARTICLE, {
     variables: { getOneArticleId: params.articleId ? parseInt(params.articleId) : -1 },
-    onCompleted: async (data) => {
-      setArticle(data.getOneArticle);
-    },
     fetchPolicy: 'network-only',
   });
-
-  useEffect(() => {
-    getArticle();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const currentTab = useMemo(() => {
     switch (tab) {
       case 'comments':
-        return <CommentsTab comments={article.comments || []} />;
+        return <CommentsTab comments={data?.getOneArticle.comments || []} />;
       case 'addComment':
         return user.id ? (
           <AddCommentTab
@@ -87,10 +102,12 @@ function Article() {
         );
 
       default:
-        return <CommentsTab comments={article.comments || []} />;
+        return <CommentsTab comments={data?.getOneArticle.comments || []} />;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tab, article, user]);
+  }, [tab, user, loading]);
+
+  console.log(data?.getOneArticle);
 
   return (
     <div className="min-h-screen py-10 px-28">
@@ -99,27 +116,29 @@ function Article() {
           Return to articles
         </Link>
       </div>
-      {article ? (
-        <div className="flex flex-col gap-y-10">
+      {!loading ? (
+        <div className="flex flex-col">
           <div className="flex items-center justify-between">
-            <h1 className="text-3xl">{article.label}</h1>
+            <Title text={data?.getOneArticle.label || ''} />
             {/* <p>
-                Written by: <span className="text-xl">{article.publishedBy.pseudo}</span>
+                Written by: <span className="text-xl">{data?.getOneArticle.publishedBy.pseudo}</span>
               </p> */}
           </div>
-          <p>{new Array(10).fill(0).map((e) => article.content)}</p>
-          <div className="flex gap-x-10">
+
+          <p>{new Array(10).fill(0).map((e) => data?.getOneArticle.content)}</p>
+
+          <div className="flex p-2 mt-10 mb-10 bg-gray-300 rounded gap-x-10">
             <div
-              className={`flex items-center justify-center w-1/2 h-10 cursor-pointer rounded-t-xl hover:bg-neutral-300 ${
-                tab === 'comments' ? 'bg-neutral-300' : 'bg-neutral-100'
+              className={`flex items-center border-b-2 border-white justify-center w-1/2 h-10 text-black cursor-pointer rounded-t bg-white transition-all ${
+                tab === 'comments' ? 'border-b-2 border-blue-500 text-blue-500' : ''
               }`}
               onClick={() => setTab('comments')}
             >
               Comments
             </div>
             <div
-              className={`flex items-center justify-center w-1/2 h-10 cursor-pointer rounded-t-xl hover:bg-neutral-300 ${
-                tab === 'addComment' ? 'bg-neutral-300' : 'bg-neutral-100'
+              className={`flex items-center border-b-2 border-white justify-center w-1/2 h-10 text-black cursor-pointer rounded-t bg-white transition-all ${
+                tab === 'addComment' ? 'border-b-2 border-blue-500 text-blue-500' : ''
               }`}
               onClick={() => setTab('addComment')}
             >

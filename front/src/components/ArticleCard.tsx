@@ -3,15 +3,9 @@ import { IArticle } from '../pages/Articles';
 import { Link } from 'react-router-dom';
 import { HiOutlineNewspaper } from 'react-icons/hi';
 import { AiOutlineUser } from 'react-icons/ai';
+import formatedDate from '../utils/formatedDate';
 
 const ArticleCard = ({ article }: { article: IArticle }) => {
-  const formatedDate = (date: string) => {
-    const _date = new Date(date);
-    return `${_date.getDay() < 10 ? `0${_date.getDay()}` : _date.getDay()}-${
-      _date.getMonth() < 10 ? `0${_date.getMonth()}` : _date.getMonth()
-    }-${_date.getFullYear()}`;
-  };
-
   return (
     <div className="flex flex-col p-5 mt-10 text-white bg-gray-700 rounded-2xl gap-x-5">
       <Link

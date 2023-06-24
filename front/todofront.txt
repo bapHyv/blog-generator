@@ -1,6 +1,5 @@
 Général:
-    -Mettre une width max
-    -Trouver des couleurs et update le tailwindcss.config.js
+    -X Mettre une width max
     -Ajouter un system d'alerte
     -Ajouter une description à l'article
 
@@ -17,13 +16,6 @@ X Login:
     -X Enlever le lien de reset
     -X Gérer l'erreur si no user found 
 
-Alerte:
-    -Créer une petite popup verte
-    -Créer une petite popup rouge
-
-Notifications:
-    -Trouver un jolie design
-
 Articles:
     -X Trouver des cards
     -Gérer la pagination (Load more)
@@ -31,15 +23,34 @@ Articles:
 
 Writers:
     -Filtrer par catégorie
-    -Mettre le bouton ajouter en ami. Si pas connecté, mettre un message sur le curseur.
+    -X Mettre le bouton ajouter en ami. Si pas connecté, mettre un message sur le curseur.
 
 Commentaire:
-    Faire des cards articleComment (Gérer les notes)
-    Faire des cards WriterComment (Gérer les notes)
+    -X Faire des cards articleComment (Gérer les notes)
+    -X Faire des cards WriterComment (Gérer les notes)
     Gérer les isVisible
-    Lors de l'ajout d'un commentaire, mettre une petite alerte
 
 Article:
+    -X Refaire les boutons des tabs
+    -Scroll top lorsque je page
+    Onglet Commentaire:
+        -Trier les commentaires par date
+    Onglet Ajouter un commentaire:
+        -Ajouter la note
+        -/!\ Lors de l'ajout d'un commentaire, refetch les commentaires PAS BESOIN DE ÇA /!\
+        -Lors de l'ajout d'un commentaire, mettre une petite alerte (prévenir que le commentaire a été ajouté mais doit être validé avant d'être visible)
+
+Writer:
+    -Désactiver le bouton violet
+    -Gérer le cas lorsqu'il n'y a pas d'article
+    -Refaire les boutons des tabs (Mettre celle de la page Article)
+
+Alerte (PEUT ÊTRE FAIRE UNE POPUP GÉNÉRAL AVEC TYPE info, valid, warning, error etc...):
+    -Créer une petite popup verte
+    -Créer une petite popup rouge
+
+Notifications:
+    -Trouver un jolie design
 
 
 Profile:
@@ -63,4 +74,5 @@ Notifications: https://tailwindui.com/components/application-ui/overlays/notific
 -Navbar => mettre l'avatar du user
 -ArticleCard => mettre l'avatar du user
 -WriterCard => Ajouter la mutation pour suivre le writer
+-WriterCard => Mettre l'avatar du user
 -registration => Désactiver le bouton si le form n'est pas correctement rempli
