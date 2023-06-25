@@ -10,7 +10,7 @@ const WriterCard = ({ writer }: { writer: IWriter }) => {
   const { user } = useUser();
   return writer ? (
     <>
-      <div className="w-full mx-8 md:w-[32%] lg:mx-auto text-black">
+      <div className="w-full mx-8 md:w-[32%] lg:mx-auto text-black shadow-card rounded">
         <div className="relative flex flex-col items-center justify-center py-5 transition-all bg-white border-b border-gray-300 rounded-t gap-y-3 hover:bg-gray-50 ">
           <Link className="absolute w-full h-full" to={`/writers/${writer.id}`}></Link>
           <AiOutlineUser className="text-black border border-black rounded-full w-28 h-28" />

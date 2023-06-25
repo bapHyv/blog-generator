@@ -32,18 +32,18 @@ Commentaire:
 
 Article:
     -X Refaire les boutons des tabs
-    -Scroll top lorsque je page
-    Onglet Commentaire:
-        -Trier les commentaires par date
+    -X Scroll top lorsque je page
+    X Onglet Commentaire:
+        -X Trier les commentaires par date
     Onglet Ajouter un commentaire:
         -Ajouter la note
         -/!\ Lors de l'ajout d'un commentaire, refetch les commentaires PAS BESOIN DE ÇA /!\
         -Lors de l'ajout d'un commentaire, mettre une petite alerte (prévenir que le commentaire a été ajouté mais doit être validé avant d'être visible)
 
-Writer:
-    -Désactiver le bouton violet
-    -Gérer le cas lorsqu'il n'y a pas d'article
-    -Refaire les boutons des tabs (Mettre celle de la page Article)
+X Writer:
+    -X Désactiver le bouton violet
+    -X Gérer le cas lorsqu'il n'y a pas d'article
+    -X Refaire les boutons des tabs (Mettre celle de la page Article)
 
 Alerte (PEUT ÊTRE FAIRE UNE POPUP GÉNÉRAL AVEC TYPE info, valid, warning, error etc...):
     -Créer une petite popup verte

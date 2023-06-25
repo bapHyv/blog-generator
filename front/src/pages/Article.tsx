@@ -19,6 +19,8 @@ const GET_ARTICLE = gql`
       comments {
         id
         note
+        createdAt
+        content
         publishedBy {
           id
           pseudo
@@ -34,8 +36,6 @@ const GET_ARTICLE = gql`
             }
           }
         }
-        content
-        createdAt
       }
     }
   }
@@ -105,14 +105,14 @@ function Article() {
         return <CommentsTab comments={data?.getOneArticle.comments || []} />;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tab, user, loading]);
+  }, [tab, user, data, loading]);
 
   console.log(data?.getOneArticle);
 
   return (
     <div className="min-h-screen py-10 px-28">
       <div className="mt-5 mb-10">
-        <Link to={'/articles'} className="p-2 text-white rounded bg-neutral-700">
+        <Link to={'/articles'} className="p-2 text-white bg-gray-700 rounded">
           Return to articles
         </Link>
       </div>
@@ -127,7 +127,7 @@ function Article() {
 
           <p>{new Array(10).fill(0).map((e) => data?.getOneArticle.content)}</p>
 
-          <div className="flex p-2 mt-10 mb-10 bg-gray-300 rounded gap-x-10">
+          <div className="flex p-2 my-10 bg-gray-300 rounded gap-x-10">
             <div
               className={`flex items-center border-b-2 border-white justify-center w-1/2 h-10 text-black cursor-pointer rounded-t bg-white transition-all ${
                 tab === 'comments' ? 'border-b-2 border-blue-500 text-blue-500' : ''

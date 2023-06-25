@@ -1,5 +1,5 @@
-import { gql, useLazyQuery } from '@apollo/client';
-import React, { useEffect, useMemo, useState } from 'react';
+import { gql, useQuery } from '@apollo/client';
+import { useMemo, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { useUser } from '../contexts/UserContext';
 import WriterCard from '../components/WriterCard';
@@ -8,10 +8,12 @@ import { IArticle } from './Articles';
 import CommentsTab from '../components/CommentsTab';
 import AddCommentTab from '../components/AddCommentTab';
 import { IComment, typeTab } from './Article';
+import Title from '../components/static/Title';
 
 const GET_WRITER = gql`
   query Query($writerId: Int!) {
     getOneWriter(writerId: $writerId) {
+      id
       pseudo
       email
       category {
@@ -39,12 +41,23 @@ const GET_WRITER = gql`
       description
       commentsFromWriters {
         id
+        note
         createdAt
         content
-        note
         publishedBy {
           id
           pseudo
+          category {
+            label
+          }
+          articles {
+            id
+          }
+          followers {
+            followed {
+              id
+            }
+          }
         }
       }
     }
@@ -62,33 +75,25 @@ interface IWriter {
   commentsFromWriters: IComment[];
 }
 
-const Writer = () => {
-  const [writer, setWriter] = useState<IWriter | null>(null);
+interface IData {
+  getOneWriter: IWriter;
+}
 
+const Writer = () => {
   const [tab, setTab] = useState<typeTab>('comments');
   const params = useParams();
 
   const { user } = useUser();
 
-  const [getWriter, { refetch }] = useLazyQuery(GET_WRITER, {
+  const { refetch, data, loading } = useQuery<IData>(GET_WRITER, {
     variables: { writerId: params.writerId ? parseInt(params.writerId) : -1 },
-    onCompleted: async (data) => {
-      setWriter(data.getOneWriter);
-    },
     fetchPolicy: 'network-only',
   });
-
-  useEffect(() => {
-    getWriter();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
-
-  console.log(writer);
 
   const currentTab = useMemo(() => {
     switch (tab) {
       case 'comments':
-        return <CommentsTab comments={writer?.commentsFromWriters || []} />;
+        return <CommentsTab comments={data?.getOneWriter.commentsFromWriters || []} />;
       case 'addComment':
         return user.id ? (
           <AddCommentTab
@@ -102,45 +107,49 @@ const Writer = () => {
         );
 
       default:
-        return <CommentsTab comments={writer?.commentsFromWriters || []} />;
+        return <CommentsTab comments={data?.getOneWriter.commentsFromWriters || []} />;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [tab, writer, user]);
+  }, [tab, data, user]);
 
   return (
-    <div className="flex flex-col px-20 py-10 gap-y-10">
-      <div className="">
-        <Link to={'/writers'} className="p-2 text-white rounded bg-neutral-700">
+    <div className="flex flex-col px-2 py-5 md:px-20 md:py-10 gap-y-10">
+      <div>
+        <Link to={'/writers'} className="p-2 text-white bg-gray-700 rounded">
           Return to writers
         </Link>
       </div>
-      {writer ? (
+      {!loading ? (
         <>
           {' '}
-          <WriterCard writer={writer} />
-          <div className="h-0.5 bg-black"></div>
-          <div className="flex flex-col gap-y-5">
-            <h2 className="text-3xl">Articles</h2>
-            <div className="overflow-y-scroll h-[50vh] shadow-inner">
-              {writer.articles.map((article) => (
-                <ArticleCard article={article} />
-              ))}
-            </div>
+          <div className="flex justify-center">
+            <WriterCard writer={data?.getOneWriter || ({} as IWriter)} />
           </div>
-          <div className="h-0.5 bg-black"></div>
-          <h2 className="text-3xl">Comments</h2>
-          <div className="flex gap-x-10">
+          <div className="flex flex-col gap-y-5">
+            <Title text="Articles" />
+            {!!data?.getOneWriter.articles.length ? (
+              <div className="overflow-y-scroll h-[50vh] shadow-inner">
+                {data?.getOneWriter.articles.map((article) => (
+                  <ArticleCard article={article} />
+                ))}
+              </div>
+            ) : (
+              <p>The writer has no article for the moment...</p>
+            )}
+          </div>
+          <Title text="Comments" />
+          <div className="flex p-2 bg-gray-300 rounded gap-x-10">
             <div
-              className={`flex items-center justify-center w-1/2 h-10 cursor-pointer rounded-t-xl hover:bg-neutral-300 ${
-                tab === 'comments' ? 'bg-neutral-300' : 'bg-neutral-100'
+              className={`flex items-center border-b-2 border-white justify-center w-1/2 h-10 text-black cursor-pointer rounded-t bg-white transition-all ${
+                tab === 'comments' ? 'border-b-2 border-blue-500 text-blue-500' : ''
               }`}
               onClick={() => setTab('comments')}
             >
               Comments
             </div>
             <div
-              className={`flex items-center justify-center w-1/2 h-10 cursor-pointer rounded-t-xl hover:bg-neutral-300 ${
-                tab === 'addComment' ? 'bg-neutral-300' : 'bg-neutral-100'
+              className={`flex items-center border-b-2 border-white justify-center w-1/2 h-10 text-black cursor-pointer rounded-t bg-white transition-all ${
+                tab === 'addComment' ? 'border-b-2 border-blue-500 text-blue-500' : ''
               }`}
               onClick={() => setTab('addComment')}
             >

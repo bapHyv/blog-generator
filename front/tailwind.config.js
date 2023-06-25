@@ -23,6 +23,7 @@ module.exports = {
       },
       boxShadow: {
         sectionHomePage: 'inset 0px 0px 10px 2px black',
+        card: '3px 3px 10px 5px #9ca3af',
       },
       zIndex: {
         behind: '-1',

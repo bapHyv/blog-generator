@@ -12,11 +12,13 @@ import Articles from './pages/Articles';
 import Writers from './pages/Writers';
 import Article from './pages/Article';
 import Writer from './pages/Writer';
+import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
     <div className="App overflow-x-hidden flex flex-col [&>*:nth-last-child(2)]:flex-1">
       <Router>
+        <ScrollToTop />
         <Header />
         <div className="min-h-screen max-w-[1440px] xl:min-w-[1439px] xl:m-auto">
           <Routes>
