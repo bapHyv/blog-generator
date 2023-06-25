@@ -75,12 +75,13 @@ interface IData {
 export type typeTab = 'comments' | 'addComment';
 
 function Article() {
+  const [isShowing, setIsShowing] = useState(false);
   const [tab, setTab] = useState<typeTab>('comments');
   const params = useParams();
 
   const { user } = useUser();
 
-  const { data, loading, refetch } = useQuery<IData>(GET_ARTICLE, {
+  const { data, loading } = useQuery<IData>(GET_ARTICLE, {
     variables: { getOneArticleId: params.articleId ? parseInt(params.articleId) : -1 },
     fetchPolicy: 'network-only',
   });
@@ -94,7 +95,6 @@ function Article() {
           <AddCommentTab
             id={params.articleId ? parseInt(params.articleId) : -1}
             type="article"
-            refetch={refetch}
             setTab={setTab}
           />
         ) : (
@@ -106,8 +106,6 @@ function Article() {
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [tab, user, data, loading]);
-
-  console.log(data?.getOneArticle);
 
   return (
     <div className="min-h-screen py-10 px-28">

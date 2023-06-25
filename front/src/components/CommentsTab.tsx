@@ -12,8 +12,6 @@ const CommentsTab = ({ comments }: { comments: IComment[] }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [comments.length, comments]);
 
-  console.log(_comments);
-
   return !!_comments.length ? (
     <div className="flex flex-col p-2 bg-gray-300 rounded gap-y-2">
       {_comments.map((comment) => (

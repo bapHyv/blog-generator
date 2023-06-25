@@ -128,7 +128,6 @@ export const FollowSubscriptions = extendType({
       type: "Follow",
       subscribe: withFilter(
         (r, a, c, i) => {
-          console.log(c.writerId);
           return c.pubSub.asyncIterator("newFollower");
         },
         async (p, v, c, i) => {

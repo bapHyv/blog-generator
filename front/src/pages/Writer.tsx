@@ -85,7 +85,7 @@ const Writer = () => {
 
   const { user } = useUser();
 
-  const { refetch, data, loading } = useQuery<IData>(GET_WRITER, {
+  const { data, loading } = useQuery<IData>(GET_WRITER, {
     variables: { writerId: params.writerId ? parseInt(params.writerId) : -1 },
     fetchPolicy: 'network-only',
   });
@@ -99,7 +99,6 @@ const Writer = () => {
           <AddCommentTab
             id={params.writerId ? parseInt(params.writerId) : -1}
             type="writer"
-            refetch={refetch}
             setTab={setTab}
           />
         ) : (

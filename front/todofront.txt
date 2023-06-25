@@ -37,20 +37,20 @@ Article:
         -X Trier les commentaires par date
     Onglet Ajouter un commentaire:
         -Ajouter la note
-        -/!\ Lors de l'ajout d'un commentaire, refetch les commentaires PAS BESOIN DE ÇA /!\
-        -Lors de l'ajout d'un commentaire, mettre une petite alerte (prévenir que le commentaire a été ajouté mais doit être validé avant d'être visible)
+        -X /!\ Lors de l'ajout d'un commentaire, refetch les commentaires PAS BESOIN DE ÇA /!\
+        -X Lors de l'ajout d'un commentaire, mettre une petite alerte (prévenir que le commentaire a été ajouté mais doit être validé avant d'être visible)
 
 X Writer:
     -X Désactiver le bouton violet
     -X Gérer le cas lorsqu'il n'y a pas d'article
     -X Refaire les boutons des tabs (Mettre celle de la page Article)
 
-Alerte (PEUT ÊTRE FAIRE UNE POPUP GÉNÉRAL AVEC TYPE info, valid, warning, error etc...):
-    -Créer une petite popup verte
-    -Créer une petite popup rouge
+X Alerte (PEUT ÊTRE FAIRE UNE POPUP GÉNÉRAL AVEC TYPE info, valid, warning, error etc...):
+    -X Créer une petite popup verte
+    -X Créer une petite popup rouge
 
-Notifications:
-    -Trouver un jolie design
+X Notifications:
+    -X Trouver un jolie design
 
 
 Profile:

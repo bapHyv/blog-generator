@@ -59,14 +59,10 @@ export function SubscribeProvider({ children }: { children: React.ReactNode }) {
     error: acError,
   } = useSubscription(NEW_ARTICLE_COMMENT, {
     skip: !user.id,
-    onComplete: () => {
-      console.log('sub triggered');
-    },
   });
 
   useEffect(() => {
     setComment((state) => {
-      console.log(state);
       if (state !== acData) {
         setNewNotif(true);
         setComment(acData);

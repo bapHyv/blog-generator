@@ -6,7 +6,7 @@ import { useSubscribe } from '../contexts/subscribeContext';
 import { useMemo } from 'react';
 import { Fragment } from 'react';
 import { Disclosure, Menu, Transition } from '@headlessui/react';
-import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
+import { Bars3Icon, BellIcon, InformationCircleIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { HiOutlineNewspaper } from 'react-icons/hi';
 import { AiOutlineUser } from 'react-icons/ai';
 
@@ -121,32 +121,42 @@ function Header() {
                         leaveFrom="transform opacity-100 scale-100"
                         leaveTo="transform opacity-0 scale-95"
                       >
-                        <Menu.Items className="absolute right-0 z-10 w-48 py-1 mt-2 origin-top-right bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+                        <Menu.Items className="absolute right-0 z-[100] mt-2 origin-top-right bg-white rounded-md shadow-lg w-96 ring-1 ring-black ring-opacity-5 focus:outline-none">
                           <Menu.Item>
                             {() => (
                               <div>
-                                <p>
-                                  New comment on:{' '}
-                                  <Link
-                                    to={`/articles/${acs.data.newArticleComment.publishedOn.id}`}
-                                  >
-                                    <span className="text-xl underline">
-                                      {acs.data.newArticleComment.publishedOn.label}
-                                    </span>
-                                  </Link>
+                                <div className="flex items-center p-2 bg-blue-100 border-b border-blue-800 rounded-t gap-x-3">
+                                  <InformationCircleIcon
+                                    className="w-5 h-5 text-blue-400"
+                                    aria-hidden="true"
+                                  />
+                                  <p className="text-blue-800">
+                                    New comment on:{' '}
+                                    <Link
+                                      to={`/articles/${acs.data.newArticleComment.publishedOn.id}`}
+                                    >
+                                      <span className="underline">
+                                        {acs.data.newArticleComment.publishedOn.label}
+                                      </span>
+                                    </Link>
+                                  </p>
+                                </div>
+                                <p className="p-2 my-2 italic">
+                                  "{acs.data.newArticleComment.content}"
                                 </p>
-                                <p>Comment:</p>
-                                <p>{acs.data.newArticleComment.content}</p>
-                                <p>
-                                  From:{' '}
+                                <div className="flex items-center p-3 bg-purple-100 border-t border-purple-800 rounded-t gap-x-3">
+                                  <span className="text-purple-800">From:</span>
+                                  <AiOutlineUser
+                                    className="w-6 h-6 text-purple-400 border border-purple-800 rounded-full"
+                                    aria-hidden="true"
+                                  />
                                   <Link
+                                    className="text-purple-800 underline"
                                     to={`/writers/${acs.data.newArticleComment.publishedBy.id}`}
                                   >
-                                    <span className="text-xl underline">
-                                      {acs.data.newArticleComment.publishedBy.pseudo}
-                                    </span>
+                                    {acs.data.newArticleComment.publishedBy.pseudo}
                                   </Link>
-                                </p>
+                                </div>
                               </div>
                             )}
                           </Menu.Item>

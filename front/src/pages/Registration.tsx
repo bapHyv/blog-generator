@@ -159,7 +159,6 @@ function Registration() {
     },
     onCompleted: (data) => {
       const { signup } = data;
-      console.log(data);
       setLocalUser(signup.writer);
       localStorage.setItem('token', signup.token);
       navigate(`/profile/${signup.writer.pseudo}`);
@@ -452,7 +451,6 @@ function Registration() {
                 }`}
                 onChange={(e) => {
                   setCategory(e.target.value);
-                  // console.log(e.target.value);
                   if (e.target.value) setCategoryError(false);
                 }}
                 value={category}
