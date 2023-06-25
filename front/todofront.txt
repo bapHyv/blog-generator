@@ -6,13 +6,16 @@ Homepage
 Commentaire:
     Gérer les isVisible
 
+WriterCard:
+    -Ajouter la mutation pour suivre le writer
+
+
 Profile:
     -Mettre profile manager dans le dashboard
     -Réparer la page Articles
     -Faire fonctionner le page builder
     -Faire fonctionner l'upload de photo
 
--WriterCard => Ajouter la mutation pour suivre le writer
 
 -Navbar => mettre l'avatar du user
 -ArticleCard => mettre l'avatar du user
