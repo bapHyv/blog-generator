@@ -75,7 +75,6 @@ interface IData {
 export type typeTab = 'comments' | 'addComment';
 
 function Article() {
-  const [isShowing, setIsShowing] = useState(false);
   const [tab, setTab] = useState<typeTab>('comments');
   const params = useParams();
 

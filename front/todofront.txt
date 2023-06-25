@@ -1,64 +1,27 @@
 Général:
-    -X Mettre une width max
-    -Ajouter un system d'alerte
     -Ajouter une description à l'article
 
 Homepage
 
-X Navbar:
-    -X Utiliser un composant tailwindcss
-
-X Footer:
-    -X Enlever les liens morts
-
-X Login:
-    -X Enlever le faux SSO
-    -X Enlever le lien de reset
-    -X Gérer l'erreur si no user found 
-
 Articles:
-    -X Trouver des cards
     -Gérer la pagination (Load more)
     -Gérer les filtres
 
 Writers:
     -Filtrer par catégorie
-    -X Mettre le bouton ajouter en ami. Si pas connecté, mettre un message sur le curseur.
 
 Commentaire:
-    -X Faire des cards articleComment (Gérer les notes)
-    -X Faire des cards WriterComment (Gérer les notes)
     Gérer les isVisible
 
 Article:
-    -X Refaire les boutons des tabs
-    -X Scroll top lorsque je page
-    X Onglet Commentaire:
-        -X Trier les commentaires par date
     Onglet Ajouter un commentaire:
         -Ajouter la note
-        -X /!\ Lors de l'ajout d'un commentaire, refetch les commentaires PAS BESOIN DE ÇA /!\
-        -X Lors de l'ajout d'un commentaire, mettre une petite alerte (prévenir que le commentaire a été ajouté mais doit être validé avant d'être visible)
-
-X Writer:
-    -X Désactiver le bouton violet
-    -X Gérer le cas lorsqu'il n'y a pas d'article
-    -X Refaire les boutons des tabs (Mettre celle de la page Article)
-
-X Alerte (PEUT ÊTRE FAIRE UNE POPUP GÉNÉRAL AVEC TYPE info, valid, warning, error etc...):
-    -X Créer une petite popup verte
-    -X Créer une petite popup rouge
-
-X Notifications:
-    -X Trouver un jolie design
-
 
 Profile:
     -Mettre profile manager dans le dashboard
     -Réparer la page Articles
     -Faire fonctionner le page builder.
     -Faire fonctionner l'upload de photo
-
 
 Navbar: https://tailwindui.com/components/application-ui/navigation/navbars
 buttons: https://tailwindui.com/components/application-ui/elements/buttons
@@ -75,4 +38,5 @@ Notifications: https://tailwindui.com/components/application-ui/overlays/notific
 -ArticleCard => mettre l'avatar du user
 -WriterCard => Ajouter la mutation pour suivre le writer
 -WriterCard => Mettre l'avatar du user
+-Notification => Mettre l'avatar du user
 -registration => Désactiver le bouton si le form n'est pas correctement rempli
