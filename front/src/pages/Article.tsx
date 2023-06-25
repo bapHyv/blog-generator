@@ -99,7 +99,6 @@ function Article() {
         ) : (
           <p>You have to loggin to comment...</p>
         );
-
       default:
         return <CommentsTab comments={data?.getOneArticle.comments || []} />;
     }
@@ -108,8 +107,8 @@ function Article() {
 
   return (
     <div className="min-h-screen py-10 px-28">
-      <div className="mt-5 mb-10">
-        <Link to={'/articles'} className="p-2 text-white bg-gray-700 rounded">
+      <div className="mt-5 mb-5">
+        <Link to={'/articles'} className="p-2 text-white bg-blue-500 rounded hover:bg-blue-600">
           Return to articles
         </Link>
       </div>
@@ -145,7 +144,7 @@ function Article() {
           {currentTab}
         </div>
       ) : (
-        <div className="h-screen rounded-3xl bg-neutral-500 animate-pulse"></div>
+        <div className="h-screen bg-gray-200 rounded-3xl animate-pulse"></div>
       )}
     </div>
   );

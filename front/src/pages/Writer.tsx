@@ -114,7 +114,7 @@ const Writer = () => {
   return (
     <div className="flex flex-col px-2 py-5 md:px-20 md:py-10 gap-y-10">
       <div>
-        <Link to={'/writers'} className="p-2 text-white bg-gray-700 rounded">
+        <Link to={'/writers'} className="p-2 text-white bg-blue-500 rounded hover:bg-blue-600">
           Return to writers
         </Link>
       </div>

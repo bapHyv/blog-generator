@@ -6,15 +6,23 @@ Homepage
 Commentaire:
     Gérer les isVisible
 
-Article:
-    Onglet Ajouter un commentaire:
-        -Ajouter la note
-
 Profile:
     -Mettre profile manager dans le dashboard
     -Réparer la page Articles
-    -Faire fonctionner le page builder.
+    -Faire fonctionner le page builder
     -Faire fonctionner l'upload de photo
+
+-WriterCard => Ajouter la mutation pour suivre le writer
+
+-Navbar => mettre l'avatar du user
+-ArticleCard => mettre l'avatar du user
+-WriterCard => Mettre l'avatar du user
+-Notification => Mettre l'avatar du user
+-registration => Désactiver le bouton si le form n'est pas correctement rempli
+
+
+
+RESOURCES: 
 
 Navbar: https://tailwindui.com/components/application-ui/navigation/navbars
 buttons: https://tailwindui.com/components/application-ui/elements/buttons
@@ -26,10 +34,3 @@ Tab (article and writer page): https://tailwindui.com/components/application-ui/
 Tab https://headlessui.com/react/tabs
 Alerts: https://tailwindui.com/components/application-ui/feedback/alerts
 Notifications: https://tailwindui.com/components/application-ui/overlays/notifications
-
--Navbar => mettre l'avatar du user
--ArticleCard => mettre l'avatar du user
--WriterCard => Ajouter la mutation pour suivre le writer
--WriterCard => Mettre l'avatar du user
--Notification => Mettre l'avatar du user
--registration => Désactiver le bouton si le form n'est pas correctement rempli

@@ -4,8 +4,12 @@ import { AiOutlineUser } from 'react-icons/ai';
 import formatedDate from '../utils/formatedDate';
 import { Link } from 'react-router-dom';
 import Stars from './Stars';
+import { Rating } from '@smastrom/react-rating';
+import { customStyle } from './AddCommentTab';
 
 const CommentCard = ({ comment }: { comment: IComment }) => {
+  console.log(comment.note);
+
   return (
     <div className="p-5 text-black bg-white rounded">
       {/* USER */}
@@ -35,17 +39,24 @@ const CommentCard = ({ comment }: { comment: IComment }) => {
         </p>
       </Link>
       {/* DATES */}
-      <span className="mt-1 text-sm italic">{formatedDate(comment.createdAt)}</span>
+      <div className="flex flex-col gap-y-2">
+        <span className="mt-1 text-sm italic">{formatedDate(comment.createdAt)}</span>
 
-      {/* RATING */}
-      {!!comment.note && (
-        <div className="[&>span]:w-full">
-          <Stars className="h-8 desktop:h-8 desktop:w-2/3" rating={comment.note} />
-        </div>
-      )}
+        {/* RATING */}
+        {!!comment.note && (
+          <div className="[&>span]:w-full">
+            <Rating
+              readOnly
+              style={{ maxWidth: 150 }}
+              value={comment.note}
+              itemStyles={customStyle}
+            />
+          </div>
+        )}
 
-      {/* COMMENT */}
-      <p>{comment.content}</p>
+        {/* COMMENT */}
+        <p>{comment.content}</p>
+      </div>
     </div>
   );
 };
