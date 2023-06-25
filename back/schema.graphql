@@ -84,7 +84,7 @@ type Query {
   getAllFollow: [Follow!]!
   getAllImages: [Image]
   getAllWriterComments: [WriterComment!]!
-  getAllWriters: [Writer!]!
+  getAllWriters(categoryId: Int): [Writer!]!
   getOneArticle(id: Int!): Article
   getOneCategory(id: Int!): Category
   getOneComment(commentId: Int!): ArticleComment

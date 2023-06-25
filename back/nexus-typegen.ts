@@ -432,6 +432,9 @@ export interface NexusGenArgTypes {
       skip?: number | null; // Int
       take?: number | null; // Int
     }
+    getAllWriters: { // args
+      categoryId?: number | null; // Int
+    }
     getOneArticle: { // args
       id: number; // Int!
     }

@@ -1,4 +1,3 @@
-import { Category } from "@prisma/client";
 import { extendType, intArg, nonNull, objectType, stringArg } from "nexus";
 
 export const Writer = objectType({
@@ -89,8 +88,19 @@ export const WriterQueries = extendType({
 
     t.nonNull.list.nonNull.field("getAllWriters", {
       type: "Writer",
+      args: {
+        categoryId: intArg(),
+      },
       resolve: async (r, a, c, i) => {
-        const writers = await c.prisma.writer.findMany();
+        const { categoryId } = a;
+
+        const where = categoryId
+          ? {
+              where: { categoryId },
+            }
+          : undefined;
+
+        const writers = await c.prisma.writer.findMany(where);
         return writers;
       },
     });

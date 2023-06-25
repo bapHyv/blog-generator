@@ -1,11 +1,11 @@
 import { gql, useQuery } from '@apollo/client';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import ArticleCard from '../components/ArticleCard';
 import Title from '../components/static/Title';
 
 export const GET_ALL_ARTICLES = gql`
-  query Query {
-    getAllArticles {
+  query Query($skip: Int, $take: Int) {
+    getAllArticles(skip: $skip, take: $take) {
       id
       label
       createdAt
@@ -41,7 +41,12 @@ interface IData {
 }
 
 const Articles = () => {
-  const { data, loading } = useQuery<IData>(GET_ALL_ARTICLES, {
+  const [take, setTake] = useState(2);
+  const { data, loading, fetchMore } = useQuery<IData>(GET_ALL_ARTICLES, {
+    variables: {
+      skip: 0,
+      take,
+    },
     fetchPolicy: 'network-only',
   });
 
@@ -56,15 +61,41 @@ const Articles = () => {
     });
   }, []);
 
+  const handleFetchMore = () => {
+    const currentLenght = data?.getAllArticles.length || 0;
+    fetchMore({ variables: { take: 2 } })
+      .then((res) => {
+        setTake(currentLenght + res.data?.getAllArticles.length);
+      })
+      .then(() => {
+        setTimeout(() => {
+          document.documentElement.scrollTo({
+            top: document.body.scrollHeight,
+            behavior: 'smooth',
+          });
+        }, 30);
+      });
+  };
+
   return (
-    <div className="flex flex-col px-2 py-5 md:px-20 md:py-10">
-      <Title text="Articles" />
-      {!loading
-        ? data?.getAllArticles.map((article) => (
-            <ArticleCard key={article.id + Math.random()} article={article} />
-          ))
-        : articleCardsPlaceholder}
-    </div>
+    <>
+      <div className="flex flex-col px-2 py-5 md:px-20 md:py-10">
+        <Title text="Articles" />
+        {!loading
+          ? data?.getAllArticles.map((article) => (
+              <ArticleCard key={article.id + Math.random()} article={article} />
+            ))
+          : articleCardsPlaceholder}
+      </div>
+      <div className="flex justify-center mb-5">
+        <button
+          onClick={() => handleFetchMore()}
+          className="p-2 text-white bg-blue-500 rounded hover:bg-blue-600"
+        >
+          Fetch More
+        </button>
+      </div>
+    </>
   );
 };
 
