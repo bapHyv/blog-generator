@@ -26,6 +26,24 @@ export const ImageQueries = extendType({
         return images;
       },
     });
+
+    t.list.field("getAllImagesFromWriter", {
+      type: "Image",
+      resolve: async (r, a, c, i) => {
+        const { writerId } = c;
+
+        if (!writerId) {
+          throw new Error("Cannot get photos without logging in");
+        }
+
+        const images = await c.prisma.image.findMany({
+          where: { ownerId: writerId },
+        });
+
+        return images;
+      },
+    });
+
     t.field("getOneImage", {
       type: "Image",
       args: {
@@ -34,9 +52,9 @@ export const ImageQueries = extendType({
       resolve: async (r, a, c, i) => {
         const { id } = a;
 
-        const article = await c.prisma.image.findUnique({ where: { id } });
+        const image = await c.prisma.image.findUnique({ where: { id } });
 
-        return article;
+        return image;
       },
     });
   },
@@ -49,7 +67,6 @@ export const ImageMutations = extendType({
       type: "Image",
       args: {
         url: nonNull(stringArg()),
-        writerId: nonNull(intArg()),
       },
       resolve: (r, a, c, i) => {
         const { url } = a;

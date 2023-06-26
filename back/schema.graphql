@@ -53,7 +53,7 @@ type Image {
 }
 
 type Mutation {
-  addOneImage(url: String!, writerId: Int!): Image!
+  addOneImage(url: String!): Image!
   changeArticleVisibility(id: Int!, isPublished: Boolean!): Article!
   createOneArticle(content: String!, isPublished: Boolean!, label: String!): Article!
   createOneArticleComment(articleId: Int!, content: String!, note: Int): ArticleComment!
@@ -73,7 +73,8 @@ type Mutation {
   updateOneArticleComment(commentId: Int!, content: String!, note: Int): ArticleComment!
   updateOneCategory(label: String!): Category!
   updateOneWriterComment(commentId: Int!, content: String!, note: Int): WriterComment!
-  updateWriter(pseudo: String!): Writer!
+  updateWriter(blogLabel: String!, description: String!, pseudo: String!): Writer!
+  updateWriterAvatar(url: String!): Writer!
   validateOneComment(commentId: Int!): WriterComment!
 }
 
@@ -84,6 +85,7 @@ type Query {
   getAllComments: [ArticleComment!]!
   getAllFollow: [Follow!]!
   getAllImages: [Image]
+  getAllImagesFromWriter: [Image]
   getAllWriterComments: [WriterComment!]!
   getAllWriters(categoryId: Int): [Writer!]!
   getOneArticle(id: Int!): Article

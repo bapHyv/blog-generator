@@ -1,22 +1,16 @@
 import { gql, useQuery } from '@apollo/client';
-import React, { useEffect, useState } from 'react';
+import React, { useMemo, useState } from 'react';
 import { User } from '../model/models';
+import { Cloudinary } from '@cloudinary/url-gen';
+import { fill } from '@cloudinary/url-gen/actions/resize';
+import { AdvancedImage } from '@cloudinary/react';
 
 interface UserContext {
   user: User;
   setLocalUser: React.Dispatch<React.SetStateAction<User>>;
+  loading: boolean;
+  avatar: JSX.Element | undefined;
 }
-
-const GET_PHOTOS = gql`
-  query Query($email: String!) {
-    getOne(email: $email) {
-      images {
-        id
-        url
-      }
-    }
-  }
-`;
 
 const AUTO_LOGIN = gql`
   query AutoLogin($token: String!) {
@@ -24,6 +18,7 @@ const AUTO_LOGIN = gql`
       id
       pseudo
       role
+      avatar
       following {
         following {
           id
@@ -53,19 +48,37 @@ const AUTO_LOGIN = gql`
 const userContext = React.createContext({} as UserContext);
 
 export function UserProvider({ children }: { children: React.ReactNode }) {
+  const cld = new Cloudinary({
+    cloud: {
+      cloudName: 'dr0zu0121',
+    },
+  });
+
   const [localUser, setLocalUser] = useState<User>({} as User);
 
-  const { data, loading } = useQuery(AUTO_LOGIN, {
+  const { loading } = useQuery(AUTO_LOGIN, {
     variables: { token: localStorage.getItem('token') },
     skip: !!localUser.id,
     onCompleted: (data) => setLocalUser(data.autoLogin),
   });
+
+  const avatar = useMemo(() => {
+    if (localUser.avatar) {
+      const cldImg = cld.image(localUser.avatar);
+      cldImg.resize(fill().height(150));
+      return <AdvancedImage cldImg={cldImg} />;
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [localUser.avatar]);
 
   return (
     <userContext.Provider
       value={{
         user: localUser,
         setLocalUser,
+        loading,
+        avatar,
       }}
     >
       {children}

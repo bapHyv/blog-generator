@@ -353,3 +353,70 @@ const token_fitness =
 
 const token_voyage_photo =
   "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ3cml0ZXJJZCI6NCwid3JpdGVyUm9sZSI6IndyaXRlciIsIndyaXRlckVtYWlsIjoiVm95YWdlUGhvdG9AZXhhbXBsZS5jb20iLCJpYXQiOjE2ODczNjI3NjV9.O0M5N_fFUVaji4lZHgj0ALIvqtkWCESjvXCeDlufDtI";
+
+const truc = {
+  data: {
+    getAllImages: [
+      {
+        url: "https://kultt.fr/wp-content/uploads/2022/09/RickAstley-ad2022.jpg",
+        id: 1,
+        createdAt: "2023-06-26T20:33:03.843Z",
+        ownedBy: {
+          id: 4,
+          email: "VoyagePhoto@example.com",
+          pseudo: "PhotoVoyage",
+        },
+      },
+      {
+        url: "https://fr.web.img6.acsta.net/pictures/18/10/31/17/34/2348073.jpg",
+        id: 2,
+        createdAt: "2023-06-26T20:34:16.396Z",
+        ownedBy: {
+          id: 4,
+          email: "VoyagePhoto@example.com",
+          pseudo: "PhotoVoyage",
+        },
+      },
+      {
+        url: "https://fr.web.img5.acsta.net/pictures/18/11/06/15/36/0408812.jpg",
+        id: 3,
+        createdAt: "2023-06-26T20:35:01.572Z",
+        ownedBy: {
+          id: 4,
+          email: "VoyagePhoto@example.com",
+          pseudo: "PhotoVoyage",
+        },
+      },
+      {
+        url: "https://fr.web.img5.acsta.net/pictures/19/09/15/23/52/1729197.jpg",
+        id: 4,
+        createdAt: "2023-06-26T20:35:21.660Z",
+        ownedBy: {
+          id: 4,
+          email: "VoyagePhoto@example.com",
+          pseudo: "PhotoVoyage",
+        },
+      },
+      {
+        url: "https://fr.web.img4.acsta.net/pictures/21/05/17/17/15/1119525.jpg",
+        id: 5,
+        createdAt: "2023-06-26T20:36:02.492Z",
+        ownedBy: {
+          id: 4,
+          email: "VoyagePhoto@example.com",
+          pseudo: "PhotoVoyage",
+        },
+      },
+      {
+        url: "https://fr.web.img5.acsta.net/pictures/14/03/24/12/46/257044.jpg",
+        id: 6,
+        createdAt: "2023-06-26T20:36:16.883Z",
+        ownedBy: {
+          id: 4,
+          email: "VoyagePhoto@example.com",
+          pseudo: "PhotoVoyage",
+        },
+      },
+    ],
+  },
+};

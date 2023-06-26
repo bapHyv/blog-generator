@@ -170,6 +170,7 @@ export interface NexusGenFieldTypes {
     updateOneCategory: NexusGenRootTypes['Category']; // Category!
     updateOneWriterComment: NexusGenRootTypes['WriterComment']; // WriterComment!
     updateWriter: NexusGenRootTypes['Writer']; // Writer!
+    updateWriterAvatar: NexusGenRootTypes['Writer']; // Writer!
     validateOneComment: NexusGenRootTypes['WriterComment']; // WriterComment!
   }
   Query: { // field return type
@@ -179,6 +180,7 @@ export interface NexusGenFieldTypes {
     getAllComments: NexusGenRootTypes['ArticleComment'][]; // [ArticleComment!]!
     getAllFollow: NexusGenRootTypes['Follow'][]; // [Follow!]!
     getAllImages: Array<NexusGenRootTypes['Image'] | null> | null; // [Image]
+    getAllImagesFromWriter: Array<NexusGenRootTypes['Image'] | null> | null; // [Image]
     getAllWriterComments: NexusGenRootTypes['WriterComment'][]; // [WriterComment!]!
     getAllWriters: NexusGenRootTypes['Writer'][]; // [Writer!]!
     getOneArticle: NexusGenRootTypes['Article'] | null; // Article
@@ -285,6 +287,7 @@ export interface NexusGenFieldTypeNames {
     updateOneCategory: 'Category'
     updateOneWriterComment: 'WriterComment'
     updateWriter: 'Writer'
+    updateWriterAvatar: 'Writer'
     validateOneComment: 'WriterComment'
   }
   Query: { // field return type name
@@ -294,6 +297,7 @@ export interface NexusGenFieldTypeNames {
     getAllComments: 'ArticleComment'
     getAllFollow: 'Follow'
     getAllImages: 'Image'
+    getAllImagesFromWriter: 'Image'
     getAllWriterComments: 'WriterComment'
     getAllWriters: 'Writer'
     getOneArticle: 'Article'
@@ -342,7 +346,6 @@ export interface NexusGenArgTypes {
   Mutation: {
     addOneImage: { // args
       url: string; // String!
-      writerId: number; // Int!
     }
     changeArticleVisibility: { // args
       id: number; // Int!
@@ -423,7 +426,12 @@ export interface NexusGenArgTypes {
       note?: number | null; // Int
     }
     updateWriter: { // args
+      blogLabel: string; // String!
+      description: string; // String!
       pseudo: string; // String!
+    }
+    updateWriterAvatar: { // args
+      url: string; // String!
     }
     validateOneComment: { // args
       commentId: number; // Int!

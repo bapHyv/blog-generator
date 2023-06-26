@@ -1,11 +1,11 @@
 export interface User {
   id: number;
   blogId: number;
+  blogLabel: string;
   pseudo: string;
   email: string;
-  password?: string;
-  description?: string;
-  avatar?: string;
+  description: string;
+  avatar: string;
   articles: Article[];
   followers: { followed: { email: string; id: number; pseudo: string } }[];
   following: { following: { email: string; id: number; pseudo: string } }[];

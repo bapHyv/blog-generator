@@ -7,7 +7,10 @@ Commentaire:
     Gérer les isVisible
 
 Profile:
-    -Mettre profile manager dans le dashboard
+    -Sidebar:
+        -À refaire
+        -Enlever Profile manager
+        -revoir les boutons
     -Réparer la page Articles
     -Faire fonctionner le page builder
     -Faire fonctionner l'upload de photo
@@ -15,7 +18,7 @@ Profile:
 
 -Navbar => mettre l'avatar du user
 -ArticleCard => mettre l'avatar du user
--WriterCard => Mettre l'avatar du user
+-X WriterCard => Mettre l'avatar du user
 -Notification => Mettre l'avatar du user
 -registration => Désactiver le bouton si le form n'est pas correctement rempli
 

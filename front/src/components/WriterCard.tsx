@@ -10,6 +10,9 @@ import {
 import { useUser } from '../contexts/UserContext';
 import { HiInformationCircle } from 'react-icons/hi';
 import { gql, useMutation } from '@apollo/client';
+import { Cloudinary } from '@cloudinary/url-gen';
+import { fill } from '@cloudinary/url-gen/actions/resize';
+import { AdvancedImage } from '@cloudinary/react';
 
 const FOLLOW_WRITER = gql`
   mutation Mutation($writerIdToFollow: Int!) {
@@ -63,6 +66,12 @@ interface IUnfollowData {
 }
 
 const WriterCard = ({ writer }: { writer: IWriter }) => {
+  const cld = new Cloudinary({
+    cloud: {
+      cloudName: 'dr0zu0121',
+    },
+  });
+
   const [isMsgVisible, setIsMsgVisible] = useState(false);
   const { user, setLocalUser } = useUser();
 
@@ -76,7 +85,7 @@ const WriterCard = ({ writer }: { writer: IWriter }) => {
     },
   });
 
-  const [unfollowWriter] = useMutation<IData>(UNFOLLOW_WRITER, {
+  const [unfollowWriter] = useMutation<IUnfollowData>(UNFOLLOW_WRITER, {
     variables: { writerIdToStopFollowing: writer.id },
     onCompleted: (data) => {
       const _following = user.following.filter((following) => following.following.id !== writer.id);
@@ -95,12 +104,22 @@ const WriterCard = ({ writer }: { writer: IWriter }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [user.id ? user.following.length : null]);
 
+  const avatar = useMemo(() => {
+    if (writer.avatar) {
+      const cldImg = cld.image(writer.avatar);
+      cldImg.resize(fill().height(150));
+      return <AdvancedImage cldImg={cldImg} />;
+    }
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [writer.avatar]);
+
   return writer ? (
     <>
       <div className="w-full mx-8 md:w-[32%] lg:mx-auto text-black shadow-card rounded">
         <div className="relative flex flex-col items-center justify-center py-5 transition-all bg-white border-b border-gray-300 rounded-t gap-y-3 hover:bg-gray-50 ">
           <Link className="absolute w-full h-full" to={`/writers/${writer.id}`}></Link>
-          <AiOutlineUser className="text-black border border-black rounded-full w-28 h-28" />
+          <div className="flex items-center justify-center h-40 w-28">{avatar}</div>
           <h2 className="text-center">
             <span className="text-3xl">{writer.pseudo[0].toUpperCase()}</span>
             <span className="text-lg">{writer.pseudo.substring(1)}</span>

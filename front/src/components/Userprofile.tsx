@@ -18,8 +18,6 @@ interface UserProfileProps {
 
 export const Userprofile = (props: UserProfileProps) => {
   const currentUser = useContext(userContext).user;
-  const [pseudo] = useState(currentUser.pseudo);
-  const [description] = useState(currentUser.description);
   const articles = currentUser.articles;
   const [component, setComponent] = useState('Dashboard');
   const [isOpen, setIsOpen] = useState(false);
@@ -28,15 +26,15 @@ export const Userprofile = (props: UserProfileProps) => {
   const selectedComponent = useMemo(() => {
     switch (component) {
       case 'Dashboard':
-        return <Dashboard description={description || ''} pseudo={pseudo} />;
+        return <Dashboard />;
       case 'PhotosManager':
-        return <PhotosManager email={currentUser.email} />;
+        return <PhotosManager />;
       case 'ProfileManager':
         return <ProfileManager />;
       case 'Articles':
         return <UserArticlePage html={articles[articleNumber].content} />;
       default:
-        return <Dashboard description={description || ''} pseudo={pseudo} />;
+        return <Dashboard />;
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [component, articleNumber]);

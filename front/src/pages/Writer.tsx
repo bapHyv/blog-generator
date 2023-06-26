@@ -16,6 +16,7 @@ const GET_WRITER = gql`
       id
       pseudo
       email
+      avatar
       category {
         id
         label
@@ -69,6 +70,7 @@ interface IWriter {
   id: number;
   pseudo: string;
   email: string;
+  avatar: string;
   category: { id: number; label: string };
   followers: { id: number }[];
   articles: IArticle[];

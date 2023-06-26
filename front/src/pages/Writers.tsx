@@ -16,6 +16,7 @@ export const GET_ALL_WRITERS = gql`
       pseudo
       description
       email
+      avatar
       category {
         id
         label
@@ -46,6 +47,7 @@ export interface IWriter {
   id: number;
   pseudo: string;
   email: string;
+  avatar: string;
   category: { id: number; label: string };
   followers: { id: number }[];
   articles: { id: number }[];
@@ -75,8 +77,6 @@ const Writers = () => {
       fetchPolicy: 'network-only',
     },
   );
-
-  console.log(cat);
 
   return (
     <div className="flex flex-col px-2 py-5 md:px-20 md:py-10">

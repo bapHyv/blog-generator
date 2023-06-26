@@ -1,69 +1,62 @@
 import { AdvancedImage } from '@cloudinary/react';
 import { Cloudinary } from '@cloudinary/url-gen';
 import { fill } from '@cloudinary/url-gen/actions/resize';
-import { gql, useLazyQuery, useMutation } from '@apollo/client';
-import { useEffect, useState } from 'react';
+import { gql, useMutation, useQuery } from '@apollo/client';
 import { ImCross } from 'react-icons/im';
 
 export const GET_PHOTOS = gql`
-  query Query($email: String!) {
-    getOne(email: $email) {
-      images {
-        id
-        url
-      }
+  query Query {
+    getAllImagesFromWriter {
+      id
+      createdAt
+      url
     }
   }
 `;
 
 const ADD_PHOTOS = gql`
-  mutation addImage($email: String!, $imageUrl: String!) {
-    addImage(email: $email, imageUrl: $imageUrl) {
+  mutation Mutation($url: String!) {
+    addOneImage(url: $url) {
       id
+      createdAt
       url
     }
   }
 `;
 
 export const DELETE_PHOTO = gql`
-  mutation DeleteImage($deleteImageId: Float!) {
-    deleteImage(id: $deleteImageId)
+  mutation Mutation($deleteOneImageId: Int!) {
+    deleteOneImage(id: $deleteOneImageId) {
+      id
+      createdAt
+      url
+    }
   }
 `;
 
-const PhotosManager = ({ email }: { email: string }) => {
-  const [photos, setPhotos] = useState<any[]>([]);
-  const cloudName = 'dvsg7r2hx';
-  const uploadPreset = 'yeahbuddy';
+interface IPhoto {
+  id: number;
+  createdAt: string;
+  url: string;
+}
+
+interface IDataPhotos {
+  getAllImagesFromWriter: IPhoto[];
+}
+
+const PhotosManager = () => {
+  const cloudName = 'dr0zu0121';
+  const uploadPreset = 'blogGenerator';
 
   const cld = new Cloudinary({
     cloud: {
-      cloudName: 'dvsg7r2hx',
+      cloudName: 'dr0zu0121',
     },
   });
 
-  const [getPhotos] = useLazyQuery(GET_PHOTOS, { variables: { email } });
+  const { data, loading, refetch } = useQuery<IDataPhotos>(GET_PHOTOS);
   const [deletePhoto] = useMutation(DELETE_PHOTO);
   const [addImage] = useMutation(ADD_PHOTOS);
-
-  const fetchData = async () => {
-    const result = await getPhotos();
-    const _photos = result.data.getOne.images
-      .reduce((acc: any, curr: any) => {
-        return [...acc, { id: curr.id, url: curr.url }];
-      }, [])
-      .map((p: { id: number; url: string }) => {
-        const img = cld.image(p.url);
-        img.resize(fill().width(150).height(150));
-        return { id: p.id, photo: img };
-      });
-    setPhotos(_photos);
-  };
-
-  useEffect(() => {
-    fetchData();
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   const uploadWidget = window.cloudinary.createUploadWidget(
     {
@@ -72,18 +65,15 @@ const PhotosManager = ({ email }: { email: string }) => {
     },
     async (error: Error, result: any) => {
       if (!error && result && result.event === 'success') {
-        const res = await addImage({ variables: { email, imageUrl: result.info.public_id } });
-        const _img = cld.image(res.data.addImage.url);
-        _img.resize(fill().width(150).height(150));
-        setPhotos([...photos, { id: res.data.addImage.id, photo: _img }]);
+        await addImage({ variables: { url: result.info.public_id } });
+        await refetch();
       }
     },
   );
 
-  const handleDeletePhoto = (deleteImageId: number) => {
-    const _photos = photos.filter((p) => p.id !== deleteImageId);
-    setPhotos(_photos);
-    deletePhoto({ variables: { deleteImageId } });
+  const handleDeletePhoto = async (deleteImageId: number) => {
+    await deletePhoto({ variables: { deleteOneImageId: deleteImageId } });
+    await refetch();
   };
 
   return (
@@ -97,19 +87,23 @@ const PhotosManager = ({ email }: { email: string }) => {
           Upload a Photo
         </button>
         <div className="p-2 overflow-y-scroll flex flex-wrap max-h-[50vh] bg-neutral-200 gap-2">
-          {!!photos.length &&
-            photos.map((p) => (
-              <div className="relative" key={p.id}>
-                <div
-                  className="absolute p-1 bg-red-600 rounded-full cursor-pointer top-1 right-1"
-                  onClick={() => handleDeletePhoto(p.id)}
-                >
-                  <ImCross className="w-2 h-2 text-white" />
-                </div>
+          {!loading &&
+            data?.getAllImagesFromWriter.map((img) => {
+              const cldImg = cld.image(img.url);
+              cldImg.resize(fill().width(150).height(150));
 
-                <AdvancedImage cldImg={p.photo} />
-              </div>
-            ))}
+              return (
+                <div className="relative" key={img.id}>
+                  <div
+                    className="absolute p-1 bg-red-600 rounded-full cursor-pointer top-1 right-1"
+                    onClick={() => handleDeletePhoto(img.id)}
+                  >
+                    <ImCross className="w-2 h-2 text-white" />
+                  </div>
+                  <AdvancedImage cldImg={cldImg} />
+                </div>
+              );
+            })}
         </div>
       </div>
     </div>

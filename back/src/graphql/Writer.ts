@@ -114,30 +114,46 @@ export const WriterMutations = extendType({
       type: "Writer",
       args: {
         pseudo: nonNull(stringArg()),
-        // description: nonNull(stringArg()),
-        // avatar: nonNull(stringArg()),
-        // blogLabel: nonNull(stringArg()),
-        // categoryId: nonNull(intArg()),
+        description: nonNull(stringArg()),
+        blogLabel: nonNull(stringArg()),
       },
       resolve: async (r, a, c, i) => {
-        // const { avatar, blogLabel, description, pseudo, categoryId } = a;
-        const { pseudo } = a;
+        const { blogLabel, description, pseudo } = a;
         const { writerId } = c;
 
         if (!writerId) {
           throw new Error("Cannot update data without logging in");
         }
 
-        const now = new Date();
+        const writer = await c.prisma.writer.update({
+          data: {
+            blogLabel,
+            description,
+            pseudo,
+          },
+          where: { id: writerId },
+        });
+
+        return writer;
+      },
+    });
+
+    t.nonNull.field("updateWriterAvatar", {
+      type: "Writer",
+      args: {
+        url: nonNull(stringArg()),
+      },
+      resolve: async (r, a, c, i) => {
+        const { url } = a;
+        const { writerId } = c;
+
+        if (!writerId) {
+          throw new Error("Cannot update avatar without logging in");
+        }
 
         const writer = await c.prisma.writer.update({
           data: {
-            // avatar,
-            // blogLabel,
-            // description,
-            pseudo,
-            createdAt: now,
-            // category: { connect: { id: categoryId } },
+            avatar: url,
           },
           where: { id: writerId },
         });
