@@ -78,6 +78,7 @@ type Mutation {
 }
 
 type Query {
+  autoLogin(token: String!): Writer
   getAllArticles(skip: Int, take: Int): [Article!]!
   getAllCategories: [Category!]!
   getAllComments: [ArticleComment!]!

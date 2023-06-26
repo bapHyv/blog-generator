@@ -1,6 +1,7 @@
 import { extendType, intArg, nonNull, objectType, stringArg } from "nexus";
 import * as bcrypt from "bcryptjs";
 import * as jwt from "jsonwebtoken";
+import { decodeAuthHeader } from "../utils/auth";
 
 export const AuthPayload = objectType({
   name: "AuthPayload",
@@ -8,6 +9,33 @@ export const AuthPayload = objectType({
     t.nonNull.string("token");
     t.nonNull.field("writer", {
       type: "Writer",
+    });
+  },
+});
+
+export const AuthQueries = extendType({
+  type: "Query",
+  definition(t) {
+    t.field("autoLogin", {
+      type: "Writer",
+      args: {
+        token: nonNull(stringArg()),
+      },
+      resolve: async (r, a, c, i) => {
+        const { token } = a;
+
+        if (!token) {
+          return null;
+        }
+
+        const writerData = decodeAuthHeader(token);
+
+        const writer = await c.prisma.writer.findUnique({
+          where: { id: writerData.writerId },
+        });
+
+        return writer;
+      },
     });
   },
 });

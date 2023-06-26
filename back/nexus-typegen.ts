@@ -173,6 +173,7 @@ export interface NexusGenFieldTypes {
     validateOneComment: NexusGenRootTypes['WriterComment']; // WriterComment!
   }
   Query: { // field return type
+    autoLogin: NexusGenRootTypes['Writer'] | null; // Writer
     getAllArticles: NexusGenRootTypes['Article'][]; // [Article!]!
     getAllCategories: NexusGenRootTypes['Category'][]; // [Category!]!
     getAllComments: NexusGenRootTypes['ArticleComment'][]; // [ArticleComment!]!
@@ -287,6 +288,7 @@ export interface NexusGenFieldTypeNames {
     validateOneComment: 'WriterComment'
   }
   Query: { // field return type name
+    autoLogin: 'Writer'
     getAllArticles: 'Article'
     getAllCategories: 'Category'
     getAllComments: 'ArticleComment'
@@ -428,6 +430,9 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    autoLogin: { // args
+      token: string; // String!
+    }
     getAllArticles: { // args
       skip?: number | null; // Int
       take?: number | null; // Int

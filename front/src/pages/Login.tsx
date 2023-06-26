@@ -27,12 +27,14 @@ export const LOGIN = gql`
           followed {
             id
             email
+            pseudo
           }
         }
         following {
           following {
             id
             email
+            pseudo
           }
         }
       }

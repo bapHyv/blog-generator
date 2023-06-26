@@ -1,6 +1,6 @@
-import { Article, User } from './models';
+import { Article } from './models';
 
-export const users: User[] = [
+export const users = [
   {
     id: 1,
     pseudo: 'test1',

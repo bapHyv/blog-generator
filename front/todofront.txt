@@ -6,10 +6,6 @@ Homepage
 Commentaire:
     Gérer les isVisible
 
-WriterCard:
-    -Ajouter la mutation pour suivre le writer
-
-
 Profile:
     -Mettre profile manager dans le dashboard
     -Réparer la page Articles

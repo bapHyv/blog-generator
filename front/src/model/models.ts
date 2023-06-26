@@ -7,6 +7,8 @@ export interface User {
   description?: string;
   avatar?: string;
   articles: Article[];
+  followers: { followed: { email: string; id: number; pseudo: string } }[];
+  following: { following: { email: string; id: number; pseudo: string } }[];
 }
 
 export interface Article {
