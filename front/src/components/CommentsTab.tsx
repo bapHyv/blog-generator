@@ -14,9 +14,9 @@ const CommentsTab = ({ comments }: { comments: IComment[] }) => {
 
   return !!_comments.length ? (
     <div className="flex flex-col p-2 bg-gray-300 rounded gap-y-2">
-      {_comments.map((comment) => (
-        <CommentCard key={comment.id} comment={comment} />
-      ))}
+      {_comments.map((comment) =>
+        comment.isValidated ? <CommentCard key={comment.id} comment={comment} /> : <></>,
+      )}
     </div>
   ) : (
     <p>There is no comment yet...</p>

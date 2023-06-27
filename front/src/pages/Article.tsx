@@ -36,6 +36,7 @@ const GET_ARTICLE = gql`
             }
           }
         }
+        isValidated
       }
     }
   }
@@ -50,11 +51,12 @@ interface IPublishedBy {
 }
 
 export interface IComment {
-  content: string;
-  createdAt: string;
   id: number;
   note: number;
+  createdAt: string;
+  content: string;
   publishedBy: IPublishedBy;
+  isValidated: boolean;
 }
 
 interface IArticle {

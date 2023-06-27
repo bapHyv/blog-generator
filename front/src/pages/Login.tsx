@@ -12,17 +12,21 @@ export const LOGIN = gql`
     login(email: $email, password: $password) {
       token
       writer {
-        avatar
-        blogLabel
-        category {
-          id
-          label
-        }
-        createdAt
-        description
-        email
-        id
+        role
         pseudo
+        id
+        blogLabel
+        avatar
+        email
+        description
+        createdAt
+        following {
+          following {
+            id
+            email
+            pseudo
+          }
+        }
         followers {
           followed {
             id
@@ -30,11 +34,24 @@ export const LOGIN = gql`
             pseudo
           }
         }
-        following {
-          following {
+        category {
+          id
+          label
+        }
+        articles {
+          id
+          isPublished
+          label
+          createdAt
+          content
+          comments {
             id
-            email
+            note
+          }
+          publishedBy {
+            id
             pseudo
+            description
           }
         }
       }

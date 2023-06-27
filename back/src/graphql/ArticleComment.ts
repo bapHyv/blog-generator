@@ -145,7 +145,7 @@ export const ArticleCommentMutations = extendType({
       },
     });
 
-    t.nonNull.field("validateOneComment", {
+    t.nonNull.field("validateOneArticleComment", {
       type: "ArticleComment",
       args: {
         commentId: nonNull(intArg()),

@@ -13,17 +13,21 @@ interface UserContext {
 }
 
 const AUTO_LOGIN = gql`
-  query AutoLogin($token: String!) {
+  query Query($token: String!) {
     autoLogin(token: $token) {
-      id
-      pseudo
       role
+      pseudo
+      id
+      blogLabel
       avatar
+      email
+      description
+      createdAt
       following {
         following {
           id
-          pseudo
           email
+          pseudo
         }
       }
       followers {
@@ -33,14 +37,92 @@ const AUTO_LOGIN = gql`
           pseudo
         }
       }
-      email
-      blogLabel
-      description
       category {
         id
         label
       }
-      createdAt
+      articles {
+        id
+        isPublished
+        label
+        createdAt
+        content
+        comments {
+          id
+          note
+        }
+        publishedBy {
+          id
+          pseudo
+          description
+        }
+      }
+      commentsOnWriters {
+        id
+        note
+        createdAt
+        content
+        publishedBy {
+          id
+          pseudo
+          category {
+            label
+          }
+          articles {
+            id
+          }
+          followers {
+            followed {
+              id
+            }
+          }
+        }
+        isValidated
+      }
+      commentsOnArticles {
+        id
+        note
+        createdAt
+        content
+        publishedBy {
+          id
+          pseudo
+          category {
+            label
+          }
+          articles {
+            id
+          }
+          followers {
+            followed {
+              id
+            }
+          }
+        }
+        isValidated
+      }
+      commentsFromWriters {
+        id
+        note
+        createdAt
+        content
+        publishedBy {
+          id
+          pseudo
+          category {
+            label
+          }
+          articles {
+            id
+          }
+          followers {
+            followed {
+              id
+            }
+          }
+        }
+        isValidated
+      }
     }
   }
 `;

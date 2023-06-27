@@ -21,7 +21,7 @@ Profile:
 -X WriterCard => Mettre l'avatar du user
 -Notification => Mettre l'avatar du user
 -registration => Désactiver le bouton si le form n'est pas correctement rempli
-
+-Ajouter un input pour le titre de l'article
 
 
 RESOURCES: 

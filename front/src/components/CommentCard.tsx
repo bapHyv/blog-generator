@@ -3,13 +3,10 @@ import { IComment } from '../pages/Article';
 import { AiOutlineUser } from 'react-icons/ai';
 import formatedDate from '../utils/formatedDate';
 import { Link } from 'react-router-dom';
-import Stars from './Stars';
 import { Rating } from '@smastrom/react-rating';
 import { customStyle } from './AddCommentTab';
 
 const CommentCard = ({ comment }: { comment: IComment }) => {
-  console.log(comment.note);
-
   return (
     <div className="p-5 text-black bg-white rounded">
       {/* USER */}

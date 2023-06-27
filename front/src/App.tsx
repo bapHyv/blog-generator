@@ -16,7 +16,12 @@ import ScrollToTop from './components/ScrollToTop';
 
 function App() {
   return (
-    <div className="App overflow-x-hidden flex flex-col [&>*:nth-last-child(2)]:flex-1">
+    <div
+      className="App overflow-x-hidden flex flex-col [&>*:nth-last-child(2)]:flex-1"
+      style={{
+        backgroundImage: 'linear-gradient(rgba(209, 213, 219, 0.5), rgba(2, 132, 199, 0.5))',
+      }}
+    >
       <Router>
         <ScrollToTop />
         <Header />

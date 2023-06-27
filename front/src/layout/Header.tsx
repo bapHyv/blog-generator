@@ -48,7 +48,7 @@ function Header() {
   };
 
   return (
-    <header>
+    <header className="z-50">
       <Disclosure as="nav" className="bg-gray-700">
         {({ open }) => (
           <>

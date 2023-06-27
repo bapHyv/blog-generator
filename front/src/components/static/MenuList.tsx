@@ -1,3 +1,5 @@
+import { User } from '../../model/models';
+
 const MenuList = ({
   label,
   items,
@@ -10,7 +12,7 @@ const MenuList = ({
   setArticleNumber,
 }: {
   label: string;
-  items: any[];
+  items: User['articles'];
   isActive: boolean;
   isOpen: boolean;
   component: string;
@@ -26,18 +28,18 @@ const MenuList = ({
           setIsOpen(!isOpen);
           setComponent(component !== 'Articles' ? 'Articles' : '');
         }}
-        className={`h-10 pl-5 flex items-center cursor-pointer hover:bg-yeahbuddy hover:text-white ${
-          isActive ? 'bg-yeahbuddy text-white' : ''
-        }`}
+        className="flex items-center h-10 pl-5 cursor-pointer"
       >
         <span>{label}</span>
       </div>
-      <div className={`relative flex flex-col ${isActive ? 'block' : 'hidden'}`}>
+      <div
+        className={`top-10 right-0 bg-gray-800 flex flex-col ${isActive ? 'absolute' : 'hidden'}`}
+      >
         {items?.map((art, i) => (
           <div
-            className={`flex items-center h-7 p-2 ml-8 cursor-pointer ${
-              articleNumber === i ? 'bg-neutral-100' : ''
-            } hover:bg-neutral-100`}
+            className={`text-white flex items-center h-7 p-2 pr-10 cursor-pointer ${
+              articleNumber === i ? 'bg-gray-900' : ''
+            } hover:bg-gray-900`}
             key={art.id}
             onClick={() => setArticleNumber(i)}
           >

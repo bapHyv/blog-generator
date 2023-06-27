@@ -53,7 +53,7 @@ export const users = [
   },
 ];
 
-export const articles: Article[] = [
+export const articles = [
   {
     id: 1,
     label: 'label1',

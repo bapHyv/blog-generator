@@ -18,6 +18,7 @@ export const GET_ALL_ARTICLES = gql`
       comments {
         id
         note
+        isValidated
       }
     }
   }
@@ -33,7 +34,7 @@ export interface IArticle {
     pseudo: string;
     description: string;
   };
-  comments: [{ id: number; note: number }];
+  comments: [{ id: number; note: number; isValidated: boolean }];
 }
 
 interface IData {

@@ -75,6 +75,7 @@ type Mutation {
   updateOneWriterComment(commentId: Int!, content: String!, note: Int): WriterComment!
   updateWriter(blogLabel: String!, description: String!, pseudo: String!): Writer!
   updateWriterAvatar(url: String!): Writer!
+  validateOneArticleComment(commentId: Int!): ArticleComment!
   validateOneComment(commentId: Int!): WriterComment!
 }
 

@@ -1,21 +1,6 @@
-const MenuItem = ({
-  label,
-  componentName,
-  isActive,
-  setComponent,
-}: {
-  label: string;
-  componentName: string;
-  isActive: boolean;
-  setComponent: React.Dispatch<React.SetStateAction<string>>;
-}) => {
+const MenuItem = ({ label }: { label: string }) => {
   return (
-    <div
-      className={`h-10 pl-5 flex items-center cursor-pointer hover:bg-yeahbuddy hover:text-white ${
-        isActive ? 'bg-yeahbuddy text-white' : ''
-      }`}
-      onClick={() => setComponent(componentName)}
-    >
+    <div className="flex items-center h-10 pl-5 cursor-pointer hover:bg-gray-800">
       <span>{label}</span>
     </div>
   );

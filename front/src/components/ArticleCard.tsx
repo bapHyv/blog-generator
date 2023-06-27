@@ -28,7 +28,7 @@ const ArticleCard = ({ article }: { article: IArticle }) => {
         </div>
         <div className="border-t border-white">
           <span>
-            <span>{article.comments.length} comments</span>
+            <span>{article.comments.filter((comment) => comment.isValidated).length} comments</span>
           </span>
         </div>
       </Link>

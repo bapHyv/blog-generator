@@ -12,7 +12,7 @@ import Title from '../components/static/Title';
 import { FaSignature } from 'react-icons/fa';
 
 const SIGN_UP = gql`
-  mutation Mutation(
+  mutation Signup(
     $pseudo: String!
     $email: String!
     $password: String!
@@ -30,26 +30,46 @@ const SIGN_UP = gql`
     ) {
       token
       writer {
-        avatar
+        role
+        pseudo
+        id
         blogLabel
+        avatar
+        email
+        description
+        createdAt
+        following {
+          following {
+            id
+            email
+            pseudo
+          }
+        }
+        followers {
+          followed {
+            id
+            email
+            pseudo
+          }
+        }
         category {
           id
           label
         }
-        description
-        email
-        id
-        pseudo
-        followers {
-          followed {
+        articles {
+          id
+          isPublished
+          label
+          createdAt
+          content
+          comments {
             id
-            pseudo
+            note
           }
-        }
-        following {
-          following {
+          publishedBy {
             id
             pseudo
+            description
           }
         }
       }

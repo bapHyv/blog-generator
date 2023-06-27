@@ -171,6 +171,7 @@ export interface NexusGenFieldTypes {
     updateOneWriterComment: NexusGenRootTypes['WriterComment']; // WriterComment!
     updateWriter: NexusGenRootTypes['Writer']; // Writer!
     updateWriterAvatar: NexusGenRootTypes['Writer']; // Writer!
+    validateOneArticleComment: NexusGenRootTypes['ArticleComment']; // ArticleComment!
     validateOneComment: NexusGenRootTypes['WriterComment']; // WriterComment!
   }
   Query: { // field return type
@@ -288,6 +289,7 @@ export interface NexusGenFieldTypeNames {
     updateOneWriterComment: 'WriterComment'
     updateWriter: 'Writer'
     updateWriterAvatar: 'Writer'
+    validateOneArticleComment: 'ArticleComment'
     validateOneComment: 'WriterComment'
   }
   Query: { // field return type name
@@ -432,6 +434,9 @@ export interface NexusGenArgTypes {
     }
     updateWriterAvatar: { // args
       url: string; // String!
+    }
+    validateOneArticleComment: { // args
+      commentId: number; // Int!
     }
     validateOneComment: { // args
       commentId: number; // Int!

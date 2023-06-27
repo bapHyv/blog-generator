@@ -81,7 +81,7 @@ const PhotosManager = () => {
       <div className="">
         <h1 className="text-3xl text-center underline text-ronniecolman">Photos Manager</h1>
         <button
-          className="p-2 my-5 text-white rounded bg-yeahbuddy"
+          className="p-2 my-5 text-white bg-blue-500 rounded hover:bg-blue-600"
           onClick={() => uploadWidget.open()}
         >
           Upload a Photo
