@@ -23,9 +23,9 @@ function App() {
       }}
     >
       <Router>
-        <ScrollToTop />
-        <Header />
         <div className="min-h-screen max-w-[1440px] xl:min-w-[1439px] xl:m-auto">
+          <ScrollToTop />
+          <Header />
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/articles" element={<Articles />} />
