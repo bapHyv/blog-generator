@@ -2,7 +2,6 @@ import { gql, useQuery } from '@apollo/client';
 import React, { useMemo, useState } from 'react';
 import { User } from '../model/models';
 import { Cloudinary } from '@cloudinary/url-gen';
-import { fill } from '@cloudinary/url-gen/actions/resize';
 import { AdvancedImage } from '@cloudinary/react';
 
 interface UserContext {
@@ -147,7 +146,6 @@ export function UserProvider({ children }: { children: React.ReactNode }) {
   const avatar = useMemo(() => {
     if (localUser.avatar) {
       const cldImg = cld.image(localUser.avatar);
-      cldImg.resize(fill().height(150));
       return <AdvancedImage cldImg={cldImg} />;
     }
 

@@ -1,6 +1,5 @@
 import { AdvancedImage } from '@cloudinary/react';
 import { Cloudinary } from '@cloudinary/url-gen';
-import { fill } from '@cloudinary/url-gen/actions/resize';
 import { gql, useMutation, useQuery } from '@apollo/client';
 import { ImCross } from 'react-icons/im';
 
@@ -90,8 +89,6 @@ const PhotosManager = () => {
           {!loading &&
             data?.getAllImagesFromWriter.map((img) => {
               const cldImg = cld.image(img.url);
-              cldImg.resize(fill().width(150).height(150));
-
               return (
                 <div className="relative" key={img.id}>
                   <div

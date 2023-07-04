@@ -1,10 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import Title from './static/Title';
 import { useUser } from '../contexts/UserContext';
-import { fill } from '@cloudinary/url-gen/actions/resize';
 import { gql, useMutation } from '@apollo/client';
-import { Cloudinary } from '@cloudinary/url-gen';
-import { AdvancedImage } from '@cloudinary/react';
 
 const UPDATE_WRITER_MUTATION = gql`
   mutation Mutation($pseudo: String!, $description: String!, $blogLabel: String!) {

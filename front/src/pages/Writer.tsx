@@ -98,11 +98,7 @@ const Writer = () => {
         return <CommentsTab comments={data?.getOneWriter.commentsFromWriters || []} />;
       case 'addComment':
         return user.id ? (
-          <AddCommentTab
-            id={params.writerId ? parseInt(params.writerId) : -1}
-            type="writer"
-            setTab={setTab}
-          />
+          <AddCommentTab id={params.writerId ? parseInt(params.writerId) : -1} type="writer" />
         ) : (
           <p>You have to loggin to comment...</p>
         );

@@ -11,7 +11,6 @@ import { useUser } from '../contexts/UserContext';
 import { HiInformationCircle } from 'react-icons/hi';
 import { gql, useMutation } from '@apollo/client';
 import { Cloudinary } from '@cloudinary/url-gen';
-import { fill } from '@cloudinary/url-gen/actions/resize';
 import { AdvancedImage } from '@cloudinary/react';
 
 const FOLLOW_WRITER = gql`
@@ -107,7 +106,6 @@ const WriterCard = ({ writer }: { writer: IWriter }) => {
   const avatar = useMemo(() => {
     if (writer.avatar) {
       const cldImg = cld.image(writer.avatar);
-      cldImg.resize(fill().height(150));
       return <AdvancedImage cldImg={cldImg} />;
     }
 

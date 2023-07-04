@@ -96,7 +96,6 @@ function Article() {
           <AddCommentTab
             id={params.articleId ? parseInt(params.articleId) : -1}
             type="article"
-            setTab={setTab}
           />
         ) : (
           <p>You have to loggin to comment...</p>

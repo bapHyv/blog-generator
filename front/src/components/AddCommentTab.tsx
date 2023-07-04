@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { typeTab } from '../pages/Article';
 import useAddCommentMutation from '../hooks/useAddCommentMutation';
 import Alert from './Alert';
 import { Rating, ThinStar } from '@smastrom/react-rating';
@@ -13,15 +12,7 @@ export const customStyle = {
   inactiveFillColor: '#d1d5db',
 };
 
-const AddCommentTab = ({
-  id,
-  type,
-  setTab,
-}: {
-  id: number;
-  type: TypeOfComment;
-  setTab: React.Dispatch<React.SetStateAction<typeTab>>;
-}) => {
+const AddCommentTab = ({ id, type }: { id: number; type: TypeOfComment }) => {
   const [isShowing, setIsShowing] = useState(false);
   const [rating, setRating] = useState<null | number>(null);
   const [comment, setComment] = useState('');
@@ -48,7 +39,7 @@ const AddCommentTab = ({
         isShowing={isShowing}
         setIsShowing={setIsShowing}
       />
-      <form onSubmit={(e) => onSubmit(e)}>
+      <form data-testid="form" onSubmit={(e) => onSubmit(e)}>
         <textarea
           name="comment"
           id="comment"
@@ -56,7 +47,8 @@ const AddCommentTab = ({
           placeholder="Write your comment here"
           value={comment}
           onChange={(e) => setComment(e.target.value)}
-        ></textarea>
+          aria-multiline
+        />
         <div className="flex items-center gap-x-5">
           <Rating
             style={{ maxWidth: 250 }}
@@ -78,7 +70,7 @@ const AddCommentTab = ({
           <input
             type="submit"
             value="Add comment"
-            className="p-3 text-white bg-green-500 rounded cursor-pointer disabled:bg-slate-400"
+            className="p-3 text-white bg-green-500 rounded cursor-pointer disabled:bg-slate-400 disabled:cursor-not-allowed"
             disabled={!comment}
           />
         </div>

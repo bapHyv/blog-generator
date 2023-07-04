@@ -1,6 +1,6 @@
 import { gql, useMutation } from '@apollo/client';
 
-const ADD_COMMENT_ARTICLE = gql`
+export const ADD_COMMENT_ARTICLE = gql`
   mutation Mutation($content: String!, $articleId: Int!, $note: Int) {
     createOneArticleComment(content: $content, articleId: $articleId, note: $note) {
       id
