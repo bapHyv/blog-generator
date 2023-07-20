@@ -1,14 +1,12 @@
 name: front-tests-workflow.yml
 
-on:
-  push:
-    branches: ["develop"]
+on: pull_request
 
 jobs:
   test-front:
-  runs-on: ubuntu-latest
-  steps:
-    - name: Check out code
-      uses: actions/checkout@v2
-    - name: Goto client and run tests
-      run: cd front && npm i && npm test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+      - name: Goto client and run tests
+        run: cd front && npm i && npm test
