@@ -62,9 +62,18 @@ dotenv.config();
 
   await server.start();
 
+  // Click jacking protection
+  app.use(function (_, res, next) {
+    res.setHeader("X-Frame-Options", "DENY");
+    res.setHeader("Content-Security-Policy", "frame-ancestors 'self'");
+    next();
+  });
+
   app.use(
     "/graphql",
-    cors<cors.CorsRequest>({ origin: "http://localhost:3000" }),
+    cors<cors.CorsRequest>({
+      origin: ["http://localhost:3000"],
+    }),
     bodyParser.json(),
     expressMiddleware(server, { context })
   );

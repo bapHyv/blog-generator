@@ -109,7 +109,9 @@ function Login() {
                 name="email"
                 id="email"
                 className={`text-gray-700 w-full border rounded form-input focus:ring-blue-500 focus:ring-1 focus:border-blue-500 ${
-                  error?.message === 'No such writer found' ? 'border-red-500' : ''
+                  error?.message === 'The writer either does not exist or the password is wrong'
+                    ? 'border-red-500'
+                    : ''
                 }`}
                 placeholder="E-mail"
                 value={email}
@@ -117,8 +119,10 @@ function Login() {
                   setEmail(e.target.value);
                 }}
               />
-              {error?.message === 'No such writer found' && (
-                <span className="text-red-500">No such writer found</span>
+              {error?.message === 'The writer either does not exist or the password is wrong' && (
+                <span className="text-red-500">
+                  The writer either does not exist or the password is wrong
+                </span>
               )}
             </div>
           </div>
@@ -137,7 +141,9 @@ function Login() {
                   name="password"
                   id="password"
                   className={`text-gray-700 w-full border rounded form-input focus:ring-blue-500 focus:ring-1 focus:border-bluering-blue-500 ${
-                    error?.message === 'Invalid password' ? 'border-red-500' : ''
+                    error?.message === 'The writer either does not exist or the password is wrong'
+                      ? 'border-red-500'
+                      : ''
                   }`}
                   placeholder="Password"
                   value={password}
@@ -160,8 +166,10 @@ function Login() {
                   )}
                 </div>
               </div>
-              {error?.message === 'Invalid password' && (
-                <span className="text-red-500">Wrong password</span>
+              {error?.message === 'The writer either does not exist or the password is wrong' && (
+                <span className="text-red-500">
+                  The writer either does not exist or the password is wrong
+                </span>
               )}
             </div>
           </div>

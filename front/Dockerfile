@@ -12,4 +12,6 @@ COPY tsconfig.json tsconfig.json
 
 COPY src src
 
+EXPOSE 3000
+
 CMD npm start

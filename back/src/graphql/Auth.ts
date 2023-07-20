@@ -104,13 +104,17 @@ export const AuthMutations = extendType({
         });
 
         if (!writer) {
-          throw new Error("No such writer found");
+          throw new Error(
+            "The writer either does not exist or the password is wrong"
+          );
         }
 
         const valid = await bcrypt.compare(password, writer.password);
 
         if (!valid) {
-          throw new Error("Invalid password");
+          throw new Error(
+            "The writer either does not exist or the password is wrong"
+          );
         }
 
         const token = jwt.sign(
