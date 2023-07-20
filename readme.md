@@ -1,7 +1,7 @@
 # Blog Generator
 
-![GitHub repo size](https://img.shields.io/github/repo-size/your-username/blog-generator)
-![GitHub license](https://img.shields.io/github/license/your-username/blog-generator)
+![GitHub repo size](https://img.shields.io/github/repo-size/baphyv/blog-generator)
+![GitHub license](https://img.shields.io/github/license/baphyv/blog-generator)
 
 This repository contains the code base for a Blog Generator, which is a full-stack web application built using React, Apollo Client, Apollo Server, Prisma, Nexus, TypeScript, React Router, and Tailwind CSS.
 
@@ -11,9 +11,6 @@ This repository contains the code base for a Blog Generator, which is a full-sta
 - [Features](#features)
 - [Technologies](#technologies)
 - [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
 
 ## Description
 
@@ -48,5 +45,5 @@ The Blog Generator is a web application that allows users to create and manage t
 1. Clone the repository:
 
 ```bash
-git clone https://github.com/your-username/blog-generator.git
+git clone https://github.com/baphyv/blog-generator.git
 ```
