@@ -3,7 +3,7 @@ name: push docker images on dockerhub
 on:
   push:
     branches:
-      - "develop"
+      - "staging"
 
 jobs:
   docker-front:
