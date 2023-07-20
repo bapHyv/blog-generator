@@ -1,8 +1,6 @@
 name: front-tests-workflow.yml
 
-on:
-  push:
-    branches: ["develop"]
+on: pull_request
 
 jobs:
   test-front:
